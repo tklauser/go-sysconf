@@ -19,8 +19,9 @@ func gensysconf() error {
 	defs := "sysconf_defs_" + runtime.GOOS + ".go"
 	cmd := exec.Command("go", "tool", "cgo", "-godefs", defs)
 	defer os.RemoveAll("_obj")
-	b, err := cmd.Output()
+	b, err := cmd.CombinedOutput()
 	if err != nil {
+		fmt.Fprint(os.Stderr, string(b))
 		return err
 	}
 	b, err = format.Source(b)
