@@ -10,14 +10,56 @@ import (
 
 const (
 	_HOST_NAME_MAX  = _MAXHOSTNAMELEN
-	_LOGIN_NAME_MAX = MAXLOGNAME
+	_LOGIN_NAME_MAX = _MAXLOGNAME
 	_SYMLOOP_MAX    = _MAXSYMLINKS
 )
 
+func pathconf(path string, name int) (int64, error) {
+	val, err := unix.Pathconf(path, name)
+	return int64(val), err
+}
+
 func sysconf(name int) (int64, error) {
 	switch name {
+	case SC_ARG_MAX:
+		if val, err := unix.SysctlUint32("kern.argmax"); err == nil {
+			return int64(val), nil
+		}
+		return -1, nil
+	case SC_CHILD_MAX:
+		var rlim unix.Rlimit
+		if err := unix.Getrlimit(unix.RLIMIT_NPROC, &rlim); err == nil {
+			if rlim.Cur != unix.RLIM_INFINITY {
+				return rlim.Cur, nil
+			}
+		}
+		return -1, nil
+	case SC_STREAM_MAX:
+		var rlim unix.Rlimit
+		if err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlim); err == nil {
+			if rlim.Cur != unix.RLIM_INFINITY {
+				return rlim.Cur, nil
+			}
+		}
+		return -1, nil
+	case SC_TTY_NAME_MAX:
+		return pathconf(_PATH_DEV, _PC_NAME_MAX)
+	case SC_TZNAME_MAX:
+		return pathconf(_PATH_ZONEINFO, _PC_NAME_MAX)
 	case SC_CLK_TCK:
 		return _CLK_TCK, nil
+	case SC_PHYS_PAGES:
+		if val, err := unix.SysctlUint64("hw.availpages"); err == nil {
+			return int64(val), nil
+		}
+		return -1, nil
+        case SC_NPROCESSORS_CONF:
+		fallthrough
+        case SC_NPROCESSORS_ONLN:
+		if val, err := unix.SysctlUint32("hw.ncpu"); err == nil {
+			return int64(val), nil
+		}
+		return -1, nil
 	}
 
 	return -1, unix.EINVAL

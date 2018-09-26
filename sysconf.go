@@ -28,14 +28,8 @@ func Sysconf(name int) (int64, error) {
 		return int64(unix.Getpagesize()), nil
 	case SC_RE_DUP_MAX:
 		return _RE_DUP_MAX, nil
-	case SC_STREAM_MAX:
-		return _STREAM_MAX, nil
 	case SC_SYMLOOP_MAX:
 		return _SYMLOOP_MAX, nil
-	case SC_TTY_NAME_MAX:
-		return _TTY_NAME_MAX, nil
-	case SC_TZNAME_MAX:
-		return _TZNAME_MAX, nil
 	case SC_VERSION:
 		return _POSIX_VERSION, nil
 	}

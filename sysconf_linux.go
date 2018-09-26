@@ -130,6 +130,12 @@ func sysconf(name int) (int64, error) {
 	case SC_CLK_TCK:
 		clktckOnce.Do(func() { clktck = getclktck() })
 		return clktck, nil
+	case SC_STREAM_MAX:
+		return _STREAM_MAX, nil
+	case SC_TTY_NAME_MAX:
+		return _TTY_NAME_MAX, nil
+	case SC_TZNAME_MAX:
+		return _TZNAME_MAX, nil
 	case SC_2_C_VERSION:
 		return _POSIX2_C_VERSION, nil
 	case SC_PHYS_PAGES:

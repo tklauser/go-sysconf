@@ -62,4 +62,11 @@ const (
 	_COLL_WEIGHTS_MAX = 0xa
 	_EXPR_NEST_MAX    = 0x20
 	_LINE_MAX         = 0x800
+
+	_PATH_DEV      = "/dev/"
+	_PATH_ZONEINFO = "/usr/share/zoneinfo"
+)
+
+const (
+	_PC_NAME_MAX = 0x4
 )

@@ -24,6 +24,7 @@ func TestSysconf(t *testing.T) {
 		{sysconf.SC_CLK_TCK, "clock ticks", false, 0},
 		{sysconf.SC_PAGESIZE, "PAGESIZE", true, int64(os.Getpagesize())},
 		{sysconf.SC_SYMLOOP_MAX, "SYMLOOP_MAX", false, 0},
+		{sysconf.SC_TZNAME_MAX, "TZNAME_MAX", false, 0},
 		{sysconf.SC_VERSION, "_POSIX_VERSION", false, 0},
 		// POSIX.2
 		{sysconf.SC_BC_BASE_MAX, "BC_BASE_MAX", false, 0},
@@ -31,10 +32,8 @@ func TestSysconf(t *testing.T) {
 		{sysconf.SC_LINE_MAX, "LINE_MAX", false, 0},
 		{sysconf.SC_2_VERSION, "_POSIX2_VERSION", false, 0},
 		{sysconf.SC_2_C_DEV, "_POSIX2_C_DEV", false, 0},
-		{sysconf.SC_2_C_VERSION, "_POSIX2_C_VERSION", false, 0},
 		// non-standard
 		{sysconf.SC_PHYS_PAGES, "number of pages of physical memory", false, 0},
-		{sysconf.SC_AVPHYS_PAGES, "number of pages of physical memory", false, 0},
 		{sysconf.SC_NPROCESSORS_CONF, "number of processors configured", false, 0},
 		{sysconf.SC_NPROCESSORS_ONLN, "number of processors online", false, 0},
 	}

@@ -8,9 +8,14 @@ package sysconf
 
 /*
 #include <limits.h>
+#include <paths.h>
 #include <sys/param.h>
 #include <time.h>
 #include <unistd.h>
+
+#ifndef _PATH_ZONEINFO
+# define _PATH_ZONEINFO	"/usr/share/zoneinfo" // TZDATA from tzcode/stdtime/tzfile.h
+#endif
 */
 import "C"
 
@@ -78,4 +83,12 @@ const (
 	_COLL_WEIGHTS_MAX = C.COLL_WEIGHTS_MAX
 	_EXPR_NEST_MAX    = C.EXPR_NEST_MAX
 	_LINE_MAX         = C.LINE_MAX
+
+	_PATH_DEV      = C._PATH_DEV
+	_PATH_ZONEINFO = C._PATH_ZONEINFO
+)
+
+// pathconf variables
+const (
+	_PC_NAME_MAX = C._PC_NAME_MAX
 )
