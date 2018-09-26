@@ -60,8 +60,6 @@ func Sysconf(name int) (int64, error) {
 		return _POSIX2_VERSION, nil
 	case SC_2_C_DEV:
 		return _POSIX2_C_DEV, nil
-	case SC_2_C_VERSION:
-		return _POSIX2_C_VERSION, nil
 	case SC_2_FORT_DEV:
 		return -1, nil
 	case SC_2_FORT_RUN:
