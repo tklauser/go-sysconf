@@ -11,8 +11,8 @@ http://man7.org/linux/man-pages/man3/sysconf.3.html
 
 Additionally, the following non-standard variables are supported on some operating systems:
 
-| Variable              | Supported on   |
-|----------------------------------------|
+| Variable | Supported on |
+|---|---|
 | `SC_PHYS_PAGES`       | Linux, FreeBSD |
 | `SC_AVPHYS_PAGES`     | Linux          |
 | `SC_NPROCESSORS_CONF` | Linux, FreeBSD |
