@@ -193,6 +193,10 @@ func sysconf(name int) (int64, error) {
 		return _POSIX_THREAD_DESTRUCTOR_ITERATIONS, nil
 	case SC_THREAD_KEYS_MAX:
 		return _PTHREAD_KEYS_MAX, nil
+	case SC_THREAD_PRIO_INHERIT:
+		return _POSIX_THREAD_PRIO_INHERIT, nil
+	case SC_THREAD_PRIO_PROTECT:
+		return _POSIX_THREAD_PRIO_PROTECT, nil
 	case SC_THREAD_STACK_MIN:
 		return _PTHREAD_STACK_MIN, nil
 	case SC_THREAD_THREADS_MAX:
@@ -225,6 +229,14 @@ func sysconf(name int) (int64, error) {
 		return _POSIX_JOB_CONTROL, nil
 	case SC_MAPPED_FILES:
 		return _POSIX_MAPPED_FILES, nil
+	case SC_MEMLOCK:
+		return _POSIX_MEMLOCK, nil
+	case SC_MEMLOCK_RANGE:
+		return _POSIX_MEMLOCK_RANGE, nil
+	case SC_SAVED_IDS:
+		return _POSIX_SAVED_IDS, nil
+	case SC_SEMAPHORES:
+		return _POSIX_SEMAPHORES, nil
 	case SC_SHELL:
 		return _POSIX_SHELL, nil
 	case SC_THREAD_CPUTIME:
@@ -258,6 +270,12 @@ func sysconf(name int) (int64, error) {
 		return -1, nil
 	case SC_2_VERSION:
 		return _POSIX2_VERSION, nil
+	case SC_2_C_DEV:
+		return _POSIX2_C_DEV, nil
+	case SC_2_LOCALEDEF:
+		return _POSIX2_LOCALEDEF, nil
+	case SC_2_SW_DEV:
+		return _POSIX2_SW_DEV, nil
 
 	case SC_PHYS_PAGES:
 		return getPhysPages(), nil

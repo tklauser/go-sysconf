@@ -29,6 +29,8 @@ const (
 	SC_PAGE_SIZE                    = 0x1e
 	SC_PAGESIZE                     = 0x1e
 	SC_THREAD_DESTRUCTOR_ITERATIONS = 0x49
+	SC_THREAD_PRIO_INHERIT          = 0x50
+	SC_THREAD_PRIO_PROTECT          = 0x51
 	SC_THREAD_KEYS_MAX              = 0x4a
 	SC_THREAD_STACK_MIN             = 0x4b
 	SC_THREAD_THREADS_MAX           = 0x4c
@@ -52,6 +54,10 @@ const (
 	SC_IPV6            = 0xeb
 	SC_JOB_CONTROL     = 0x7
 	SC_MAPPED_FILES    = 0x10
+	SC_MEMLOCK         = 0x11
+	SC_MEMLOCK_RANGE   = 0x12
+	SC_SAVED_IDS       = 0x8
+	SC_SEMAPHORES      = 0x15
 	SC_SHELL           = 0x9d
 	SC_THREAD_CPUTIME  = 0x8b
 	SC_THREADS         = 0x43
@@ -114,18 +120,24 @@ const (
 	_INT_MAX = 0x7fffffff
 
 	_POSIX_ADVISORY_INFO                = 0x31069
-	_POSIX_ASYNCHRONOUS_IO              = 0x31069
 	_POSIX_ARG_MAX                      = 0x1000
+	_POSIX_ASYNCHRONOUS_IO              = 0x31069
 	_POSIX_BARRIERS                     = 0x31069
 	_POSIX_CHILD_MAX                    = 0x19
 	_POSIX_CLOCK_SELECTION              = 0x31069
+	_POSIX_FSYNC                        = 0x31069
 	_POSIX_IPV6                         = 0x31069
 	_POSIX_JOB_CONTROL                  = 0x1
-	_POSIX_FSYNC                        = 0x31069
 	_POSIX_MAPPED_FILES                 = 0x31069
+	_POSIX_MEMLOCK                      = 0x31069
+	_POSIX_MEMLOCK_RANGE                = 0x31069
+	_POSIX_SAVED_IDS                    = 0x1
+	_POSIX_SEMAPHORES                   = 0x31069
 	_POSIX_SHELL                        = 0x1
 	_POSIX_SIGQUEUE_MAX                 = 0x20
 	_POSIX_THREAD_DESTRUCTOR_ITERATIONS = 0x4
+	_POSIX_THREAD_PRIO_INHERIT          = 0x31069
+	_POSIX_THREAD_PRIO_PROTECT          = 0x31069
 	_POSIX_THREADS                      = 0x31069
 	_POSIX_TIMEOUTS                     = 0x31069
 	_POSIX_TIMERS                       = 0x31069
@@ -133,6 +145,8 @@ const (
 
 	_POSIX2_C_DEV     = 0x31069
 	_POSIX2_C_VERSION = 0x31069
+	_POSIX2_LOCALEDEF = 0x31069
+	_POSIX2_SW_DEV    = 0x31069
 	_POSIX2_VERSION   = 0x31069
 
 	_XOPEN_CRYPT       = 0x1
