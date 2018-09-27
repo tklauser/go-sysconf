@@ -162,6 +162,12 @@ func sysconf(name int) (int64, error) {
 		return clktck, nil
 	case SC_DELAYTIMER_MAX:
 		return _DELAYTIMER_MAX, nil
+	case SC_MQ_OPEN_MAX:
+		return -1, nil
+	case SC_MQ_PRIO_MAX:
+		return _MQ_PRIO_MAX, nil
+	case SC_NGROUPS_MAX:
+		return readProcFs("/proc/sys/kernel/ngroups_max", _NGROUPS_MAX), nil
 	case SC_OPEN_MAX:
 		openMax := int64(_OPEN_MAX)
 		var rlim unix.Rlimit
@@ -169,12 +175,6 @@ func sysconf(name int) (int64, error) {
 			openMax = int64(rlim.Cur)
 		}
 		return openMax, nil
-	case SC_MQ_OPEN_MAX:
-		return -1, nil
-	case SC_MQ_PRIO_MAX:
-		return _MQ_PRIO_MAX, nil
-	case SC_NGROUPS_MAX:
-		return readProcFs("/proc/sys/kernel/ngroups_max", _NGROUPS_MAX), nil
 	case SC_RTSIG_MAX:
 		return _RTSIG_MAX, nil
 	case SC_SEM_NSEMS_MAX:
