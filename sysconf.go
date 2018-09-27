@@ -38,8 +38,6 @@ func Sysconf(name int) (int64, error) {
 		return _LINE_MAX, nil
 	case SC_LOGIN_NAME_MAX:
 		return _LOGIN_NAME_MAX, nil
-	case SC_NGROUPS_MAX:
-		return _NGROUPS_MAX, nil
 	case SC_PAGESIZE: // same as SC_PAGE_SIZE
 		return int64(unix.Getpagesize()), nil
 	case SC_RE_DUP_MAX:

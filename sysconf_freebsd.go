@@ -14,9 +14,11 @@ const (
 	_SYMLOOP_MAX    = _MAXSYMLINKS
 )
 
-func pathconf(path string, name int) (int64, error) {
-	val, err := unix.Pathconf(path, name)
-	return int64(val), err
+func pathconf(path string, name int) int64 {
+	if val, err := unix.Pathconf(path, name); err == nil {
+		return int64(val)
+	}
+	return -1
 }
 
 func sysconf(name int) (int64, error) {
@@ -43,9 +45,9 @@ func sysconf(name int) (int64, error) {
 		}
 		return -1, nil
 	case SC_TTY_NAME_MAX:
-		return pathconf(_PATH_DEV, _PC_NAME_MAX)
+		return pathconf(_PATH_DEV, _PC_NAME_MAX), nil
 	case SC_TZNAME_MAX:
-		return pathconf(_PATH_ZONEINFO, _PC_NAME_MAX)
+		return pathconf(_PATH_ZONEINFO, _PC_NAME_MAX), nil
 	case SC_CLK_TCK:
 		return _CLK_TCK, nil
 	case SC_PHYS_PAGES:
