@@ -44,6 +44,9 @@ func Sysconf(name int) (int64, error) {
 		return _RE_DUP_MAX, nil
 	case SC_SYMLOOP_MAX:
 		return _SYMLOOP_MAX, nil
+
+	case SC_SHELL:
+		return _POSIX_SHELL, nil
 	case SC_VERSION:
 		return _POSIX_VERSION, nil
 	case SC_2_VERSION:
