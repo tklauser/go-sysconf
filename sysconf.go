@@ -2,14 +2,17 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-//go:generate go run mksysconf.go
-
+// Package sysconf implements the sysconf(3) function and provides the
+// associated SC_* constants to query system configuration values.
 package sysconf
 
 import (
 	"golang.org/x/sys/unix"
 )
 
+//go:generate go run mksysconf.go
+
+// Sysconf returns the value of a sysconf(3) configurable system variable.
 func Sysconf(name int) (int64, error) {
 	// OS-specific sysconf
 	if sc, err := sysconf(name); err == nil {
