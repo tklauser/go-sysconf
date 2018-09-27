@@ -14,20 +14,10 @@ const (
 	_SYMLOOP_MAX    = _MAXSYMLINKS
 )
 
-func pathconf(path string, name int) int64 {
-	if val, err := unix.Pathconf(path, name); err == nil {
-		return int64(val)
-	}
-	return -1
-}
-
 func sysconf(name int) (int64, error) {
 	switch name {
 	case SC_ARG_MAX:
-		if val, err := unix.SysctlUint32("kern.argmax"); err == nil {
-			return int64(val), nil
-		}
-		return -1, nil
+		return sysctl32("kern.argmax")
 	case SC_CHILD_MAX:
 		var rlim unix.Rlimit
 		if err := unix.Getrlimit(unix.RLIMIT_NPROC, &rlim); err == nil {

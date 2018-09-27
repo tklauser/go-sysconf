@@ -24,27 +24,6 @@ var (
 	clktckOnce sync.Once
 )
 
-func sysctl32(name string) int64 {
-	if val, err := unix.SysctlUint32(name); err == nil {
-		return int64(val)
-	}
-	return -1
-}
-
-func sysctl64(name string) int64 {
-	if val, err := unix.SysctlUint64(name); err == nil {
-		return int64(val)
-	}
-	return -1
-}
-
-func pathconf(path string, name int) int64 {
-	if val, err := unix.Pathconf(path, name); err == nil {
-		return int64(val)
-	}
-	return -1
-}
-
 func sysconf(name int) (int64, error) {
 	// NetBSD uses sysctl to get some of these values. For the user.* namespace,
 	// calls get handled by user_sysctl in /usr/src/lib/libc/gen/sysctl.c
