@@ -4,66 +4,140 @@
 package sysconf
 
 const (
-	SC_ARG_MAX        = 0x0
-	SC_CHILD_MAX      = 0x1
-	SC_HOST_NAME_MAX  = 0xb4
-	SC_LOGIN_NAME_MAX = 0x47
-	SC_NGROUPS_MAX    = 0x3
-	SC_CLK_TCK        = 0x2
-	SC_OPEN_MAX       = 0x4
-	SC_PAGESIZE       = 0x1e
-	SC_RE_DUP_MAX     = 0x2c
-	SC_STREAM_MAX     = 0x5
-	SC_SYMLOOP_MAX    = 0xad
-	SC_TTY_NAME_MAX   = 0x48
-	SC_TZNAME_MAX     = 0x6
-	SC_VERSION        = 0x1d
+	SC_AIO_LISTIO_MAX               = 0x17
+	SC_AIO_MAX                      = 0x18
+	SC_AIO_PRIO_DELTA_MAX           = 0x19
+	SC_ARG_MAX                      = 0x0
+	SC_ATEXIT_MAX                   = 0x57
+	SC_BC_BASE_MAX                  = 0x24
+	SC_BC_DIM_MAX                   = 0x25
+	SC_BC_SCALE_MAX                 = 0x26
+	SC_BC_STRING_MAX                = 0x27
+	SC_CHILD_MAX                    = 0x1
+	SC_CLK_TCK                      = 0x2
+	SC_COLL_WEIGHTS_MAX             = 0x28
+	SC_DELAYTIMER_MAX               = 0x1a
+	SC_EXPR_NEST_MAX                = 0x2a
+	SC_HOST_NAME_MAX                = 0xb4
+	SC_IOV_MAX                      = 0x3c
+	SC_LINE_MAX                     = 0x2b
+	SC_LOGIN_NAME_MAX               = 0x47
+	SC_MQ_OPEN_MAX                  = 0x1b
+	SC_MQ_PRIO_MAX                  = 0x1c
+	SC_NGROUPS_MAX                  = 0x3
+	SC_OPEN_MAX                     = 0x4
+	SC_PAGE_SIZE                    = 0x1e
+	SC_PAGESIZE                     = 0x1e
+	SC_THREAD_DESTRUCTOR_ITERATIONS = 0x49
+	SC_THREAD_KEYS_MAX              = 0x4a
+	SC_THREAD_STACK_MIN             = 0x4b
+	SC_THREAD_THREADS_MAX           = 0x4c
+	SC_RE_DUP_MAX                   = 0x2c
+	SC_RTSIG_MAX                    = 0x1f
+	SC_SEM_NSEMS_MAX                = 0x20
+	SC_SEM_VALUE_MAX                = 0x21
+	SC_SIGQUEUE_MAX                 = 0x22
+	SC_STREAM_MAX                   = 0x5
+	SC_SYMLOOP_MAX                  = 0xad
+	SC_TIMER_MAX                    = 0x23
+	SC_TTY_NAME_MAX                 = 0x48
+	SC_TZNAME_MAX                   = 0x6
 
-	SC_BC_BASE_MAX      = 0x24
-	SC_BC_DIM_MAX       = 0x25
-	SC_BC_SCALE_MAX     = 0x26
-	SC_BC_STRING_MAX    = 0x27
-	SC_COLL_WEIGHTS_MAX = 0x28
-	SC_EXPR_NEST_MAX    = 0x2a
-	SC_LINE_MAX         = 0x2b
-	SC_2_VERSION        = 0x2e
-	SC_2_C_DEV          = 0x30
-	SC_2_C_VERSION      = 0x60
-	SC_2_FORT_DEV       = 0x31
-	SC_2_FORT_RUN       = 0x32
-	SC_2_LOCALEDEF      = 0x34
-	SC_2_SW_DEV         = 0x33
+	SC_ADVISORY_INFO   = 0x84
+	SC_ASYNCHRONOUS_IO = 0xc
+	SC_BARRIERS        = 0x85
+	SC_CLOCK_SELECTION = 0x89
+	SC_CPUTIME         = 0x8a
+	SC_FSYNC           = 0xf
+	SC_IPV6            = 0xeb
+	SC_JOB_CONTROL     = 0x7
+	SC_MAPPED_FILES    = 0x10
+	SC_SHELL           = 0x9d
+	SC_THREAD_CPUTIME  = 0x8b
+	SC_THREADS         = 0x43
+	SC_TIMEOUTS        = 0xa4
+	SC_TIMERS          = 0xb
+	SC_VERSION         = 0x1d
+
+	SC_2_C_BIND    = 0x2f
+	SC_2_C_DEV     = 0x30
+	SC_2_C_VERSION = 0x60
+	SC_2_FORT_DEV  = 0x31
+	SC_2_FORT_RUN  = 0x32
+	SC_2_LOCALEDEF = 0x34
+	SC_2_SW_DEV    = 0x33
+	SC_2_UPE       = 0x61
+	SC_2_VERSION   = 0x2e
+
+	SC_XOPEN_CRYPT       = 0x5c
+	SC_XOPEN_REALTIME    = 0x82
+	SC_XOPEN_STREAMS     = 0xf6
+	SC_XOPEN_UNIX        = 0x5b
+	SC_XOPEN_VERSION     = 0x59
+	SC_XOPEN_XCU_VERSION = 0x5a
 
 	SC_PHYS_PAGES       = 0x55
 	SC_AVPHYS_PAGES     = 0x56
+	SC_MONOTONIC_CLOCK  = 0x95
 	SC_NPROCESSORS_CONF = 0x53
 	SC_NPROCESSORS_ONLN = 0x54
+	SC_UIO_MAXIOV       = 0x3c
 )
 
 const (
-	_POSIX_VERSION  = 0x31069
-	_POSIX2_VERSION = 0x31069
+	_AIO_PRIO_DELTA_MAX = 0x14
+	_BC_BASE_MAX        = 0x63
+	_BC_DIM_MAX         = 0x800
+	_BC_SCALE_MAX       = 0x63
+	_BC_STRING_MAX      = 0x3e8
+	_COLL_WEIGHTS_MAX   = 0xff
+	_DELAYTIMER_MAX     = 0x7fffffff
+	_EXPR_NEST_MAX      = 0x20
+	_HOST_NAME_MAX      = 0x40
+	_LINE_MAX           = 0x800
+	_LOGIN_NAME_MAX     = 0x100
+	_MQ_PRIO_MAX        = 0x8000
+	_NGROUPS_MAX        = 0x10000
+	_OPEN_MAX           = 0x100
+	_PTHREAD_KEYS_MAX   = 0x400
+	_PTHREAD_STACK_MIN  = 0x4000
+	_RE_DUP_MAX         = 0x7fff
+	_RTSIG_MAX          = 0x20
+	_SEM_VALUE_MAX      = 0x7fffffff
+	_STREAM_MAX         = 0x10
+	_SYMLOOP_MAX        = -0x1
+	_TTY_NAME_MAX       = 0x20
+	_TZNAME_MAX         = 0x6
+
+	_UIO_MAXIOV = 0x400
+
+	_INT_MAX = 0x7fffffff
+
+	_POSIX_ADVISORY_INFO                = 0x31069
+	_POSIX_ASYNCHRONOUS_IO              = 0x31069
+	_POSIX_ARG_MAX                      = 0x1000
+	_POSIX_BARRIERS                     = 0x31069
+	_POSIX_CHILD_MAX                    = 0x19
+	_POSIX_CLOCK_SELECTION              = 0x31069
+	_POSIX_IPV6                         = 0x31069
+	_POSIX_JOB_CONTROL                  = 0x1
+	_POSIX_FSYNC                        = 0x31069
+	_POSIX_MAPPED_FILES                 = 0x31069
+	_POSIX_SHELL                        = 0x1
+	_POSIX_SIGQUEUE_MAX                 = 0x20
+	_POSIX_THREAD_DESTRUCTOR_ITERATIONS = 0x4
+	_POSIX_THREADS                      = 0x31069
+	_POSIX_TIMEOUTS                     = 0x31069
+	_POSIX_TIMERS                       = 0x31069
+	_POSIX_VERSION                      = 0x31069
 
 	_POSIX2_C_DEV     = 0x31069
 	_POSIX2_C_VERSION = 0x31069
+	_POSIX2_VERSION   = 0x31069
 
-	_POSIX_ARG_MAX   = 0x1000
-	_POSIX_CHILD_MAX = 0x19
-
-	_HOST_NAME_MAX  = 0x40
-	_LOGIN_NAME_MAX = 0x100
-	_NGROUPS_MAX    = 0x10000
-	_RE_DUP_MAX     = 0x7fff
-	_STREAM_MAX     = 0x10
-	_SYMLOOP_MAX    = -0x1
-	_TTY_NAME_MAX   = 0x20
-	_TZNAME_MAX     = 0x6
-
-	_BC_BASE_MAX      = 0x63
-	_BC_DIM_MAX       = 0x800
-	_BC_SCALE_MAX     = 0x63
-	_BC_STRING_MAX    = 0x3e8
-	_COLL_WEIGHTS_MAX = 0xff
-	_EXPR_NEST_MAX    = 0x20
-	_LINE_MAX         = 0x800
+	_XOPEN_CRYPT       = 0x1
+	_XOPEN_REALTIME    = 0x1
+	_XOPEN_UNIX        = 0x1
+	_XOPEN_VERSION     = 0x2bc
+	_XOPEN_XCU_VERSION = 0x4
 )

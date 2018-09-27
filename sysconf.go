@@ -16,25 +16,6 @@ func Sysconf(name int) (int64, error) {
 		return sc, nil
 	}
 
-	// POSIX.1 sysconf
-	switch name {
-	case SC_HOST_NAME_MAX:
-		return _HOST_NAME_MAX, nil
-	case SC_LOGIN_NAME_MAX:
-		return _LOGIN_NAME_MAX, nil
-	case SC_NGROUPS_MAX:
-		return _NGROUPS_MAX, nil
-	case SC_PAGESIZE:
-		return int64(unix.Getpagesize()), nil
-	case SC_RE_DUP_MAX:
-		return _RE_DUP_MAX, nil
-	case SC_SYMLOOP_MAX:
-		return _SYMLOOP_MAX, nil
-	case SC_VERSION:
-		return _POSIX_VERSION, nil
-	}
-
-	// POSIX.2 sysconf
 	switch name {
 	case SC_BC_BASE_MAX:
 		return _BC_BASE_MAX, nil
@@ -48,8 +29,22 @@ func Sysconf(name int) (int64, error) {
 		return _COLL_WEIGHTS_MAX, nil
 	case SC_EXPR_NEST_MAX:
 		return _EXPR_NEST_MAX, nil
+	case SC_HOST_NAME_MAX:
+		return _HOST_NAME_MAX, nil
 	case SC_LINE_MAX:
 		return _LINE_MAX, nil
+	case SC_LOGIN_NAME_MAX:
+		return _LOGIN_NAME_MAX, nil
+	case SC_NGROUPS_MAX:
+		return _NGROUPS_MAX, nil
+	case SC_PAGESIZE: // same as SC_PAGE_SIZE
+		return int64(unix.Getpagesize()), nil
+	case SC_RE_DUP_MAX:
+		return _RE_DUP_MAX, nil
+	case SC_SYMLOOP_MAX:
+		return _SYMLOOP_MAX, nil
+	case SC_VERSION:
+		return _POSIX_VERSION, nil
 	case SC_2_VERSION:
 		return _POSIX2_VERSION, nil
 	case SC_2_C_DEV:
