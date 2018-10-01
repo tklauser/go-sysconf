@@ -9,6 +9,7 @@ import (
 	"os"
 	"runtime"
 	"strconv"
+	"strings"
 	"sync"
 	"unsafe"
 
@@ -97,14 +98,68 @@ func getAvPhysPages() int64 {
 	return getMemPages(si.Freeram, si.Unit)
 }
 
+func getNprocRange(cpuRangeStr string) ([]uint, error) {
+	var cpus []uint
+	cpuRangeStr = strings.Trim(cpuRangeStr, "\n ")
+	for _, cpuRange := range strings.Split(cpuRangeStr, ",") {
+		rangeOp := strings.SplitN(cpuRange, "-", 2)
+		first, err := strconv.ParseUint(rangeOp[0], 10, 32)
+		if err != nil {
+			return nil, err
+		}
+		if len(rangeOp) == 1 {
+			cpus = append(cpus, uint(first))
+			continue
+		}
+		last, err := strconv.ParseUint(rangeOp[1], 10, 32)
+		if err != nil {
+			return nil, err
+		}
+		for n := first; n <= last; n++ {
+			cpus = append(cpus, uint(n))
+		}
+	}
+	return cpus, nil
+}
+
+// based on readCPURange in github.com/iovisor/gobpf/pkg/cpuonline/cpu_range.go
+func readCPURange(file string) (int64, error) {
+	buf, err := ioutil.ReadFile(file)
+	if err != nil {
+		return 0, err
+	}
+	count := int64(0)
+	cpuRangeStr := strings.Trim(string(buf), "\n ")
+	for _, cpuRange := range strings.Split(cpuRangeStr, ",") {
+		rangeOp := strings.SplitN(cpuRange, "-", 2)
+		first, err := strconv.ParseUint(rangeOp[0], 10, 32)
+		if err != nil {
+			return 0, err
+		}
+		if len(rangeOp) == 1 {
+			count += 1
+			continue
+		}
+		last, err := strconv.ParseUint(rangeOp[1], 10, 32)
+		if err != nil {
+			return 0, err
+		}
+		count += int64(last - first + 1)
+	}
+	return count, nil
+}
+
 func getNprocs() int64 {
-	// TODO(tk): parse /sys/devices/system/cpu/online like glibc
+	count, err := readCPURange("/sys/devices/system/cpu/online")
+	if err == nil {
+		return count
+	}
 
 	runtime.LockOSThread()
 	defer runtime.UnlockOSThread()
 
 	var cpus unix.CPUSet
-	err := unix.SchedGetaffinity(0, &cpus)
+	err = unix.SchedGetaffinity(0, &cpus)
 	if err == nil {
 		return int64(cpus.Count())
 	}
@@ -113,7 +168,27 @@ func getNprocs() int64 {
 }
 
 func getNprocsConf() int64 {
-	// TODO(tk): walk /sys/devices/system/cpu/cpu* entries like glibc
+	// TODO(tk): read /sys/devices/system/cpu/present instead?
+	d, err := os.Open("/sys/devices/system/cpu")
+	if err == nil {
+		defer d.Close()
+		fis, err := d.Readdir(-1)
+		if err == nil {
+			count := int64(0)
+			for _, fi := range fis {
+				if name := fi.Name(); fi.IsDir() && strings.HasPrefix(name, "cpu") {
+					_, err := strconv.ParseInt(name[3:], 10, 64)
+					if err == nil {
+						count += 1
+					}
+				}
+			}
+			return count
+		}
+	}
+
+	// TODO(tk): fall back to reading /proc/cpuinfo on legacy systems
+	// without sysfs?
 
 	return getNprocs()
 }
