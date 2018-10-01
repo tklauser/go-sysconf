@@ -82,6 +82,7 @@ func testSysconfCgoMatch(t *testing.T) {
 		{sysconf.SC_TIMERS, C._SC_TIMERS, "_POSIX_TIMERS"},
 		{sysconf.SC_VERSION, C._SC_VERSION, "_POSIX_VERSION"},
 
+		{sysconf.SC_2_C_BIND, C._SC_2_C_BIND, "_POSIX2_C_BIND"},
 		{sysconf.SC_2_C_DEV, C._SC_2_C_DEV, "_POSIX2_C_DEV"},
 		{sysconf.SC_2_LOCALEDEF, C._SC_2_LOCALEDEF, "_POSIX2_LOCALEDEF"},
 		{sysconf.SC_2_SW_DEV, C._SC_2_SW_DEV, "_POSIX2_SW_DEV"},

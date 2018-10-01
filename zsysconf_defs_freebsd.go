@@ -75,13 +75,14 @@ const (
 	SC_TIMERS                = 0x29
 	SC_VERSION               = 0x8
 
-	SC_2_VERSION   = 0x11
+	SC_2_C_BIND    = 0x12
 	SC_2_C_DEV     = 0x13
 	SC_2_FORT_DEV  = 0x15
 	SC_2_FORT_RUN  = 0x16
 	SC_2_LOCALEDEF = 0x17
-	SC_2_UPE       = 0x19
 	SC_2_SW_DEV    = 0x18
+	SC_2_UPE       = 0x19
+	SC_2_VERSION   = 0x11
 
 	SC_XOPEN_CRYPT       = 0x6c
 	SC_XOPEN_REALTIME    = 0x6f
@@ -147,6 +148,7 @@ const (
 	_POSIX_TIMERS                = 0x30db0
 	_POSIX_VERSION               = 0x30db0
 
+	_POSIX2_C_BIND    = 0x30db0
 	_POSIX2_C_DEV     = -0x1
 	_POSIX2_LOCALEDEF = -0x1
 	_POSIX2_SW_DEV    = -0x1
