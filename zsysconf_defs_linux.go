@@ -163,6 +163,7 @@ const (
 	_POSIX_TIMERS                       = 0x31069
 	_POSIX_VERSION                      = 0x31069
 
+	_POSIX2_C_BIND    = 0x31069
 	_POSIX2_C_DEV     = 0x31069
 	_POSIX2_C_VERSION = 0x31069
 	_POSIX2_LOCALEDEF = 0x31069
