@@ -1,5 +1,7 @@
 # go-sysconf
 
+[![Build Status][1]][2] [![Go Report Card][3]][4]
+
 `sysconf` for Go, without using cgo.
 
 Supported operating systems: Linux, Darwin, FreeBSD, NetBSD.
@@ -30,3 +32,8 @@ https://godoc.org/github.com/tklauser/go-sysconf
 
 * [POSIX documenation for`sysconf`](http://pubs.opengroup.org/onlinepubs/9699919799/functions/sysconf.html)
 * [Linux manpage for `sysconf(3)`](http://man7.org/linux/man-pages/man3/sysconf.3.html)
+
+[1]: https://travis-ci.org/tklauser/go-sysconf.svg?branch=master
+[2]: https://travis-ci.org/tklauser/go-sysconf
+[3]: https://goreportcard.com/badge/github.com/tklauser/go-sysconf
+[4]: https://goreportcard.com/report/github.com/tklauser/go-sysconf
