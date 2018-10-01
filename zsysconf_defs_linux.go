@@ -125,12 +125,14 @@ const (
 	_POSIX_BARRIERS                     = 0x31069
 	_POSIX_CHILD_MAX                    = 0x19
 	_POSIX_CLOCK_SELECTION              = 0x31069
+	_POSIX_CPUTIME                      = 0x0
 	_POSIX_FSYNC                        = 0x31069
 	_POSIX_IPV6                         = 0x31069
 	_POSIX_JOB_CONTROL                  = 0x1
 	_POSIX_MAPPED_FILES                 = 0x31069
 	_POSIX_MEMLOCK                      = 0x31069
 	_POSIX_MEMLOCK_RANGE                = 0x31069
+	_POSIX_MONOTONIC_CLOCK              = 0x0
 	_POSIX_SAVED_IDS                    = 0x1
 	_POSIX_SEMAPHORES                   = 0x31069
 	_POSIX_SHELL                        = 0x1

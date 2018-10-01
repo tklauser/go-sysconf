@@ -155,12 +155,14 @@ const (
 	_POSIX_BARRIERS                     = C._POSIX_BARRIERS
 	_POSIX_CHILD_MAX                    = C._POSIX_CHILD_MAX
 	_POSIX_CLOCK_SELECTION              = C._POSIX_CLOCK_SELECTION
+	_POSIX_CPUTIME                      = C._POSIX_CPUTIME
 	_POSIX_FSYNC                        = C._POSIX_FSYNC
 	_POSIX_IPV6                         = C._POSIX_IPV6
 	_POSIX_JOB_CONTROL                  = C._POSIX_JOB_CONTROL
 	_POSIX_MAPPED_FILES                 = C._POSIX_MAPPED_FILES
 	_POSIX_MEMLOCK                      = C._POSIX_MEMLOCK
 	_POSIX_MEMLOCK_RANGE                = C._POSIX_MEMLOCK_RANGE
+	_POSIX_MONOTONIC_CLOCK              = C._POSIX_MONOTONIC_CLOCK
 	_POSIX_SAVED_IDS                    = C._POSIX_SAVED_IDS
 	_POSIX_SEMAPHORES                   = C._POSIX_SEMAPHORES
 	_POSIX_SHELL                        = C._POSIX_SHELL
