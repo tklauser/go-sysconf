@@ -226,7 +226,7 @@ func sysconf(name int) (int64, error) {
 	case SC_ATEXIT_MAX:
 		return _INT_MAX, nil
 	case SC_CHILD_MAX:
-		childMax := int64(_POSIX_CHILD_MAX)
+		childMax := int64(-1)
 		var rlim unix.Rlimit
 		if err := unix.Getrlimit(unix.RLIMIT_NPROC, &rlim); err == nil && rlim.Cur != unix.RLIM_INFINITY {
 			childMax = int64(rlim.Cur)
