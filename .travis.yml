@@ -7,4 +7,5 @@ os:
 go:
   - 1.11.x
 
+dist: trusty
 sudo: false
