@@ -24,6 +24,19 @@ var (
 	clktckOnce sync.Once
 )
 
+func sysconfPOSIX(name int) (int64, error) {
+	// NetBSD does not define all _POSIX_* values used in sysconf_posix.go
+	// Handle the supported ones here.
+	switch name {
+	case SC_SHELL:
+		return _POSIX_SHELL, nil
+	case SC_VERSION:
+		return _POSIX_VERSION, nil
+	}
+
+	return -1, unix.EINVAL
+}
+
 func sysconf(name int) (int64, error) {
 	// NetBSD uses sysctl to get some of these values. For the user.* namespace,
 	// calls get handled by user_sysctl in /usr/src/lib/libc/gen/sysctl.c
@@ -115,10 +128,6 @@ func sysconf(name int) (int64, error) {
 	case SC_ATEXIT_MAX:
 		// sysctl("user.atexit_max")
 		return -1, nil // TODO
-
-	// Unsorted
-	case SC_SHELL:
-		return _POSIX_SHELL, nil
 
 	// Extensions
 	case SC_NPROCESSORS_CONF:
