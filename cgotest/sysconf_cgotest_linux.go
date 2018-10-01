@@ -5,22 +5,28 @@
 package sysconf_cgotest
 
 /*
+#include <gnu/libc-version.h>
+#include <stdlib.h>
 #include <unistd.h>
 */
 import "C"
 
 import (
+	"strconv"
+	"strings"
 	"testing"
 
 	"github.com/tklauser/go-sysconf"
 )
 
+type testCase struct {
+	goVar int
+	cVar  C.int
+	name  string
+}
+
 func testSysconfCgoMatch(t *testing.T) {
-	testCases := []struct {
-		goVar int
-		cVar  C.int
-		name  string
-	}{
+	testCases := []testCase{
 		{sysconf.SC_AIO_LISTIO_MAX, C._SC_AIO_LISTIO_MAX, "AIO_LISTIO_MAX"},
 		{sysconf.SC_AIO_MAX, C._SC_AIO_MAX, "AIO_MAX"},
 		{sysconf.SC_AIO_PRIO_DELTA_MAX, C._SC_AIO_PRIO_DELTA_MAX, "AIO_PRIO_DELTA_MAX"},
@@ -92,7 +98,10 @@ func testSysconfCgoMatch(t *testing.T) {
 		{sysconf.SC_VERSION, C._SC_VERSION, "_POSIX_VERSION"},
 
 		{sysconf.SC_2_C_DEV, C._SC_2_C_DEV, "_POSIX2_C_DEV"},
-		{sysconf.SC_2_C_VERSION, C._SC_2_C_VERSION, "_POSIX2_C_VERSION"},
+		// glibc version < 2.22 does not define _POSIX2_C_VERSION
+		// despite supporting the standard, see glibc bug BZ 438. Test it
+		// in testPosix2CVersion below.
+		// {sysconf.SC_2_C_VERSION, C._SC_2_C_VERSION, "_POSIX2_C_VERSION"},
 		{sysconf.SC_2_FORT_DEV, C._SC_2_FORT_DEV, "_POSIX2_FORT_DEV"},
 		{sysconf.SC_2_FORT_RUN, C._SC_2_FORT_RUN, "_POSIX2_FORT_RUN"},
 		{sysconf.SC_2_LOCALEDEF, C._SC_2_LOCALEDEF, "_POSIX2_LOCALEDEF"},
@@ -116,22 +125,48 @@ func testSysconfCgoMatch(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		if tc.goVar != int(tc.cVar) {
-			t.Errorf("sysconf variable %v values in Go and C don't match: %v <-> %v", tc.name, tc.goVar, tc.cVar)
-		}
-		goVal, err := sysconf.Sysconf(tc.goVar)
-		if err != nil {
-			t.Fatalf("Sysconf(%s/%d): %v", tc.name, tc.goVar, err)
-		}
-		t.Logf("%s = %v", tc.name, goVal)
+		testSysconfGoCgo(t, tc)
+	}
 
-		cVal, err := C.sysconf(tc.cVar)
-		if err != nil {
-			t.Fatalf("C.sysconf(%s/%d): %v", tc.name, tc.cVar, err)
-		}
+	testPosix2CVersion(t)
+}
 
-		if goVal != int64(cVal) {
-			t.Errorf("values in Go and C for %v don't match: %v <-> %v", tc.name, goVal, cVal)
-		}
+func testSysconfGoCgo(t *testing.T, tc testCase) {
+	if tc.goVar != int(tc.cVar) {
+		t.Errorf("sysconf variable %v values in Go and C don't match: %v <-> %v", tc.name, tc.goVar, tc.cVar)
+	}
+	goVal, err := sysconf.Sysconf(tc.goVar)
+	if err != nil {
+		t.Fatalf("Sysconf(%s/%d): %v", tc.name, tc.goVar, err)
+	}
+	t.Logf("%s = %v", tc.name, goVal)
+
+	cVal, err := C.sysconf(tc.cVar)
+	if err != nil {
+		t.Fatalf("C.sysconf(%s/%d): %v", tc.name, tc.cVar, err)
+	}
+
+	if goVal != int64(cVal) {
+		t.Errorf("values in Go and C for %v don't match: %v <-> %v", tc.name, goVal, cVal)
+	}
+}
+
+func testPosix2CVersion(t *testing.T) {
+	glibcVer := C.GoString(C.gnu_get_libc_version())
+	majMin := strings.Split(glibcVer, ".")
+	if len(majMin) < 2 {
+		t.Fatalf("unexpected glibc version: %v\n", glibcVer)
+	}
+	t.Logf("glibc version: %v\n", glibcVer)
+
+	maj, _ := strconv.Atoi(majMin[0])
+	min, _ := strconv.Atoi(majMin[1])
+	// _POSIX2_C_VERSION was fixed in glibc 2.22, see glibc commit
+	// 4e5f9259f352 ("Restore _POSIX2_C_VERSION definition (bug 438).")
+	if maj <= 2 && min < 22 {
+		t.Logf("skipping _POSIX2_C_VERSION test on glibc < 2.22")
+	} else {
+		tc := testCase{sysconf.SC_2_C_VERSION, C._SC_2_C_VERSION, "_POSIX2_C_VERSION"}
+		testSysconfGoCgo(t, tc)
 	}
 }
