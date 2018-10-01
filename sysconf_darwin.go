@@ -91,38 +91,8 @@ func sysconf(name int) (int64, error) {
 	case SC_TZNAME_MAX:
 		return pathconf(_PATH_ZONEINFO, _PC_NAME_MAX), nil
 
-	case SC_ADVISORY_INFO:
-		return _POSIX_ADVISORY_INFO, nil
-	case SC_ASYNCHRONOUS_IO:
-		return _POSIX_ASYNCHRONOUS_IO, nil
-	case SC_BARRIERS:
-		return _POSIX_BARRIERS, nil
-	case SC_CLOCK_SELECTION:
-		return _POSIX_CLOCK_SELECTION, nil
-	case SC_CPUTIME:
-		return _POSIX_CPUTIME, nil
-	case SC_FSYNC:
-		return _POSIX_FSYNC, nil
-	case SC_IPV6:
-		return _POSIX_IPV6, nil
-	case SC_JOB_CONTROL:
-		return _POSIX_JOB_CONTROL, nil
-	case SC_MAPPED_FILES:
-		return _POSIX_MAPPED_FILES, nil
-	case SC_MEMLOCK:
-		return _POSIX_MEMLOCK, nil
-	case SC_MEMLOCK_RANGE:
-		return _POSIX_MEMLOCK_RANGE, nil
 	case SC_SAVED_IDS:
 		return sysctl32("kern.saved_ids"), nil
-	case SC_SEMAPHORES:
-		return _POSIX_SEMAPHORES, nil
-	case SC_THREADS:
-		return _POSIX_THREADS, nil
-	case SC_TIMEOUTS:
-		return _POSIX_TIMEOUTS, nil
-	case SC_TIMERS:
-		return _POSIX_TIMERS, nil
 	case SC_VERSION:
 		// TODO(tk): darwin libc uses sysctl(CTL_KERN, KERN_POSIX1)
 		return _POSIX_VERSION, nil
@@ -140,21 +110,8 @@ func sysconf(name int) (int64, error) {
 	case SC_XOPEN_XCU_VERSION:
 		return _XOPEN_XCU_VERSION, nil
 
-	case SC_2_VERSION:
-		return _POSIX2_VERSION, nil
-	case SC_2_C_DEV:
-		return _POSIX2_C_DEV, nil
-	case SC_2_LOCALEDEF:
-		return _POSIX2_LOCALEDEF, nil
-	case SC_2_SW_DEV:
-		return _POSIX2_SW_DEV, nil
-	case SC_2_UPE:
-		return _POSIX2_UPE, nil
-
 	case SC_PHYS_PAGES:
 		return sysctl64("hw.memsize") / int64(unix.Getpagesize()), nil
-	case SC_MONOTONIC_CLOCK:
-		return _POSIX_MONOTONIC_CLOCK, nil
 	case SC_NPROCESSORS_CONF:
 		fallthrough
 	case SC_NPROCESSORS_ONLN:

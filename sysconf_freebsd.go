@@ -119,13 +119,6 @@ func sysconf(name int) (int64, error) {
 		}
 		return _POSIX_TIMERS, nil
 
-	case SC_2_LOCALEDEF:
-		return _POSIX2_LOCALEDEF, nil
-	case SC_2_SW_DEV:
-		return _POSIX2_SW_DEV, nil
-	case SC_2_UPE:
-		return _POSIX2_UPE, nil
-
 	case SC_XOPEN_CRYPT:
 		return _XOPEN_CRYPT, nil
 	case SC_XOPEN_REALTIME:

@@ -19,6 +19,11 @@ func Sysconf(name int) (int64, error) {
 		return sc, nil
 	}
 
+	// POSIX default values
+	if sc, err := sysconfPOSIX(name); err == nil {
+		return sc, nil
+	}
+
 	switch name {
 	case SC_BC_BASE_MAX:
 		return _BC_BASE_MAX, nil
@@ -44,50 +49,6 @@ func Sysconf(name int) (int64, error) {
 		return _RE_DUP_MAX, nil
 	case SC_SYMLOOP_MAX:
 		return _SYMLOOP_MAX, nil
-
-	case SC_ADVISORY_INFO:
-		return _POSIX_ADVISORY_INFO, nil
-	case SC_ASYNCHRONOUS_IO:
-		return _POSIX_ASYNCHRONOUS_IO, nil
-	case SC_BARRIERS:
-		return _POSIX_BARRIERS, nil
-	case SC_CLOCK_SELECTION:
-		return _POSIX_CLOCK_SELECTION, nil
-	case SC_CPUTIME:
-		return _POSIX_CPUTIME, nil
-	case SC_FSYNC:
-		return _POSIX_FSYNC, nil
-	case SC_IPV6:
-		return _POSIX_IPV6, nil
-	case SC_JOB_CONTROL:
-		return _POSIX_JOB_CONTROL, nil
-	case SC_MAPPED_FILES:
-		return _POSIX_MAPPED_FILES, nil
-	case SC_MEMLOCK:
-		return _POSIX_MEMLOCK, nil
-	case SC_MEMLOCK_RANGE:
-		return _POSIX_MEMLOCK_RANGE, nil
-	case SC_MONOTONIC_CLOCK:
-		return _POSIX_MONOTONIC_CLOCK, nil
-	case SC_SEMAPHORES:
-		return _POSIX_SEMAPHORES, nil
-	case SC_SHELL:
-		return _POSIX_SHELL, nil
-	case SC_THREADS:
-		return _POSIX_THREADS, nil
-	case SC_TIMEOUTS:
-		return _POSIX_TIMEOUTS, nil
-	case SC_VERSION:
-		return _POSIX_VERSION, nil
-
-	case SC_2_C_DEV:
-		return _POSIX2_C_DEV, nil
-	case SC_2_FORT_DEV:
-		return -1, nil
-	case SC_2_FORT_RUN:
-		return -1, nil
-	case SC_2_VERSION:
-		return _POSIX2_VERSION, nil
 	}
 
 	return -1, unix.EINVAL

@@ -283,48 +283,21 @@ func sysconf(name int) (int64, error) {
 	case SC_TZNAME_MAX:
 		return _TZNAME_MAX, nil
 
-	case SC_ADVISORY_INFO:
-		return _POSIX_ADVISORY_INFO, nil
-	case SC_ASYNCHRONOUS_IO:
-		return _POSIX_ASYNCHRONOUS_IO, nil
-	case SC_BARRIERS:
-		return _POSIX_BARRIERS, nil
-	case SC_CLOCK_SELECTION:
-		return _POSIX_CLOCK_SELECTION, nil
 	case SC_CPUTIME:
 		if hasClock(unix.CLOCK_PROCESS_CPUTIME_ID) {
 			return _POSIX_VERSION, nil
 		}
 		return -1, nil
-	case SC_FSYNC:
-		return _POSIX_FSYNC, nil
-	case SC_IPV6:
-		return _POSIX_IPV6, nil
-	case SC_JOB_CONTROL:
-		return _POSIX_JOB_CONTROL, nil
-	case SC_MAPPED_FILES:
-		return _POSIX_MAPPED_FILES, nil
-	case SC_MEMLOCK:
-		return _POSIX_MEMLOCK, nil
-	case SC_MEMLOCK_RANGE:
-		return _POSIX_MEMLOCK_RANGE, nil
-	case SC_SAVED_IDS:
-		return _POSIX_SAVED_IDS, nil
-	case SC_SEMAPHORES:
-		return _POSIX_SEMAPHORES, nil
-	case SC_SHELL:
-		return _POSIX_SHELL, nil
+	case SC_MONOTONIC_CLOCK:
+		if hasClock(unix.CLOCK_MONOTONIC) {
+			return _POSIX_VERSION, nil
+		}
+		return -1, nil
 	case SC_THREAD_CPUTIME:
 		if hasClock(unix.CLOCK_THREAD_CPUTIME_ID) {
 			return _POSIX_VERSION, nil
 		}
 		return -1, nil
-	case SC_THREADS:
-		return _POSIX_THREADS, nil
-	case SC_TIMEOUTS:
-		return _POSIX_TIMEOUTS, nil
-	case SC_TIMERS:
-		return _POSIX_TIMERS, nil
 
 	case SC_XOPEN_CRYPT:
 		return _XOPEN_CRYPT, nil
@@ -339,28 +312,10 @@ func sysconf(name int) (int64, error) {
 	case SC_XOPEN_XCU_VERSION:
 		return _XOPEN_XCU_VERSION, nil
 
-	case SC_2_C_VERSION:
-		return _POSIX2_C_VERSION, nil
-	case SC_2_UPE:
-		return -1, nil
-	case SC_2_VERSION:
-		return _POSIX2_VERSION, nil
-	case SC_2_C_DEV:
-		return _POSIX2_C_DEV, nil
-	case SC_2_LOCALEDEF:
-		return _POSIX2_LOCALEDEF, nil
-	case SC_2_SW_DEV:
-		return _POSIX2_SW_DEV, nil
-
 	case SC_PHYS_PAGES:
 		return getPhysPages(), nil
 	case SC_AVPHYS_PAGES:
 		return getAvPhysPages(), nil
-	case SC_MONOTONIC_CLOCK:
-		if hasClock(unix.CLOCK_MONOTONIC) {
-			return _POSIX_VERSION, nil
-		}
-		return -1, nil
 	case SC_NPROCESSORS_CONF:
 		return getNprocsConf(), nil
 	case SC_NPROCESSORS_ONLN:
