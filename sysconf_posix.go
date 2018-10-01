@@ -77,8 +77,6 @@ func sysconfPOSIX(name int) (int64, error) {
 		return _POSIX2_LOCALEDEF, nil
 	case SC_2_SW_DEV:
 		return _POSIX2_SW_DEV, nil
-	case SC_2_UPE:
-		return _POSIX2_UPE, nil
 	case SC_2_VERSION:
 		return _POSIX2_VERSION, nil
 	}

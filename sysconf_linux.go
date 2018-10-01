@@ -303,6 +303,8 @@ func sysconf(name int) (int64, error) {
 
 	case SC_2_C_VERSION:
 		return _POSIX2_C_VERSION, nil
+	case SC_2_UPE:
+		return -1, nil
 
 	case SC_XOPEN_CRYPT:
 		return _XOPEN_CRYPT, nil
