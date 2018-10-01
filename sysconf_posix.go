@@ -52,8 +52,6 @@ func sysconfPOSIX(name int) (int64, error) {
 		return _POSIX_REALTIME_SIGNALS, nil
 	case SC_REGEXP:
 		return _POSIX_REGEXP, nil
-	case SC_SAVED_IDS:
-		return _POSIX_SAVED_IDS, nil
 	case SC_SEMAPHORES:
 		return _POSIX_SEMAPHORES, nil
 	case SC_SHARED_MEMORY_OBJECTS:
@@ -71,8 +69,6 @@ func sysconfPOSIX(name int) (int64, error) {
 
 	case SC_2_C_DEV:
 		return _POSIX2_C_DEV, nil
-	case SC_2_C_VERSION:
-		return _POSIX2_C_VERSION, nil
 	case SC_2_FORT_DEV:
 		return -1, nil
 	case SC_2_FORT_RUN:
@@ -82,7 +78,7 @@ func sysconfPOSIX(name int) (int64, error) {
 	case SC_2_SW_DEV:
 		return _POSIX2_SW_DEV, nil
 	case SC_2_UPE:
-		return -1, nil
+		return _POSIX2_UPE, nil
 	case SC_2_VERSION:
 		return _POSIX2_VERSION, nil
 	}

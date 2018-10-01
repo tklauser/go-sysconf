@@ -293,11 +293,16 @@ func sysconf(name int) (int64, error) {
 			return _POSIX_VERSION, nil
 		}
 		return -1, nil
+	case SC_SAVED_IDS:
+		return _POSIX_SAVED_IDS, nil
 	case SC_THREAD_CPUTIME:
 		if hasClock(unix.CLOCK_THREAD_CPUTIME_ID) {
 			return _POSIX_VERSION, nil
 		}
 		return -1, nil
+
+	case SC_2_C_VERSION:
+		return _POSIX2_C_VERSION, nil
 
 	case SC_XOPEN_CRYPT:
 		return _XOPEN_CRYPT, nil
