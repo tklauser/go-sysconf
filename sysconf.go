@@ -15,7 +15,10 @@ import (
 
 var errInvalid error = errors.New("invalid parameter value")
 
-// Sysconf returns the value of a sysconf(3) configurable system variable.
+// Sysconf returns the value of a sysconf(3) runtime system parameter.
+// The name parameter should be a SC_* constant define in this package. The
+// implementation is GOOS-specific and certain SC_* constants might not be
+// defined for all GOOSes.
 func Sysconf(name int) (int64, error) {
 	// OS-specific sysconf
 	if sc, err := sysconf(name); err == nil {
