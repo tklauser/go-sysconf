@@ -106,6 +106,10 @@ func sysconf(name int) (int64, error) {
 			return 0, nil
 		}
 		return _POSIX_IPV6, nil
+	case SC_PRIORITY_SCHEDULING:
+		if _POSIX_PRIORITY_SCHEDULING == 0 {
+			return yesno(sysctl32("p1003_1b.priority_scheduling")), nil
+		}
 	case SC_SAVED_IDS:
 		return yesno(sysctl32("kern.saved_ids")), nil
 	case SC_SEMAPHORES:
@@ -113,6 +117,8 @@ func sysconf(name int) (int64, error) {
 			return yesno(sysctl32("p1003_1b.semaphores")), nil
 		}
 		return _POSIX_SEMAPHORES, nil
+	case SC_THREAD_CPUTIME:
+		return _POSIX_THREAD_CPUTIME, nil
 	case SC_TIMERS:
 		if _POSIX_TIMERS == 0 {
 			return yesno(sysctl32("p1003_1b.timers")), nil
