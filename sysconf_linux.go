@@ -402,5 +402,5 @@ func sysconf(name int) (int64, error) {
 		return _UIO_MAXIOV, nil
 	}
 
-	return -1, unix.EINVAL
+	return -1, errInvalid
 }

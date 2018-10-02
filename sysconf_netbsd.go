@@ -34,7 +34,7 @@ func sysconfPOSIX(name int) (int64, error) {
 		return _POSIX_VERSION, nil
 	}
 
-	return -1, unix.EINVAL
+	return -1, errInvalid
 }
 
 func sysconf(name int) (int64, error) {
@@ -150,5 +150,5 @@ func sysconf(name int) (int64, error) {
 		return sysctl32("kern.maxproc"), nil
 	}
 
-	return -1, unix.EINVAL
+	return -1, errInvalid
 }

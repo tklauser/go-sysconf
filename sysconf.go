@@ -7,10 +7,13 @@
 package sysconf
 
 import (
-	"golang.org/x/sys/unix"
+	"errors"
+	"os"
 )
 
 //go:generate go run mksysconf.go
+
+var errInvalid error = errors.New("invalid parameter value")
 
 // Sysconf returns the value of a sysconf(3) configurable system variable.
 func Sysconf(name int) (int64, error) {
@@ -44,12 +47,12 @@ func Sysconf(name int) (int64, error) {
 	case SC_LOGIN_NAME_MAX:
 		return _LOGIN_NAME_MAX, nil
 	case SC_PAGESIZE: // same as SC_PAGE_SIZE
-		return int64(unix.Getpagesize()), nil
+		return int64(os.Getpagesize()), nil
 	case SC_RE_DUP_MAX:
 		return _RE_DUP_MAX, nil
 	case SC_SYMLOOP_MAX:
 		return _SYMLOOP_MAX, nil
 	}
 
-	return -1, unix.EINVAL
+	return -1, errInvalid
 }
