@@ -15,7 +15,12 @@ func TestSysconf(t *testing.T) {
 	// C.sysconf are in the test directory.
 	val, err := sysconf.Sysconf(sysconf.SC_CLK_TCK)
 	if err != nil {
-		t.Fatalf("Sysconf(CLK_TCK): %v", err)
+		t.Errorf("Sysconf(CLK_TCK): %v", err)
 	}
 	t.Logf("CLK_TCK = %v", val)
+
+	_, err = sysconf.Sysconf(-1)
+	if err == nil {
+		t.Errorf("Sysconf(-1) returned %v, want non-nil", err)
+	}
 }
