@@ -30,3 +30,10 @@ func sysctl64(name string) int64 {
 	}
 	return -1
 }
+
+func yesno(val int64) int64 {
+	if val == 0 {
+		return -1
+	}
+	return val
+}

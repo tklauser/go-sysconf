@@ -14,13 +14,6 @@ const (
 	_SYMLOOP_MAX    = _MAXSYMLINKS
 )
 
-func yesno(val int64) int64 {
-	if val == 0 {
-		return -1
-	}
-	return val
-}
-
 func sysconf(name int) (int64, error) {
 	switch name {
 	case SC_AIO_LISTIO_MAX:
