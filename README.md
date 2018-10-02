@@ -21,7 +21,23 @@ Additionally, the following non-standard variables are supported on some operati
 
 ## Usage
 
-TODO
+```Go
+package main
+
+import (
+	"fmt"
+
+	"github.com/tklauser/go-sysconf"
+)
+
+func main() {
+	// get clock ticks, this will return the same as C.sysconf(C._SC_CLK_TCK)
+	clktck, err := sysconf.Sysconf(sysconf.SC_CLK_TCK)
+	if err != nil {
+		fmt.Printf("SC_CLK_TCK: %v\n", clktck)
+	}
+}
+```
 
 ## Documentation
 
@@ -31,6 +47,7 @@ https://godoc.org/github.com/tklauser/go-sysconf
 
 * [POSIX documenation for`sysconf`](http://pubs.opengroup.org/onlinepubs/9699919799/functions/sysconf.html)
 * [Linux manpage for `sysconf(3)`](http://man7.org/linux/man-pages/man3/sysconf.3.html)
+* [glibc constants for `sysconf` parameters](https://www.gnu.org/software/libc/manual/html_node/Constants-for-Sysconf.html)
 
 [1]: https://travis-ci.org/tklauser/go-sysconf.svg?branch=master
 [2]: https://travis-ci.org/tklauser/go-sysconf
