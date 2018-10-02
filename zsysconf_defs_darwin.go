@@ -136,8 +136,8 @@ const (
 	_POSIX_PRIORITY_SCHEDULING          = -0x1
 	_POSIX_RAW_SOCKETS                  = -0x1
 	_POSIX_READER_WRITER_LOCKS          = 0x30db0
-	_POSIX_REALTIME_SIGNALS             = 0x30db0
-	_POSIX_REGEXP                       = 0x1
+	_POSIX_REALTIME_SIGNALS             = -0x1
+	_POSIX_REGEXP                       = 0x30db0
 	_POSIX_SEM_VALUE_MAX                = 0x7fff
 	_POSIX_SEMAPHORES                   = -0x1
 	_POSIX_SHARED_MEMORY_OBJECTS        = -0x1
@@ -152,6 +152,7 @@ const (
 	_POSIX_TIMERS                       = -0x1
 	_POSIX_VERSION                      = 0x30db0
 
+	_POSIX2_C_BIND    = 0x30db0
 	_POSIX2_C_DEV     = 0x30db0
 	_POSIX2_LOCALEDEF = 0x30db0
 	_POSIX2_SW_DEV    = 0x30db0
