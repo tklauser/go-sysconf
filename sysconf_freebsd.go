@@ -14,6 +14,7 @@ const (
 	_SYMLOOP_MAX    = _MAXSYMLINKS
 )
 
+// sysconf implements sysconf(3) as in the FreeBSD 12 libc.
 func sysconf(name int) (int64, error) {
 	switch name {
 	case SC_AIO_LISTIO_MAX:
@@ -99,10 +100,26 @@ func sysconf(name int) (int64, error) {
 			return 0, nil
 		}
 		return _POSIX_IPV6, nil
+	case SC_MESSAGE_PASSING:
+		if _POSIX_MESSAGE_PASSING == 0 {
+			return yesno(sysctl32("p1003_1b.message_passing")), nil
+		}
+		return _POSIX_MESSAGE_PASSING, nil
+	case SC_PRIORITIZED_IO:
+		if _POSIX_PRIORITIZED_IO == 0 {
+			return yesno(sysctl32("p1003_1b.prioritized_io")), nil
+		}
+		return _POSIX_PRIORITIZED_IO, nil
 	case SC_PRIORITY_SCHEDULING:
 		if _POSIX_PRIORITY_SCHEDULING == 0 {
 			return yesno(sysctl32("p1003_1b.priority_scheduling")), nil
 		}
+		return _POSIX_PRIORITY_SCHEDULING, nil
+	case SC_REALTIME_SIGNALS:
+		if _POSIX_REALTIME_SIGNALS == 0 {
+			return yesno(sysctl32("p1003_1b.realtime_signals")), nil
+		}
+		return _POSIX_REALTIME_SIGNALS, nil
 	case SC_SAVED_IDS:
 		return yesno(sysctl32("kern.saved_ids")), nil
 	case SC_SEMAPHORES:
@@ -110,21 +127,75 @@ func sysconf(name int) (int64, error) {
 			return yesno(sysctl32("p1003_1b.semaphores")), nil
 		}
 		return _POSIX_SEMAPHORES, nil
+	case SC_SPAWN:
+		return _POSIX_SPAWN, nil
+	case SC_SPIN_LOCKS:
+		return _POSIX_SPIN_LOCKS, nil
+	case SC_SPORADIC_SERVER:
+		return _POSIX_SPORADIC_SERVER, nil
+	case SC_SYNCHRONIZED_IO:
+		if _POSIX_SYNCHRONIZED_IO == 0 {
+			return yesno(sysctl32("p1003_1b.synchronized_io")), nil
+		}
+		return _POSIX_SYNCHRONIZED_IO, nil
+	case SC_THREAD_ATTR_STACKADDR:
+		return _POSIX_THREAD_ATTR_STACKADDR, nil
+	case SC_THREAD_ATTR_STACKSIZE:
+		return _POSIX_THREAD_ATTR_STACKSIZE, nil
 	case SC_THREAD_CPUTIME:
 		return _POSIX_THREAD_CPUTIME, nil
+	case SC_THREAD_PRIORITY_SCHEDULING:
+		return _POSIX_THREAD_PRIORITY_SCHEDULING, nil
+	case SC_THREAD_PROCESS_SHARED:
+		return _POSIX_THREAD_PROCESS_SHARED, nil
+	case SC_THREAD_SAFE_FUNCTIONS:
+		return _POSIX_THREAD_SAFE_FUNCTIONS, nil
 	case SC_TIMERS:
 		if _POSIX_TIMERS == 0 {
 			return yesno(sysctl32("p1003_1b.timers")), nil
 		}
 		return _POSIX_TIMERS, nil
+	case SC_TRACE:
+		return _POSIX_TRACE, nil
+	case SC_TYPED_MEMORY_OBJECTS:
+		return _POSIX_TYPED_MEMORY_OBJECTS, nil
+	case SC_VERSION:
+		// TODO(tk): FreeBSD libc uses sysctl(CTL_KERN, KERN_POSIX1)
+		return _POSIX_VERSION, nil
 
+		/* TODO(tk): these need GOARCH-dependent integer size checks
+		case SC_V6_ILP32_OFF32:
+			return _V6_ILP32_OFF32, nil
+		case SC_V6_ILP32_OFFBIG:
+			return _V6_ILP32_OFFBIG, nil
+		case SC_V6_LP64_OFF64:
+			return _V6_LP64_OFF64, nil
+		case SC_V6_LPBIG_OFFBIG:
+			return _V6_LPBIG_OFFBIG, nil
+		*/
+
+	case SC_2_CHAR_TERM:
+		return _POSIX2_CHAR_TERM, nil
+	case SC_2_PBS,
+		SC_2_PBS_ACCOUNTING,
+		SC_2_PBS_CHECKPOINT,
+		SC_2_PBS_LOCATE,
+		SC_2_PBS_MESSAGE,
+		SC_2_PBS_TRACK:
+		return _POSIX2_PBS, nil
 	case SC_2_UPE:
 		return _POSIX2_UPE, nil
 
 	case SC_XOPEN_CRYPT:
 		return _XOPEN_CRYPT, nil
+	case SC_XOPEN_ENH_I18N:
+		return _XOPEN_ENH_I18N, nil
 	case SC_XOPEN_REALTIME:
 		return _XOPEN_REALTIME, nil
+	case SC_XOPEN_REALTIME_THREADS:
+		return _XOPEN_REALTIME_THREADS, nil
+	case SC_XOPEN_SHM:
+		return _XOPEN_SHM, nil
 	case SC_XOPEN_STREAMS:
 		return -1, nil
 	case SC_XOPEN_UNIX:
