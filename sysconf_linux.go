@@ -295,21 +295,92 @@ func sysconf(name int) (int64, error) {
 		return -1, nil
 	case SC_SAVED_IDS:
 		return _POSIX_SAVED_IDS, nil
+	case SC_SPAWN:
+		return _POSIX_SPAWN, nil
+	case SC_SPIN_LOCKS:
+		return _POSIX_SPIN_LOCKS, nil
+	case SC_SPORADIC_SERVER:
+		return _POSIX_SPORADIC_SERVER, nil
+	case SC_SYNCHRONIZED_IO:
+		return _POSIX_SYNCHRONIZED_IO, nil
+	case SC_THREAD_ATTR_STACKADDR:
+		return _POSIX_THREAD_ATTR_STACKADDR, nil
+	case SC_THREAD_ATTR_STACKSIZE:
+		return _POSIX_THREAD_ATTR_STACKSIZE, nil
 	case SC_THREAD_CPUTIME:
 		if hasClock(unix.CLOCK_THREAD_CPUTIME_ID) {
 			return _POSIX_VERSION, nil
 		}
 		return -1, nil
+	case SC_THREAD_PRIORITY_SCHEDULING:
+		return _POSIX_THREAD_PRIORITY_SCHEDULING, nil
+	case SC_THREAD_PROCESS_SHARED:
+		return _POSIX_THREAD_PROCESS_SHARED, nil
+	case SC_THREAD_SAFE_FUNCTIONS:
+		return _POSIX_THREAD_SAFE_FUNCTIONS, nil
+	case SC_THREAD_SPORADIC_SERVER:
+		return _POSIX_THREAD_SPORADIC_SERVER, nil
+	case SC_TRACE:
+		return _POSIX_TRACE, nil
+	case SC_TRACE_EVENT_FILTER:
+		return _POSIX_TRACE_EVENT_FILTER, nil
+	case SC_TRACE_EVENT_NAME_MAX:
+		return -1, nil
+	case SC_TRACE_INHERIT:
+		return _POSIX_TRACE_INHERIT, nil
+	case SC_TRACE_LOG:
+		return _POSIX_TRACE_LOG, nil
+	case SC_TRACE_NAME_MAX:
+		return -1, nil
+	case SC_TRACE_SYS_MAX:
+		return -1, nil
+	case SC_TRACE_USER_EVENT_MAX:
+		return -1, nil
+	case SC_TYPED_MEMORY_OBJECTS:
+		return _POSIX_TYPED_MEMORY_OBJECTS, nil
+
+	case SC_V7_ILP32_OFF32:
+		return -1, nil
+	case SC_V7_ILP32_OFFBIG:
+		return -1, nil
+	case SC_V7_LP64_OFF64:
+		return _POSIX_V7_LP64_OFF64, nil
+	case SC_V7_LPBIG_OFFBIG:
+		return _POSIX_V7_LPBIG_OFFBIG, nil
+
+	case SC_V6_ILP32_OFF32:
+		return -1, nil
+	case SC_V6_ILP32_OFFBIG:
+		return -1, nil
+	case SC_V6_LP64_OFF64:
+		return _POSIX_V6_LP64_OFF64, nil
+	case SC_V6_LPBIG_OFFBIG:
+		return _POSIX_V6_LPBIG_OFFBIG, nil
 
 	case SC_2_C_VERSION:
 		return _POSIX2_C_VERSION, nil
+	case SC_2_CHAR_TERM:
+		return _POSIX2_CHAR_TERM, nil
+	case SC_2_PBS,
+		SC_2_PBS_ACCOUNTING,
+		SC_2_PBS_CHECKPOINT,
+		SC_2_PBS_LOCATE,
+		SC_2_PBS_MESSAGE,
+		SC_2_PBS_TRACK:
+		return -1, nil
 	case SC_2_UPE:
 		return -1, nil
 
 	case SC_XOPEN_CRYPT:
 		return _XOPEN_CRYPT, nil
+	case SC_XOPEN_ENH_I18N:
+		return _XOPEN_ENH_I18N, nil
 	case SC_XOPEN_REALTIME:
 		return _XOPEN_REALTIME, nil
+	case SC_XOPEN_REALTIME_THREADS:
+		return _XOPEN_REALTIME_THREADS, nil
+	case SC_XOPEN_SHM:
+		return _XOPEN_SHM, nil
 	case SC_XOPEN_STREAMS:
 		return -1, nil
 	case SC_XOPEN_UNIX:
