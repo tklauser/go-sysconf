@@ -17,6 +17,7 @@ import (
 	"testing"
 
 	"github.com/tklauser/go-sysconf"
+	"golang.org/x/sys/unix"
 )
 
 type testCase struct {
@@ -135,19 +136,24 @@ func testSysconfGoCgo(t *testing.T, tc testCase) {
 	if tc.goVar != int(tc.cVar) {
 		t.Errorf("sysconf variable %v values in Go and C don't match: %v <-> %v", tc.name, tc.goVar, tc.cVar)
 	}
-	goVal, err := sysconf.Sysconf(tc.goVar)
-	if err != nil {
-		t.Fatalf("Sysconf(%s/%d): %v", tc.name, tc.goVar, err)
+	goVal, goErr := sysconf.Sysconf(tc.goVar)
+	if goErr != nil && goErr != unix.EINVAL {
+		t.Errorf("Sysconf(%s/%d): %v", tc.name, tc.goVar, goErr)
 	}
-	t.Logf("%s = %v", tc.name, goVal)
+	if goErr != unix.EINVAL {
+		t.Logf("%s = %v", tc.name, goVal)
+	}
 
-	cVal, err := C.sysconf(tc.cVar)
-	if err != nil {
-		t.Fatalf("C.sysconf(%s/%d): %v", tc.name, tc.cVar, err)
+	cVal, cErr := C.sysconf(tc.cVar)
+	if cErr != nil && cErr != unix.EINVAL {
+		t.Fatalf("Sysconf(%s/%d): %v", tc.name, tc.goVar, cErr)
 	}
 
 	if goVal != int64(cVal) {
 		t.Errorf("values in Go and C for %v don't match: %v <-> %v", tc.name, goVal, cVal)
+	}
+	if goErr != cErr {
+		t.Errorf("error values in Go and C for %v don't match: %v <-> %v", tc.name, goErr, cErr)
 	}
 }
 
