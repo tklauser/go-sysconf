@@ -17,7 +17,6 @@ import (
 	"testing"
 
 	"github.com/tklauser/go-sysconf"
-	"golang.org/x/sys/unix"
 )
 
 func testSysconfCgoMatch(t *testing.T) {
@@ -88,7 +87,6 @@ func testSysconfCgoMatch(t *testing.T) {
 		{sysconf.SC_SPAWN, C._SC_SPAWN, "_POSIX_SPAWN"},
 		{sysconf.SC_SPIN_LOCKS, C._SC_SPIN_LOCKS, "_POSIX_SPIN_LOCKS"},
 		{sysconf.SC_SPORADIC_SERVER, C._SC_SPORADIC_SERVER, "_POSIX_SPORADIC_SERVER"},
-		{sysconf.SC_SS_REPL_MAX, C._SC_SS_REPL_MAX, "_POSIX_SS_REPL_MAX"},
 		{sysconf.SC_SYNCHRONIZED_IO, C._SC_SYNCHRONIZED_IO, "_POSIX_SYNCHRONIZED_IO"},
 		{sysconf.SC_THREAD_ATTR_STACKADDR, C._SC_THREAD_ATTR_STACKADDR, "_POSIX_THREAD_ATTR_STACKADDR"},
 		{sysconf.SC_THREAD_ATTR_STACKSIZE, C._SC_THREAD_ATTR_STACKSIZE, "_POSIX_THREAD_ATTR_STACKSIZE"},
@@ -97,8 +95,6 @@ func testSysconfCgoMatch(t *testing.T) {
 		{sysconf.SC_THREAD_PRIO_PROTECT, C._SC_THREAD_PRIO_PROTECT, "_POSIX_THREAD_PRIO_PROTECT"},
 		{sysconf.SC_THREAD_PRIORITY_SCHEDULING, C._SC_THREAD_PRIORITY_SCHEDULING, "_POSIX_THREAD_PRIORITY_SCHEDULING"},
 		{sysconf.SC_THREAD_PROCESS_SHARED, C._SC_THREAD_PROCESS_SHARED, "_POSIX_THREAD_PROCESS_SHARED"},
-		{sysconf.SC_THREAD_ROBUST_PRIO_INHERIT, C._SC_THREAD_ROBUST_PRIO_INHERIT, "_POSIX_THREAD_ROBUST_PRIO_INHERIT"},
-		{sysconf.SC_THREAD_ROBUST_PRIO_PROTECT, C._SC_THREAD_ROBUST_PRIO_PROTECT, "_POSIX_THREAD_ROBUST_PRIO_PROTECT"},
 		{sysconf.SC_THREAD_SAFE_FUNCTIONS, C._SC_THREAD_SAFE_FUNCTIONS, "_POSIX_THREAD_SAFE_FUNCTIONS"},
 		{sysconf.SC_THREAD_SPORADIC_SERVER, C._SC_THREAD_SPORADIC_SERVER, "_POSIX_THREAD_SPORADIC_SERVER"},
 		{sysconf.SC_THREADS, C._SC_THREADS, "_POSIX_THREADS"},
@@ -163,37 +159,21 @@ func testSysconfCgoMatch(t *testing.T) {
 		{sysconf.SC_NPROCESSORS_ONLN, C._SC_NPROCESSORS_ONLN, "_NPROCESSORS_ONLN"},
 		{sysconf.SC_UIO_MAXIOV, C._SC_UIO_MAXIOV, "UIO_MAXIOV"},
 	}
-
 	for _, tc := range testCases {
 		testSysconfGoCgo(t, tc)
 	}
 
+	// These _SC_* are defined but no longer supported by sysconf(3)
+	testCasesInvalid := []testCase{
+		{sysconf.SC_SS_REPL_MAX, C._SC_SS_REPL_MAX, "_POSIX_SS_REPL_MAX"},
+		{sysconf.SC_THREAD_ROBUST_PRIO_INHERIT, C._SC_THREAD_ROBUST_PRIO_INHERIT, "_POSIX_THREAD_ROBUST_PRIO_INHERIT"},
+		{sysconf.SC_THREAD_ROBUST_PRIO_PROTECT, C._SC_THREAD_ROBUST_PRIO_PROTECT, "_POSIX_THREAD_ROBUST_PRIO_PROTECT"},
+	}
+	for _, tc := range testCasesInvalid {
+		testSysconfGoCgoInvalid(t, tc)
+	}
+
 	testPosix2CVersion(t)
-}
-
-func testSysconfGoCgo(t *testing.T, tc testCase) {
-	if tc.goVar != int(tc.cVar) {
-		t.Errorf("sysconf variable %v values in Go and C don't match: %v <-> %v", tc.name, tc.goVar, tc.cVar)
-	}
-	goVal, goErr := sysconf.Sysconf(tc.goVar)
-	if goErr != nil && goErr != unix.EINVAL {
-		t.Errorf("Sysconf(%s/%d): %v", tc.name, tc.goVar, goErr)
-	}
-	if goErr != unix.EINVAL {
-		t.Logf("%s = %v", tc.name, goVal)
-	}
-
-	cVal, cErr := C.sysconf(tc.cVar)
-	if cErr != nil && cErr != unix.EINVAL {
-		t.Fatalf("Sysconf(%s/%d): %v", tc.name, tc.goVar, cErr)
-	}
-
-	if goVal != int64(cVal) {
-		t.Errorf("values in Go and C for %v don't match: %v <-> %v", tc.name, goVal, cVal)
-	}
-	if goErr != cErr {
-		t.Errorf("error values in Go and C for %v don't match: %v <-> %v", tc.name, goErr, cErr)
-	}
 }
 
 func testPosix2CVersion(t *testing.T) {

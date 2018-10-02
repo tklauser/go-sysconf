@@ -13,7 +13,6 @@ import (
 	"testing"
 
 	"github.com/tklauser/go-sysconf"
-	"golang.org/x/sys/unix"
 )
 
 func testSysconfCgoMatch(t *testing.T) {
@@ -145,33 +144,7 @@ func testSysconfCgoMatch(t *testing.T) {
 		{sysconf.SC_NPROCESSORS_CONF, C._SC_NPROCESSORS_CONF, "_NPROCESSORS_CONF"},
 		{sysconf.SC_NPROCESSORS_ONLN, C._SC_NPROCESSORS_ONLN, "_NPROCESSORS_ONLN"},
 	}
-
 	for _, tc := range testCases {
 		testSysconfGoCgo(t, tc)
-	}
-}
-
-func testSysconfGoCgo(t *testing.T, tc testCase) {
-	if tc.goVar != int(tc.cVar) {
-		t.Errorf("sysconf variable %v values in Go and C don't match: %v <-> %v", tc.name, tc.goVar, tc.cVar)
-	}
-	goVal, goErr := sysconf.Sysconf(tc.goVar)
-	if goErr != nil && goErr != unix.EINVAL {
-		t.Errorf("Sysconf(%s/%d): %v", tc.name, tc.goVar, goErr)
-	}
-	if goErr != unix.EINVAL {
-		t.Logf("%s = %v", tc.name, goVal)
-	}
-
-	cVal, cErr := C.sysconf(tc.cVar)
-	if cErr != nil && cErr != unix.EINVAL {
-		t.Fatalf("Sysconf(%s/%d): %v", tc.name, tc.goVar, cErr)
-	}
-
-	if goVal != int64(cVal) {
-		t.Errorf("values in Go and C for %v don't match: %v <-> %v", tc.name, goVal, cVal)
-	}
-	if goErr != cErr {
-		t.Errorf("error values in Go and C for %v don't match: %v <-> %v", tc.name, goErr, cErr)
 	}
 }

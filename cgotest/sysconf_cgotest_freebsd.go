@@ -111,22 +111,6 @@ func testSysconfCgoMatch(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		if tc.goVar != int(tc.cVar) {
-			t.Errorf("sysconf variable %v values in Go and C don't match: %v <-> %v", tc.name, tc.goVar, tc.cVar)
-		}
-		goVal, err := sysconf.Sysconf(tc.goVar)
-		if err != nil {
-			t.Fatalf("Sysconf(%s/%d): %v", tc.name, tc.goVar, err)
-		}
-		t.Logf("%s = %v", tc.name, goVal)
-
-		cVal, err := C.sysconf(tc.cVar)
-		if err != nil {
-			t.Fatalf("C.sysconf(%s/%d): %v", tc.name, tc.cVar, err)
-		}
-
-		if goVal != int64(cVal) {
-			t.Errorf("values in Go and C for %v don't match: %v <-> %v", tc.name, goVal, cVal)
-		}
+		testSysconfGoCgo(t, tc)
 	}
 }
