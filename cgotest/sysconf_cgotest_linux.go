@@ -127,11 +127,11 @@ func testSysconfCgoMatch(t *testing.T) {
 
 		{sysconf.SC_2_C_BIND, C._SC_2_C_BIND, "_POSIX2_C_BIND"},
 		{sysconf.SC_2_C_DEV, C._SC_2_C_DEV, "_POSIX2_C_DEV"},
-		{sysconf.SC_2_CHAR_TERM, C._SC_2_CHAR_TERM, "_POSIX2_CHAR_TERM"},
 		// glibc version < 2.22 does not define _POSIX2_C_VERSION
 		// despite supporting the standard, see glibc bug BZ 438. Test it
 		// in testPosix2CVersion below.
 		// {sysconf.SC_2_C_VERSION, C._SC_2_C_VERSION, "_POSIX2_C_VERSION"},
+		{sysconf.SC_2_CHAR_TERM, C._SC_2_CHAR_TERM, "_POSIX2_CHAR_TERM"},
 		{sysconf.SC_2_FORT_DEV, C._SC_2_FORT_DEV, "_POSIX2_FORT_DEV"},
 		{sysconf.SC_2_FORT_RUN, C._SC_2_FORT_RUN, "_POSIX2_FORT_RUN"},
 		{sysconf.SC_2_LOCALEDEF, C._SC_2_LOCALEDEF, "_POSIX2_LOCALEDEF"},

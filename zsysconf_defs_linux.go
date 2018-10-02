@@ -183,9 +183,9 @@ const (
 	_POSIX_MAPPED_FILES                 = 0x31069
 	_POSIX_MEMLOCK                      = 0x31069
 	_POSIX_MEMLOCK_RANGE                = 0x31069
-	_POSIX_MONOTONIC_CLOCK              = 0x0
 	_POSIX_MEMORY_PROTECTION            = 0x31069
 	_POSIX_MESSAGE_PASSING              = 0x31069
+	_POSIX_MONOTONIC_CLOCK              = 0x0
 	_POSIX_PRIORITIZED_IO               = 0x31069
 	_POSIX_PRIORITY_SCHEDULING          = 0x31069
 	_POSIX_RAW_SOCKETS                  = 0x31069
@@ -193,8 +193,8 @@ const (
 	_POSIX_REALTIME_SIGNALS             = 0x31069
 	_POSIX_REGEXP                       = 0x1
 	_POSIX_SAVED_IDS                    = 0x1
-	_POSIX_SHARED_MEMORY_OBJECTS        = 0x31069
 	_POSIX_SEMAPHORES                   = 0x31069
+	_POSIX_SHARED_MEMORY_OBJECTS        = 0x31069
 	_POSIX_SHELL                        = 0x1
 	_POSIX_SIGQUEUE_MAX                 = 0x20
 	_POSIX_SPAWN                        = 0x31069
