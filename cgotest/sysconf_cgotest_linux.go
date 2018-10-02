@@ -170,9 +170,8 @@ func testPosix2CVersion(t *testing.T) {
 	// _POSIX2_C_VERSION was fixed in glibc 2.22, see glibc commit
 	// 4e5f9259f352 ("Restore _POSIX2_C_VERSION definition (bug 438).")
 	if maj <= 2 && min < 22 {
-		t.Logf("skipping _POSIX2_C_VERSION test on glibc < 2.22")
-	} else {
-		tc := testCase{sysconf.SC_2_C_VERSION, C._SC_2_C_VERSION, "_POSIX2_C_VERSION"}
-		testSysconfGoCgo(t, tc)
+		t.Skipf("skipping _POSIX2_C_VERSION test on glibc < 2.22")
 	}
+	tc := testCase{sysconf.SC_2_C_VERSION, C._SC_2_C_VERSION, "_POSIX2_C_VERSION"}
+	testSysconfGoCgo(t, tc)
 }
