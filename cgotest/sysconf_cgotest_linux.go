@@ -20,12 +20,6 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-type testCase struct {
-	goVar int
-	cVar  C.int
-	name  string
-}
-
 func testSysconfCgoMatch(t *testing.T) {
 	testCases := []testCase{
 		{sysconf.SC_AIO_LISTIO_MAX, C._SC_AIO_LISTIO_MAX, "AIO_LISTIO_MAX"},
