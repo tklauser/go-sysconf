@@ -15,7 +15,6 @@ Additionally, the following non-standard variables are supported on some operati
 |---|---|
 | `SC_PHYS_PAGES`       | Linux, Darwin, FreeBSD, NetBSD |
 | `SC_AVPHYS_PAGES`     | Linux |
-| `SC_MONOTONIC_CLOCK`  | Linux, Darwin, FreeBSD, NetBSD |
 | `SC_NPROCESSORS_CONF` | Linux, Darwin, FreeBSD, NetBSD |
 | `SC_NPROCESSORS_ONLN` | Linux, Darwin, FreeBSD, NetBSD |
 | `SC_UIO_MAXIOV`       | Linux |
