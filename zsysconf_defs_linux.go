@@ -18,6 +18,8 @@ const (
 	SC_COLL_WEIGHTS_MAX             = 0x28
 	SC_DELAYTIMER_MAX               = 0x1a
 	SC_EXPR_NEST_MAX                = 0x2a
+	SC_GETGR_R_SIZE_MAX             = 0x45
+	SC_GETPW_R_SIZE_MAX             = 0x46
 	SC_HOST_NAME_MAX                = 0xb4
 	SC_IOV_MAX                      = 0x3c
 	SC_LINE_MAX                     = 0x2b
@@ -155,6 +157,8 @@ const (
 	_LOGIN_NAME_MAX     = 0x100
 	_MQ_PRIO_MAX        = 0x8000
 	_NGROUPS_MAX        = 0x10000
+	_NSS_BUFLEN_GROUP   = 0x400
+	_NSS_BUFLEN_PASSWD  = 0x400
 	_OPEN_MAX           = 0x100
 	_PTHREAD_KEYS_MAX   = 0x400
 	_PTHREAD_STACK_MIN  = 0x4000

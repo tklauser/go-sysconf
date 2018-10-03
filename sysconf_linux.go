@@ -237,6 +237,10 @@ func sysconf(name int) (int64, error) {
 		return clktck, nil
 	case SC_DELAYTIMER_MAX:
 		return _DELAYTIMER_MAX, nil
+	case SC_GETGR_R_SIZE_MAX:
+		return _NSS_BUFLEN_GROUP, nil
+	case SC_GETPW_R_SIZE_MAX:
+		return _NSS_BUFLEN_PASSWD, nil
 	case SC_MQ_OPEN_MAX:
 		return -1, nil
 	case SC_MQ_PRIO_MAX:

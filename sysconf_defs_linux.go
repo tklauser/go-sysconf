@@ -12,6 +12,9 @@ package sysconf
 #include <stdio.h>
 #include <unistd.h>
 
+#include <grp.h> // for NSS_BUFLEN_GROUP
+#include <pwd.h> // for NSS_BUFLEN_PASSWD
+
 // This comes from the Linux kernel header.
 #ifndef OPEN_MAX
 # define OPEN_MAX	256
@@ -46,6 +49,8 @@ const (
 	SC_COLL_WEIGHTS_MAX             = C._SC_COLL_WEIGHTS_MAX
 	SC_DELAYTIMER_MAX               = C._SC_DELAYTIMER_MAX
 	SC_EXPR_NEST_MAX                = C._SC_EXPR_NEST_MAX
+	SC_GETGR_R_SIZE_MAX             = C._SC_GETGR_R_SIZE_MAX
+	SC_GETPW_R_SIZE_MAX             = C._SC_GETPW_R_SIZE_MAX
 	SC_HOST_NAME_MAX                = C._SC_HOST_NAME_MAX
 	SC_IOV_MAX                      = C._SC_IOV_MAX
 	SC_LINE_MAX                     = C._SC_LINE_MAX
@@ -185,6 +190,8 @@ const (
 	_LOGIN_NAME_MAX     = C.LOGIN_NAME_MAX
 	_MQ_PRIO_MAX        = C.MQ_PRIO_MAX
 	_NGROUPS_MAX        = C.NGROUPS_MAX
+	_NSS_BUFLEN_GROUP   = C.NSS_BUFLEN_GROUP
+	_NSS_BUFLEN_PASSWD  = C.NSS_BUFLEN_PASSWD
 	_OPEN_MAX           = C.OPEN_MAX
 	_PTHREAD_KEYS_MAX   = C.PTHREAD_KEYS_MAX
 	_PTHREAD_STACK_MIN  = C.PTHREAD_STACK_MIN
