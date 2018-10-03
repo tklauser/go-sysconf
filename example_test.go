@@ -10,14 +10,14 @@ import (
 	"github.com/tklauser/go-sysconf"
 )
 
-func ExampleSysconfClkTck() {
+func ExampleSysconf() {
 	clktck, err := sysconf.Sysconf(sysconf.SC_CLK_TCK)
 	if err != nil {
 		fmt.Printf("SC_CLK_TCK: %v\n", clktck)
 	}
 }
 
-func ExampleSysconfUnsupported() {
+func ExampleSysconf_unsupported() {
 	_, err := sysconf.Sysconf(-1)
 	fmt.Print(err)
 
