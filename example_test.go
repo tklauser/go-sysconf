@@ -17,7 +17,7 @@ func ExampleSysconf() {
 	}
 }
 
-func ExampleSysconf_unsupported() {
+func ExampleSysconf_invalidParameter() {
 	_, err := sysconf.Sysconf(-1)
 	fmt.Print(err)
 
