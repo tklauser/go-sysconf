@@ -187,12 +187,52 @@ func sysconf(name int) (int64, error) {
 		return _POSIX_VERSION, nil
 
 	case SC_V6_ILP32_OFF32:
+		if _V6_ILP32_OFF32 == 0 {
+			if unix.SizeofInt*_CHAR_BIT == 32 &&
+				unix.SizeofInt == unix.SizeofLong &&
+				unix.SizeofLong == unix.SizeofPtr &&
+				unix.SizeofPtr == sizeofOffT {
+				return 1, nil
+			} else {
+				return -1, nil
+			}
+		}
 		return _V6_ILP32_OFF32, nil
 	case SC_V6_ILP32_OFFBIG:
+		if _V6_ILP32_OFFBIG == 0 {
+			if unix.SizeofInt*_CHAR_BIT == 32 &&
+				unix.SizeofInt == unix.SizeofLong &&
+				unix.SizeofLong == unix.SizeofPtr &&
+				sizeofOffT*_CHAR_BIT >= 64 {
+				return 1, nil
+			} else {
+				return -1, nil
+			}
+		}
 		return _V6_ILP32_OFFBIG, nil
 	case SC_V6_LP64_OFF64:
+		if _V6_LP64_OFF64 == 0 {
+			if unix.SizeofInt*_CHAR_BIT == 32 &&
+				unix.SizeofLong*_CHAR_BIT == 64 &&
+				unix.SizeofLong == unix.SizeofPtr &&
+				unix.SizeofPtr == sizeofOffT {
+				return 1, nil
+			} else {
+				return -1, nil
+			}
+		}
 		return _V6_LP64_OFF64, nil
 	case SC_V6_LPBIG_OFFBIG:
+		if _V6_LPBIG_OFFBIG == 0 {
+			if unix.SizeofInt*_CHAR_BIT >= 32 &&
+				unix.SizeofLong*_CHAR_BIT >= 64 &&
+				unix.SizeofPtr*_CHAR_BIT >= 64 &&
+				sizeofOffT*_CHAR_BIT >= 64 {
+				return 1, nil
+			} else {
+				return -1, nil
+			}
+		}
 		return _V6_LPBIG_OFFBIG, nil
 
 	case SC_2_CHAR_TERM:

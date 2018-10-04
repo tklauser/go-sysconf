@@ -145,8 +145,6 @@ const (
 	_NAME_MAX         = 0xff
 	_RE_DUP_MAX       = 0xff
 
-	_INT_MAX = 0x7fffffff
-
 	_CLK_TCK = 0x64
 
 	_MAXHOSTNAMELEN = 0x100
@@ -242,4 +240,12 @@ const (
 	_PC_NAME_MAX = 0x4
 
 	_PATH_ZONEINFO = "/usr/share/zoneinfo"
+)
+
+const (
+	_CHAR_BIT = 0x8
+
+	_INT_MAX = 0x7fffffff
+
+	sizeofOffT = 0x8
 )

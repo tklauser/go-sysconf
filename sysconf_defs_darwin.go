@@ -17,6 +17,12 @@ package sysconf
 #ifndef _PATH_ZONEINFO
 # define _PATH_ZONEINFO	"/usr/share/zoneinfo" // TZDATA from tzcode/stdtime/tzfile.h
 #endif
+
+// off_t is typdefed from __darwin_off_t which is always __int64_t on darwin,
+// see /usr/include/_types.h
+enum {
+	sizeofOffT = sizeof(__int64_t)
+};
 */
 import "C"
 
@@ -165,8 +171,6 @@ const (
 	_NAME_MAX         = C.NAME_MAX
 	_RE_DUP_MAX       = C.RE_DUP_MAX
 
-	_INT_MAX = C.INT_MAX
-
 	_CLK_TCK = C.CLK_TCK
 
 	_MAXHOSTNAMELEN = C.MAXHOSTNAMELEN
@@ -263,4 +267,13 @@ const (
 	_PC_NAME_MAX = C._PC_NAME_MAX
 
 	_PATH_ZONEINFO = C._PATH_ZONEINFO
+)
+
+// integer sizes
+const (
+	_CHAR_BIT = C.CHAR_BIT
+
+	_INT_MAX = C.INT_MAX
+
+	sizeofOffT = C.sizeofOffT
 )
