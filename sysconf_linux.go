@@ -5,6 +5,7 @@
 package sysconf
 
 import (
+	"bufio"
 	"io/ioutil"
 	"os"
 	"runtime"
@@ -125,22 +126,51 @@ func readCPURange(file string) (int64, error) {
 	return count, nil
 }
 
+const sysfsCpuOnline = "/sys/devices/system/cpu/online"
+
+func getNprocsSysfs() (int64, error) {
+	return readCPURange(sysfsCpuOnline)
+}
+
+func getNprocsProcStat() (int64, error) {
+	f, err := os.Open("/proc/stat")
+	if err != nil {
+		return -1, err
+	}
+	defer f.Close()
+
+	count := int64(0)
+	s := bufio.NewScanner(f)
+	for s.Scan() {
+		if line := strings.TrimSpace(s.Text()); strings.HasPrefix(line, "cpu") {
+			l := strings.SplitN(line, " ", 2)
+			_, err := strconv.ParseInt(l[0][3:], 10, 64)
+			if err == nil {
+				count += 1
+			}
+		} else {
+			// The current format of /proc/stat has all the
+			// cpu* lines at the beginning. Assume this
+			// stays this way.
+			break
+		}
+	}
+	return count, nil
+}
+
 func getNprocs() int64 {
-	count, err := readCPURange("/sys/devices/system/cpu/online")
+	count, err := getNprocsSysfs()
 	if err == nil {
 		return count
 	}
 
-	runtime.LockOSThread()
-	defer runtime.UnlockOSThread()
-
-	var cpus unix.CPUSet
-	err = unix.SchedGetaffinity(0, &cpus)
+	count, err = getNprocsProcStat()
 	if err == nil {
-		return int64(cpus.Count())
+		return count
 	}
 
-	return int64(runtime.NumCPU()) // default to the value determined at runtime startup if all else fails
+	// default to the value determined at runtime startup if all else fails
+	return int64(runtime.NumCPU())
 }
 
 func getNprocsConf() int64 {
