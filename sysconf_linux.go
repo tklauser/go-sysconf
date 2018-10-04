@@ -53,7 +53,7 @@ func getclktck() int64 {
 	return _SYSTEM_CLK_TCK
 }
 
-func readProcFs(path string, fallback int64) int64 {
+func readProcFsInt64(path string, fallback int64) int64 {
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		return fallback
@@ -96,30 +96,6 @@ func getAvPhysPages() int64 {
 		return int64(0)
 	}
 	return getMemPages(si.Freeram, si.Unit)
-}
-
-func getNprocRange(cpuRangeStr string) ([]uint, error) {
-	var cpus []uint
-	cpuRangeStr = strings.Trim(cpuRangeStr, "\n ")
-	for _, cpuRange := range strings.Split(cpuRangeStr, ",") {
-		rangeOp := strings.SplitN(cpuRange, "-", 2)
-		first, err := strconv.ParseUint(rangeOp[0], 10, 32)
-		if err != nil {
-			return nil, err
-		}
-		if len(rangeOp) == 1 {
-			cpus = append(cpus, uint(first))
-			continue
-		}
-		last, err := strconv.ParseUint(rangeOp[1], 10, 32)
-		if err != nil {
-			return nil, err
-		}
-		for n := first; n <= last; n++ {
-			cpus = append(cpus, uint(n))
-		}
-	}
-	return cpus, nil
 }
 
 // based on readCPURange in github.com/iovisor/gobpf/pkg/cpuonline/cpu_range.go
@@ -246,7 +222,7 @@ func sysconf(name int) (int64, error) {
 	case SC_MQ_PRIO_MAX:
 		return _MQ_PRIO_MAX, nil
 	case SC_NGROUPS_MAX:
-		return readProcFs("/proc/sys/kernel/ngroups_max", _NGROUPS_MAX), nil
+		return readProcFsInt64("/proc/sys/kernel/ngroups_max", _NGROUPS_MAX), nil
 	case SC_OPEN_MAX:
 		openMax := int64(_OPEN_MAX)
 		var rlim unix.Rlimit
@@ -265,7 +241,7 @@ func sysconf(name int) (int64, error) {
 		if err := unix.Getrlimit(unix.RLIMIT_SIGPENDING, &rlim); err == nil {
 			return int64(rlim.Cur), nil
 		}
-		return readProcFs("/proc/sys/kernel/rtsig-max", _POSIX_SIGQUEUE_MAX), nil
+		return readProcFsInt64("/proc/sys/kernel/rtsig-max", _POSIX_SIGQUEUE_MAX), nil
 	case SC_STREAM_MAX:
 		return _STREAM_MAX, nil
 	case SC_THREAD_DESTRUCTOR_ITERATIONS:
