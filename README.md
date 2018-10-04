@@ -2,7 +2,7 @@
 
 [![Build Status][1]][2] [![Go Report Card][3]][4]
 
-`sysconf` for Go, without using cgo.
+`sysconf` for Go, without using cgo or external binaries (e.g. getconf).
 
 Supported operating systems: Linux, Darwin, FreeBSD, NetBSD, OpenBSD.
 Support for DragonflyBSD and Solaris is planned but not yet implemented.
