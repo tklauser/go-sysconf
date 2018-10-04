@@ -18,6 +18,8 @@ const (
 	SC_COLL_WEIGHTS_MAX             = 0xd
 	SC_DELAYTIMER_MAX               = 0x2d
 	SC_EXPR_NEST_MAX                = 0xe
+	SC_GETGR_R_SIZE_MAX             = 0x46
+	SC_GETPW_R_SIZE_MAX             = 0x47
 	SC_HOST_NAME_MAX                = 0x48
 	SC_IOV_MAX                      = 0x38
 	SC_LINE_MAX                     = 0xf
@@ -28,6 +30,10 @@ const (
 	SC_OPEN_MAX                     = 0x5
 	SC_PAGE_SIZE                    = 0x1d
 	SC_PAGESIZE                     = 0x1d
+	SC_THREAD_DESTRUCTOR_ITERATIONS = 0x55
+	SC_THREAD_KEYS_MAX              = 0x56
+	SC_THREAD_STACK_MIN             = 0x5d
+	SC_THREAD_THREADS_MAX           = 0x5e
 	SC_RE_DUP_MAX                   = 0x10
 	SC_RTSIG_MAX                    = 0x30
 	SC_SEM_NSEMS_MAX                = 0x31
@@ -35,10 +41,6 @@ const (
 	SC_SIGQUEUE_MAX                 = 0x33
 	SC_STREAM_MAX                   = 0x1a
 	SC_SYMLOOP_MAX                  = 0x78
-	SC_THREAD_DESTRUCTOR_ITERATIONS = 0x55
-	SC_THREAD_KEYS_MAX              = 0x56
-	SC_THREAD_STACK_MIN             = 0x5d
-	SC_THREAD_THREADS_MAX           = 0x5e
 	SC_TIMER_MAX                    = 0x34
 	SC_TTY_NAME_MAX                 = 0x65
 	SC_TZNAME_MAX                   = 0x1b

@@ -36,6 +36,8 @@ const (
 	SC_COLL_WEIGHTS_MAX             = C._SC_COLL_WEIGHTS_MAX
 	SC_DELAYTIMER_MAX               = C._SC_DELAYTIMER_MAX
 	SC_EXPR_NEST_MAX                = C._SC_EXPR_NEST_MAX
+	SC_GETGR_R_SIZE_MAX             = C._SC_GETGR_R_SIZE_MAX
+	SC_GETPW_R_SIZE_MAX             = C._SC_GETPW_R_SIZE_MAX
 	SC_HOST_NAME_MAX                = C._SC_HOST_NAME_MAX
 	SC_IOV_MAX                      = C._SC_IOV_MAX
 	SC_LINE_MAX                     = C._SC_LINE_MAX
@@ -46,6 +48,10 @@ const (
 	SC_OPEN_MAX                     = C._SC_OPEN_MAX
 	SC_PAGE_SIZE                    = C._SC_PAGE_SIZE
 	SC_PAGESIZE                     = C._SC_PAGESIZE
+	SC_THREAD_DESTRUCTOR_ITERATIONS = C._SC_THREAD_DESTRUCTOR_ITERATIONS
+	SC_THREAD_KEYS_MAX              = C._SC_THREAD_KEYS_MAX
+	SC_THREAD_STACK_MIN             = C._SC_THREAD_STACK_MIN
+	SC_THREAD_THREADS_MAX           = C._SC_THREAD_THREADS_MAX
 	SC_RE_DUP_MAX                   = C._SC_RE_DUP_MAX
 	SC_RTSIG_MAX                    = C._SC_RTSIG_MAX
 	SC_SEM_NSEMS_MAX                = C._SC_SEM_NSEMS_MAX
@@ -53,10 +59,6 @@ const (
 	SC_SIGQUEUE_MAX                 = C._SC_SIGQUEUE_MAX
 	SC_STREAM_MAX                   = C._SC_STREAM_MAX
 	SC_SYMLOOP_MAX                  = C._SC_SYMLOOP_MAX
-	SC_THREAD_DESTRUCTOR_ITERATIONS = C._SC_THREAD_DESTRUCTOR_ITERATIONS
-	SC_THREAD_KEYS_MAX              = C._SC_THREAD_KEYS_MAX
-	SC_THREAD_STACK_MIN             = C._SC_THREAD_STACK_MIN
-	SC_THREAD_THREADS_MAX           = C._SC_THREAD_THREADS_MAX
 	SC_TIMER_MAX                    = C._SC_TIMER_MAX
 	SC_TTY_NAME_MAX                 = C._SC_TTY_NAME_MAX
 	SC_TZNAME_MAX                   = C._SC_TZNAME_MAX
