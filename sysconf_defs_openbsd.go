@@ -21,6 +21,11 @@ package sysconf
 #ifndef _PATH_ZONEINFO
 # define _PATH_ZONEINFO	"/usr/share/zoneinfo" // TZDATA from tzcode/stdtime/tzfile.h
 #endif
+
+// off_t is always __int64_t on OpenBSD, see /usr/include/_types.h
+enum {
+	sizeofOffT = sizeof(__int64_t)
+};
 */
 import "C"
 
@@ -273,4 +278,13 @@ const (
 	_SHRT_MAX = C.SHRT_MAX
 
 	_PATH_ZONEINFO = C._PATH_ZONEINFO
+)
+
+// integer sizes
+const (
+	_CHAR_BIT = C.CHAR_BIT
+
+	_INT_MAX = C.INT_MAX
+
+	sizeofOffT = C.sizeofOffT
 )

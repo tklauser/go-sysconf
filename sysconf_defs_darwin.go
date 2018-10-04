@@ -18,8 +18,7 @@ package sysconf
 # define _PATH_ZONEINFO	"/usr/share/zoneinfo" // TZDATA from tzcode/stdtime/tzfile.h
 #endif
 
-// off_t is typdefed from __darwin_off_t which is always __int64_t on darwin,
-// see /usr/include/_types.h
+// off_t always __int64_t on darwin, see /usr/include/_types.h
 enum {
 	sizeofOffT = sizeof(__int64_t)
 };

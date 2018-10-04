@@ -250,3 +250,11 @@ const (
 
 	_PATH_ZONEINFO = "/usr/share/zoneinfo"
 )
+
+const (
+	_CHAR_BIT = 0x8
+
+	_INT_MAX = 0x7fffffff
+
+	sizeofOffT = 0x8
+)

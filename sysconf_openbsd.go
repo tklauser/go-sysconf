@@ -153,85 +153,73 @@ func sysconf(name int) (int64, error) {
 	case SC_V7_ILP32_OFF32:
 		return _POSIX_V7_ILP32_OFF32, nil
 	case SC_V7_ILP32_OFFBIG:
-		/*
-			if _POSIX_V7_ILP32_OFFBIG == 0 {
-				if sizeofInt*_CHAR_BIT == 32 &&
-					sizeofLong*_CHAR_BIT == 32 &&
-					sizeofPtr*_CHAR_BIT == 32 &&
-					sizeofOffT*_CHAR_BIT >= 64 {
-					return 1, nil
-				}
-				return -1, nil
+		if _POSIX_V7_ILP32_OFFBIG == 0 {
+			if unix.SizeofInt*_CHAR_BIT == 32 &&
+				unix.SizeofLong*_CHAR_BIT == 32 &&
+				unix.SizeofPtr*_CHAR_BIT == 32 &&
+				sizeofOffT*_CHAR_BIT >= 64 {
+				return 1, nil
 			}
-		*/
+			return -1, nil
+		}
 		return _POSIX_V7_ILP32_OFFBIG, nil
 	case SC_V7_LP64_OFF64:
-		/*
-			if _POSIX_V7_LP64_OFF64 == 0 {
-				if sizeofInt*_CHAR_BIT == 32 &&
-					sizeofLong*_CHAR_BIT == 64 &&
-					sizeofPtr*_CHAR_BIT == 64 &&
-					sizeofOffT*_CHAR_BIT == 64 {
-					return 1, nil
-				}
-				return -1, nil
+		if _POSIX_V7_LP64_OFF64 == 0 {
+			if unix.SizeofInt*_CHAR_BIT == 32 &&
+				unix.SizeofLong*_CHAR_BIT == 64 &&
+				unix.SizeofPtr*_CHAR_BIT == 64 &&
+				sizeofOffT*_CHAR_BIT == 64 {
+				return 1, nil
 			}
-		*/
+			return -1, nil
+		}
 		return _POSIX_V7_LP64_OFF64, nil
 	case SC_V7_LPBIG_OFFBIG:
-		/*
-			if _POSIX_V7_LPBIG_OFFBIG == 0 {
-				if sizeofInt*_CHAR_BIT >= 32 &&
-					sizeofLong*_CHAR_BIT >= 64 &&
-					sizeofPtr*_CHAR_BIT >= 64 &&
-					sizeofOffT*_CHAR_BIT >= 64 {
-					return 1, nil
-				}
-				return -1, nil
+		if _POSIX_V7_LPBIG_OFFBIG == 0 {
+			if unix.SizeofInt*_CHAR_BIT >= 32 &&
+				unix.SizeofLong*_CHAR_BIT >= 64 &&
+				unix.SizeofPtr*_CHAR_BIT >= 64 &&
+				sizeofOffT*_CHAR_BIT >= 64 {
+				return 1, nil
 			}
-		*/
+			return -1, nil
+		}
 		return _POSIX_V7_LPBIG_OFFBIG, nil
 
 	case SC_V6_ILP32_OFF32:
 		return _POSIX_V6_ILP32_OFF32, nil
 	case SC_V6_ILP32_OFFBIG:
-		/*
-			if _POSIX_V6_ILP32_OFFBIG == 0 {
-				if sizeofInt*_CHAR_BIT == 32 &&
-					sizeofLong*_CHAR_BIT == 32 &&
-					sizeofPtr*_CHAR_BIT == 32 &&
-					sizeofOffT*_CHAR_BIT >= 64 {
-					return 1, nil
-				}
-				return -1, nil
+		if _POSIX_V6_ILP32_OFFBIG == 0 {
+			if unix.SizeofInt*_CHAR_BIT == 32 &&
+				unix.SizeofLong*_CHAR_BIT == 32 &&
+				unix.SizeofPtr*_CHAR_BIT == 32 &&
+				sizeofOffT*_CHAR_BIT >= 64 {
+				return 1, nil
 			}
-		*/
+			return -1, nil
+		}
 		return _POSIX_V6_ILP32_OFFBIG, nil
 	case SC_V6_LP64_OFF64:
-		/*
-			if _POSIX_V6_LP64_OFF64 == 0 {
-				if sizeofInt*_CHAR_BIT == 32 &&
-					sizeofLong*_CHAR_BIT == 64 &&
-					sizeofPtr*_CHAR_BIT == 64 &&
-					sizeofOffT*_CHAR_BIT == 64 {
-					return 1, nil
-				}
-				return -1, nil
+		if _POSIX_V6_LP64_OFF64 == 0 {
+			if unix.SizeofInt*_CHAR_BIT == 32 &&
+				unix.SizeofLong*_CHAR_BIT == 64 &&
+				unix.SizeofPtr*_CHAR_BIT == 64 &&
+				sizeofOffT*_CHAR_BIT == 64 {
+				return 1, nil
 			}
-		*/
+			return -1, nil
+		}
 		return _POSIX_V6_LP64_OFF64, nil
 	case SC_V6_LPBIG_OFFBIG:
-		/*
-			if _POSIX_V6_LPBIG_OFFBIG == 0 {
-				if sizeofInt*_CHAR_BIT >= 32 &&
-					sizeofLong*_CHAR_BIT >= 64 &&
-					sizeofPtr*_CHAR_BIT >= 64 &&
-					sizeofOffT*_CHAR_BIT >= 64 {
-					return 1, nil
-				}
-				return -1, nil
+		if _POSIX_V6_LPBIG_OFFBIG == 0 {
+			if unix.SizeofInt*_CHAR_BIT >= 32 &&
+				unix.SizeofLong*_CHAR_BIT >= 64 &&
+				unix.SizeofPtr*_CHAR_BIT >= 64 &&
+				sizeofOffT*_CHAR_BIT >= 64 {
+				return 1, nil
 			}
-		*/
+			return -1, nil
+		}
 		return _POSIX_V6_LPBIG_OFFBIG, nil
 
 	case SC_2_CHAR_TERM:
