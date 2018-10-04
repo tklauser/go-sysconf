@@ -18,6 +18,8 @@ const (
 	SC_COLL_WEIGHTS_MAX             = 0xd
 	SC_DELAYTIMER_MAX               = 0x2d
 	SC_EXPR_NEST_MAX                = 0xe
+	SC_GETGR_R_SIZE_MAX             = 0x46
+	SC_GETPW_R_SIZE_MAX             = 0x47
 	SC_HOST_NAME_MAX                = 0x48
 	SC_IOV_MAX                      = 0x38
 	SC_LINE_MAX                     = 0xf

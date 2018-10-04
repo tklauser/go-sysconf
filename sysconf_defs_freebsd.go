@@ -41,6 +41,8 @@ const (
 	SC_COLL_WEIGHTS_MAX             = C._SC_COLL_WEIGHTS_MAX
 	SC_DELAYTIMER_MAX               = C._SC_DELAYTIMER_MAX
 	SC_EXPR_NEST_MAX                = C._SC_EXPR_NEST_MAX
+	SC_GETGR_R_SIZE_MAX             = C._SC_GETGR_R_SIZE_MAX
+	SC_GETPW_R_SIZE_MAX             = C._SC_GETPW_R_SIZE_MAX
 	SC_HOST_NAME_MAX                = C._SC_HOST_NAME_MAX
 	SC_IOV_MAX                      = C._SC_IOV_MAX
 	SC_LINE_MAX                     = C._SC_LINE_MAX

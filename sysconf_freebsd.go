@@ -39,6 +39,8 @@ func sysconf(name int) (int64, error) {
 		return _CLK_TCK, nil
 	case SC_DELAYTIMER_MAX:
 		return sysctl32("p1003_1b.delaytimer_max"), nil
+	case SC_GETGR_R_SIZE_MAX, SC_GETPW_R_SIZE_MAX:
+		return -1, nil
 	case SC_IOV_MAX:
 		return sysctl32("kern.iov_max"), nil
 	case SC_MQ_OPEN_MAX:
