@@ -1,6 +1,8 @@
 # go-sysconf
 
-[![Build Status][1]][2] [![Go Report Card][3]][4]
+[![Build Status][1]][2]
+[![Go Report Card][3]][4]
+[![GoDoc][5]][6]
 
 `sysconf` for Go, without using cgo or external binaries (e.g. getconf).
 
@@ -39,10 +41,6 @@ func main() {
 }
 ```
 
-## Documentation
-
-https://godoc.org/github.com/tklauser/go-sysconf
-
 ## References
 
 * [POSIX documenation for`sysconf`](http://pubs.opengroup.org/onlinepubs/9699919799/functions/sysconf.html)
@@ -53,3 +51,5 @@ https://godoc.org/github.com/tklauser/go-sysconf
 [2]: https://travis-ci.org/tklauser/go-sysconf
 [3]: https://goreportcard.com/badge/github.com/tklauser/go-sysconf
 [4]: https://goreportcard.com/report/github.com/tklauser/go-sysconf
+[5]: https://godoc.org/github.com/tklauser/go-sysconf/cmd?status.svg
+[6]: https://godoc.org/github.com/tklauser/go-sysconf/cmd
