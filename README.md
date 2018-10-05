@@ -51,5 +51,5 @@ func main() {
 [2]: https://travis-ci.org/tklauser/go-sysconf
 [3]: https://goreportcard.com/badge/github.com/tklauser/go-sysconf
 [4]: https://goreportcard.com/report/github.com/tklauser/go-sysconf
-[5]: https://godoc.org/github.com/tklauser/go-sysconf/cmd?status.svg
-[6]: https://godoc.org/github.com/tklauser/go-sysconf/cmd
+[5]: https://godoc.org/github.com/tklauser/go-sysconf?status.svg
+[6]: https://godoc.org/github.com/tklauser/go-sysconf
