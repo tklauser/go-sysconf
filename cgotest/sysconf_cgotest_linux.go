@@ -60,7 +60,6 @@ func testSysconfCgoMatch(t *testing.T) {
 		{sysconf.SC_SYMLOOP_MAX, C._SC_SYMLOOP_MAX, "SYMLOOP_MAX"},
 		{sysconf.SC_TIMER_MAX, C._SC_TIMER_MAX, "TIMER_MAX"},
 		{sysconf.SC_TTY_NAME_MAX, C._SC_TTY_NAME_MAX, "TTY_NAME_MAX"},
-		{sysconf.SC_TZNAME_MAX, C._SC_TZNAME_MAX, "TZNAME_MAX"},
 
 		{sysconf.SC_ADVISORY_INFO, C._SC_ADVISORY_INFO, "_POSIX_ADVISORY_INFO"},
 		{sysconf.SC_ASYNCHRONOUS_IO, C._SC_ASYNCHRONOUS_IO, "_POSIX_ASYNCHRONOUS_IO"},
@@ -175,10 +174,10 @@ func testSysconfCgoMatch(t *testing.T) {
 		testSysconfGoCgoInvalid(t, tc)
 	}
 
-	testPosix2CVersion(t)
+	testGlibcVersionDeps(t)
 }
 
-func testPosix2CVersion(t *testing.T) {
+func testGlibcVersionDeps(t *testing.T) {
 	glibcVer := C.GoString(C.gnu_get_libc_version())
 	majMin := strings.Split(glibcVer, ".")
 	if len(majMin) < 2 {
@@ -188,11 +187,22 @@ func testPosix2CVersion(t *testing.T) {
 
 	maj, _ := strconv.Atoi(majMin[0])
 	min, _ := strconv.Atoi(majMin[1])
+
 	// _POSIX2_C_VERSION was fixed in glibc 2.22, see glibc commit
 	// 4e5f9259f352 ("Restore _POSIX2_C_VERSION definition (bug 438).")
-	if maj <= 2 && min < 22 {
+	if maj == 2 && min >= 22 {
+		cVersion := testCase{sysconf.SC_2_C_VERSION, C._SC_2_C_VERSION, "_POSIX2_C_VERSION"}
+		testSysconfGoCgo(t, cVersion)
+	} else {
 		t.Skipf("skipping _POSIX2_C_VERSION test on glibc < 2.22")
 	}
-	tc := testCase{sysconf.SC_2_C_VERSION, C._SC_2_C_VERSION, "_POSIX2_C_VERSION"}
-	testSysconfGoCgo(t, tc)
+
+	// _TZNAME_MAX was changed in glibc 2.26, see glibc commit
+	// 8492c4dd699e ("timezone: Remove TZNAME_MAX limit from sysconf [BZ #15576]")
+	if maj == 2 && min >= 26 {
+		tzname := testCase{sysconf.SC_TZNAME_MAX, C._SC_TZNAME_MAX, "TZNAME_MAX"}
+		testSysconfGoCgo(t, tzname)
+	} else {
+		t.Skipf("skipping _TZNAME_MAX test on glibc < 2.26")
+	}
 }

@@ -291,7 +291,7 @@ func sysconf(name int) (int64, error) {
 	case SC_TTY_NAME_MAX:
 		return _TTY_NAME_MAX, nil
 	case SC_TZNAME_MAX:
-		return _TZNAME_MAX, nil
+		return -1, nil
 
 	case SC_CPUTIME:
 		if hasClock(unix.CLOCK_PROCESS_CPUTIME_ID) {
