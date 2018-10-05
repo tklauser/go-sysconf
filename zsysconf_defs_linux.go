@@ -168,7 +168,6 @@ const (
 	_STREAM_MAX         = 0x10
 	_SYMLOOP_MAX        = -0x1
 	_TTY_NAME_MAX       = 0x20
-	_TZNAME_MAX         = 0x6
 
 	_UIO_MAXIOV = 0x400
 

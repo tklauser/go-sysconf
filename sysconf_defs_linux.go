@@ -27,9 +27,6 @@ package sysconf
 #ifndef SYMLOOP_MAX
 # define SYMLOOP_MAX	-1	// undefined
 #endif
-#ifndef TZNAME_MAX
-# define TZNAME_MAX	_POSIX_TZNAME_MAX
-#endif
 */
 import "C"
 
@@ -201,7 +198,6 @@ const (
 	_STREAM_MAX         = C.STREAM_MAX
 	_SYMLOOP_MAX        = C.SYMLOOP_MAX
 	_TTY_NAME_MAX       = C.TTY_NAME_MAX
-	_TZNAME_MAX         = C.TZNAME_MAX
 
 	_UIO_MAXIOV = C.UIO_MAXIOV
 
