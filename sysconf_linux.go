@@ -114,7 +114,7 @@ func readCPURange(file string) (int64, error) {
 			return 0, err
 		}
 		if len(rangeOp) == 1 {
-			count += 1
+			count++
 			continue
 		}
 		last, err := strconv.ParseUint(rangeOp[1], 10, 32)
@@ -146,7 +146,7 @@ func getNprocsProcStat() (int64, error) {
 			l := strings.SplitN(line, " ", 2)
 			_, err := strconv.ParseInt(l[0][3:], 10, 64)
 			if err == nil {
-				count += 1
+				count++
 			}
 		} else {
 			// The current format of /proc/stat has all the
@@ -185,7 +185,7 @@ func getNprocsConf() int64 {
 				if name := fi.Name(); fi.IsDir() && strings.HasPrefix(name, "cpu") {
 					_, err := strconv.ParseInt(name[3:], 10, 64)
 					if err == nil {
-						count += 1
+						count++
 					}
 				}
 			}
