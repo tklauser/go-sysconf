@@ -6,13 +6,13 @@ package sysconf
 
 import (
 	"bufio"
+	"encoding/binary"
 	"io/ioutil"
 	"os"
 	"runtime"
 	"strconv"
 	"strings"
 	"sync"
-	"unsafe"
 
 	"golang.org/x/sys/unix"
 )
@@ -22,6 +22,8 @@ const (
 	_AT_CLKTCK = 17 // Frequency of times()
 
 	_SYSTEM_CLK_TCK = 100
+
+	uintSize uint = 32 << (^uint(0) >> 63)
 )
 
 var (
@@ -32,22 +34,24 @@ var (
 func getclktck() int64 {
 	// I currently don't know a way to get the loaded-provided auxv, thus
 	// get it from /proc/self/auxv on Linux.
-	// Code based on sysargs in runtime/os_linux.go
-	if fd, err := unix.Open("/proc/self/auxv", unix.O_RDONLY, 0); err == nil {
-		buf := make([]byte, 8192)
-		n, err := unix.Read(fd, buf)
-		unix.Close(fd)
-		if err == nil {
-			auxv := (*[10000]uintptr)(unsafe.Pointer(&buf[0]))[0:n]
-			// Make sure buf is terminated, even if we didn't read
-			// the whole file.
-			auxv[len(auxv)-2] = _AT_NULL
-			for i := 0; auxv[i] != _AT_NULL; i += 2 {
-				tag, val := auxv[i], auxv[i+1]
-				switch tag {
-				case _AT_CLKTCK:
-					return int64(val)
-				}
+	// Code based on cpu_linux.go in golang.org/x/sys/cpu
+	buf, err := ioutil.ReadFile("/proc/self/auxv")
+	if err == nil {
+		pb := int(uintSize / 8)
+		for i := 0; i < len(buf)-pb*2; i += pb * 2 {
+			var tag, val uint
+			switch uintSize {
+			case 32:
+				tag = uint(binary.LittleEndian.Uint32(buf[i:]))
+				val = uint(binary.LittleEndian.Uint32(buf[i+pb:]))
+			case 64:
+				tag = uint(binary.LittleEndian.Uint64(buf[i:]))
+				val = uint(binary.LittleEndian.Uint64(buf[i+pb:]))
+			}
+
+			switch tag {
+			case _AT_CLKTCK:
+				return int64(val)
 			}
 		}
 	}
