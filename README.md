@@ -43,7 +43,7 @@ func main() {
 
 ## References
 
-* [POSIX documenation for`sysconf`](http://pubs.opengroup.org/onlinepubs/9699919799/functions/sysconf.html)
+* [POSIX documenation for `sysconf`](http://pubs.opengroup.org/onlinepubs/9699919799/functions/sysconf.html)
 * [Linux manpage for `sysconf(3)`](http://man7.org/linux/man-pages/man3/sysconf.3.html)
 * [glibc constants for `sysconf` parameters](https://www.gnu.org/software/libc/manual/html_node/Constants-for-Sysconf.html)
 
