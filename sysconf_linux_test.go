@@ -12,7 +12,7 @@ import (
 // TestGetNproc tests that sysfs and /proc/stat report the same number of online
 // CPUs.
 func TestGetNproc(t *testing.T) {
-	if _, err := os.Stat(sysfsCpuOnline); err != nil {
+	if _, err := os.Stat("/sys/devices/system/cpu/online"); err != nil {
 		t.Skipf("sysfs not mounted, skipping")
 	}
 

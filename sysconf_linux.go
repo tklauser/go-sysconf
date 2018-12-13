@@ -14,6 +14,7 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/tklauser/numcpus"
 	"golang.org/x/sys/unix"
 )
 
@@ -103,37 +104,9 @@ func getAvPhysPages() int64 {
 	return getMemPages(si.Freeram, si.Unit)
 }
 
-// based on readCPURange in github.com/iovisor/gobpf/pkg/cpuonline/cpu_range.go
-func readCPURange(file string) (int64, error) {
-	buf, err := ioutil.ReadFile(file)
-	if err != nil {
-		return 0, err
-	}
-	count := int64(0)
-	cpuRangeStr := strings.Trim(string(buf), "\n ")
-	for _, cpuRange := range strings.Split(cpuRangeStr, ",") {
-		rangeOp := strings.SplitN(cpuRange, "-", 2)
-		first, err := strconv.ParseUint(rangeOp[0], 10, 32)
-		if err != nil {
-			return 0, err
-		}
-		if len(rangeOp) == 1 {
-			count++
-			continue
-		}
-		last, err := strconv.ParseUint(rangeOp[1], 10, 32)
-		if err != nil {
-			return 0, err
-		}
-		count += int64(last - first + 1)
-	}
-	return count, nil
-}
-
-const sysfsCpuOnline = "/sys/devices/system/cpu/online"
-
 func getNprocsSysfs() (int64, error) {
-	return readCPURange(sysfsCpuOnline)
+	n, err := numcpus.GetOnline()
+	return int64(n), err
 }
 
 func getNprocsProcStat() (int64, error) {
