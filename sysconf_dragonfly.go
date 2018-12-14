@@ -211,17 +211,11 @@ func sysconf(name int) (int64, error) {
 		return _XOPEN_UNIX, nil
 
 	case SC_PHYS_PAGES:
-		if val, err := unix.SysctlUint64("hw.availpages"); err == nil {
-			return int64(val), nil
-		}
-		return -1, nil
+		return sysctl64("hw.availpages"), nil
 	case SC_NPROCESSORS_CONF:
 		fallthrough
 	case SC_NPROCESSORS_ONLN:
-		if val, err := unix.SysctlUint32("hw.ncpu"); err == nil {
-			return int64(val), nil
-		}
-		return -1, nil
+		return sysctl32("hw.ncpu"), nil
 	}
 
 	return -1, errInvalid
