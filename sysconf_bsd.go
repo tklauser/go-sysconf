@@ -6,9 +6,7 @@
 
 package sysconf
 
-import (
-	"golang.org/x/sys/unix"
-)
+import "golang.org/x/sys/unix"
 
 func pathconf(path string, name int) int64 {
 	if val, err := unix.Pathconf(path, name); err == nil {

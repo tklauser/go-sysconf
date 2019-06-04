@@ -112,6 +112,5 @@ const (
 )
 
 // pathconf variables
-const (
-	_PC_NAME_MAX = C._PC_NAME_MAX
-)
+
+const _PC_NAME_MAX = C._PC_NAME_MAX

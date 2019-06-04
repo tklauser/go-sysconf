@@ -4,9 +4,7 @@
 
 package sysconf
 
-import (
-	"golang.org/x/sys/unix"
-)
+import "golang.org/x/sys/unix"
 
 const (
 	_HOST_NAME_MAX  = _MAXHOSTNAMELEN - 1

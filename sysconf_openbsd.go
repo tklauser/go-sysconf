@@ -4,9 +4,7 @@
 
 package sysconf
 
-import (
-	"golang.org/x/sys/unix"
-)
+import "golang.org/x/sys/unix"
 
 // sysconf implements sysconf(3) as in the OpenBSD 6.3 libc.
 func sysconf(name int) (int64, error) {

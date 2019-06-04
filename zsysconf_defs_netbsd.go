@@ -91,6 +91,4 @@ const (
 	_PATH_ZONEINFO = "/usr/share/zoneinfo"
 )
 
-const (
-	_PC_NAME_MAX = 0x4
-)
+const _PC_NAME_MAX = 0x4
