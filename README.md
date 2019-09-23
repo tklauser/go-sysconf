@@ -1,8 +1,9 @@
 # go-sysconf
 
-[![Build Status][1]][2]
-[![Go Report Card][3]][4]
-[![GoDoc][5]][6]
+[![GitHub Actions Status][1]][2]
+[![Build Status][1]][3]
+[![Go Report Card][5]][6]
+[![GoDoc][7]][8]
 
 `sysconf` for Go, without using cgo or external binaries (e.g. getconf).
 
@@ -47,9 +48,10 @@ func main() {
 * [Linux manpage for `sysconf(3)`](http://man7.org/linux/man-pages/man3/sysconf.3.html)
 * [glibc constants for `sysconf` parameters](https://www.gnu.org/software/libc/manual/html_node/Constants-for-Sysconf.html)
 
-[1]: https://travis-ci.org/tklauser/go-sysconf.svg?branch=master
-[2]: https://travis-ci.org/tklauser/go-sysconf
-[3]: https://goreportcard.com/badge/github.com/tklauser/go-sysconf
-[4]: https://goreportcard.com/report/github.com/tklauser/go-sysconf
-[5]: https://godoc.org/github.com/tklauser/go-sysconf?status.svg
-[6]: https://godoc.org/github.com/tklauser/go-sysconf
+[1]: https://travis-ci.org/tklauser/go-sysconf
+[2]: https://github.com/tklauser/go-sysconf/workflows/Test/badge.svg
+[3]: https://travis-ci.org/tklauser/go-sysconf.svg?branch=master
+[4]: https://goreportcard.com/badge/github.com/tklauser/go-sysconf
+[5]: https://goreportcard.com/report/github.com/tklauser/go-sysconf
+[6]: https://godoc.org/github.com/tklauser/go-sysconf?status.svg
+[7]: https://godoc.org/github.com/tklauser/go-sysconf
