@@ -193,9 +193,8 @@ func sysconf(name int) (int64, error) {
 				unix.SizeofLong == unix.SizeofPtr &&
 				unix.SizeofPtr == sizeofOffT {
 				return 1, nil
-			} else {
-				return -1, nil
 			}
+			return -1, nil
 		}
 		return _V6_ILP32_OFF32, nil
 	case SC_V6_ILP32_OFFBIG:
@@ -205,9 +204,8 @@ func sysconf(name int) (int64, error) {
 				unix.SizeofLong == unix.SizeofPtr &&
 				sizeofOffT*_CHAR_BIT >= 64 {
 				return 1, nil
-			} else {
-				return -1, nil
 			}
+			return -1, nil
 		}
 		return _V6_ILP32_OFFBIG, nil
 	case SC_V6_LP64_OFF64:
@@ -217,9 +215,8 @@ func sysconf(name int) (int64, error) {
 				unix.SizeofLong == unix.SizeofPtr &&
 				unix.SizeofPtr == sizeofOffT {
 				return 1, nil
-			} else {
-				return -1, nil
 			}
+			return -1, nil
 		}
 		return _V6_LP64_OFF64, nil
 	case SC_V6_LPBIG_OFFBIG:
@@ -229,9 +226,8 @@ func sysconf(name int) (int64, error) {
 				unix.SizeofPtr*_CHAR_BIT >= 64 &&
 				sizeofOffT*_CHAR_BIT >= 64 {
 				return 1, nil
-			} else {
-				return -1, nil
 			}
+			return -1, nil
 		}
 		return _V6_LPBIG_OFFBIG, nil
 
