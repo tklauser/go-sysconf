@@ -209,7 +209,7 @@ const (
 	_POSIX_VERSION                      = 0x30db0
 
 	_V6_ILP32_OFF32  = -0x1
-	_V6_ILP32_OFFBIG = 0x1
+	_V6_ILP32_OFFBIG = -0x1
 	_V6_LP64_OFF64   = 0x1
 	_V6_LPBIG_OFFBIG = 0x1
 
