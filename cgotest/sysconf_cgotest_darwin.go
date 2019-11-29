@@ -10,9 +10,12 @@ package sysconf_cgotest
 import "C"
 
 import (
+	"strconv"
+	"strings"
 	"testing"
 
 	"github.com/tklauser/go-sysconf"
+	"golang.org/x/sys/unix"
 )
 
 func testSysconfCgoMatch(t *testing.T) {
@@ -113,7 +116,6 @@ func testSysconfCgoMatch(t *testing.T) {
 		{sysconf.SC_VERSION, C._SC_VERSION, "_POSIX_VERSION"},
 
 		{sysconf.SC_V6_ILP32_OFF32, C._SC_V6_ILP32_OFF32, "_POSIX_V6_ILP32_OFF32"},
-		{sysconf.SC_V6_ILP32_OFFBIG, C._SC_V6_ILP32_OFFBIG, "_POSIX_V6_ILP32_OFFBIG"},
 		{sysconf.SC_V6_LP64_OFF64, C._SC_V6_LP64_OFF64, "_POSIX_V6_LP64_OFF64"},
 		{sysconf.SC_V6_LPBIG_OFFBIG, C._SC_V6_LPBIG_OFFBIG, "_POSIX_V6_LPBIG_OFFBIG"},
 
@@ -150,5 +152,28 @@ func testSysconfCgoMatch(t *testing.T) {
 	}
 	for _, tc := range testCases {
 		testSysconfGoCgo(t, tc)
+	}
+
+	testMacOSVersionDeps(t)
+}
+
+func testMacOSVersionDeps(t *testing.T) {
+	var u unix.Utsname
+	err := unix.Uname(&u)
+	if err != nil {
+		t.Fatalf("Uname: %v", err)
+	}
+	rel := string(u.Release[:])
+	t.Logf("macOS release: %s", rel)
+
+	ver := strings.Split(rel, ".")
+	maj, _ := strconv.Atoi(ver[0])
+
+	// _POSIX_V6_ILP32_OFFBIG was fixed in macOS 10.15 (Catalina)
+	if maj >= 19 {
+		v6Ilp32Offbig := testCase{sysconf.SC_V6_ILP32_OFFBIG, C._SC_V6_ILP32_OFFBIG, "_POSIX_V6_ILP32_OFFBIG"}
+		testSysconfGoCgo(t, v6Ilp32Offbig)
+	} else {
+		t.Skip("skipping _POSIX_V6_ILP32_OFFBIG on macOS < 10.15")
 	}
 }
