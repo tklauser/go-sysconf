@@ -194,7 +194,7 @@ func testGlibcVersionDeps(t *testing.T) {
 		cVersion := testCase{sysconf.SC_2_C_VERSION, C._SC_2_C_VERSION, "_POSIX2_C_VERSION"}
 		testSysconfGoCgo(t, cVersion)
 	} else {
-		t.Skipf("skipping _POSIX2_C_VERSION test on glibc < 2.22")
+		t.Skipf("skipping _POSIX2_C_VERSION test on glibc %d.%d (< 2.22)", maj, min)
 	}
 
 	// _TZNAME_MAX was changed in glibc 2.26, see glibc commit
@@ -203,6 +203,6 @@ func testGlibcVersionDeps(t *testing.T) {
 		tzname := testCase{sysconf.SC_TZNAME_MAX, C._SC_TZNAME_MAX, "TZNAME_MAX"}
 		testSysconfGoCgo(t, tzname)
 	} else {
-		t.Skipf("skipping _TZNAME_MAX test on glibc < 2.26")
+		t.Skipf("skipping _TZNAME_MAX test on glibc %d.%d (< 2.26)", maj, min)
 	}
 }
