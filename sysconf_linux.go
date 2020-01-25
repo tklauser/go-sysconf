@@ -92,7 +92,7 @@ func getPhysPages() int64 {
 	if err != nil {
 		return int64(0)
 	}
-	return getMemPages(si.Totalram, si.Unit)
+	return getMemPages(uint64(si.Totalram), si.Unit)
 }
 
 func getAvPhysPages() int64 {
@@ -101,7 +101,7 @@ func getAvPhysPages() int64 {
 	if err != nil {
 		return int64(0)
 	}
-	return getMemPages(si.Freeram, si.Unit)
+	return getMemPages(uint64(si.Freeram), si.Unit)
 }
 
 func getNprocsSysfs() (int64, error) {
