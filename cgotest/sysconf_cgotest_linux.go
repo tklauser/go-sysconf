@@ -142,7 +142,7 @@ func testSysconfCgoMatch(t *testing.T) {
 		{sysconf.SC_2_UPE, C._SC_2_UPE, "_POSIX2_UPE"},
 		{sysconf.SC_2_VERSION, C._SC_2_VERSION, "_POSIX2_VERSION"},
 
-		{sysconf.SC_XOPEN_CRYPT, C._SC_XOPEN_CRYPT, "_XOPEN_CRYPT"},
+		// _XOPEN_CRYPT was removed in glibc 2.28, don't test it
 		{sysconf.SC_XOPEN_ENH_I18N, C._SC_XOPEN_ENH_I18N, "_XOPEN_ENH_I18N"},
 		{sysconf.SC_XOPEN_REALTIME, C._SC_XOPEN_REALTIME, "_XOPEN_REALTIME"},
 		{sysconf.SC_XOPEN_REALTIME_THREADS, C._SC_XOPEN_REALTIME_THREADS, "_XOPEN_REALTIME_THREADS"},

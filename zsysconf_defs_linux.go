@@ -237,7 +237,6 @@ const (
 	_POSIX2_SW_DEV    = 0x31069
 	_POSIX2_VERSION   = 0x31069
 
-	_XOPEN_CRYPT            = 0x1
 	_XOPEN_ENH_I18N         = 0x1
 	_XOPEN_REALTIME         = 0x1
 	_XOPEN_REALTIME_THREADS = 0x1

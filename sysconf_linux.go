@@ -359,7 +359,8 @@ func sysconf(name int) (int64, error) {
 		return -1, nil
 
 	case SC_XOPEN_CRYPT:
-		return _XOPEN_CRYPT, nil
+		// removed in glibc 2.28
+		return -1, nil
 	case SC_XOPEN_ENH_I18N:
 		return _XOPEN_ENH_I18N, nil
 	case SC_XOPEN_REALTIME:
