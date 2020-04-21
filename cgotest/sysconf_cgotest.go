@@ -31,9 +31,8 @@ func testSysconfGoCgo(t *testing.T, tc testCase) {
 	goVal, goErr := sysconf.Sysconf(tc.goVar)
 	if goErr != nil {
 		t.Fatalf("Sysconf(%s/%d): %v", tc.name, tc.goVar, goErr)
-	} else {
-		t.Logf("%s = %v", tc.name, goVal)
 	}
+	t.Logf("%s = %v", tc.name, goVal)
 
 	cVal, cErr := C.sysconf(tc.cVar)
 	if cErr != nil {
