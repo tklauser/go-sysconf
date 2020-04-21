@@ -49,7 +49,7 @@ func main() {
 * [glibc constants for `sysconf` parameters](https://www.gnu.org/software/libc/manual/html_node/Constants-for-Sysconf.html)
 
 [1]: https://github.com/tklauser/go-sysconf/workflows/Test/badge.svg
-[2]: https://github.com/tklauser/go-sysconf
+[2]: https://github.com/tklauser/go-sysconf/actions
 [3]: https://travis-ci.org/tklauser/go-sysconf.svg?branch=master
 [4]: https://travis-ci.org/tklauser/go-sysconf
 [5]: https://goreportcard.com/badge/github.com/tklauser/go-sysconf
