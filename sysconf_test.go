@@ -15,12 +15,29 @@ func TestSysconf(t *testing.T) {
 	// C.sysconf are in the test directory.
 	val, err := sysconf.Sysconf(sysconf.SC_CLK_TCK)
 	if err != nil {
-		t.Errorf("Sysconf(CLK_TCK): %v", err)
+		t.Errorf("Sysconf(SC_CLK_TCK): %v", err)
 	}
-	t.Logf("CLK_TCK = %v", val)
+	t.Logf("clock ticks = %v", val)
 
 	_, err = sysconf.Sysconf(-1)
 	if err == nil {
 		t.Errorf("Sysconf(-1) returned %v, want non-nil", err)
+	}
+}
+
+func TestOpenMax(t *testing.T) {
+
+	openMax, err := sysconf.Sysconf(sysconf.SC_OPEN_MAX)
+	if err != nil {
+		t.Fatalf("Sysconf(SC_OPEN_MAX): %v", err)
+	}
+
+	// from https://pubs.opengroup.org/onlinepubs/009695399/basedefs/limits.h.html
+	_POSIX_OPEN_MAX := int64(20)
+
+	// according to sysconf(3), OPEN_MAX must be ≥ _POSIX_OPEN_MAX
+	if openMax < _POSIX_OPEN_MAX {
+		t.Errorf("Sysconf(SC_OPEN_MAX) (%d) expected to be greater or equal _POSIX_OPEN_MAX (%d)",
+			openMax, _POSIX_OPEN_MAX)
 	}
 }
