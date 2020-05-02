@@ -5,8 +5,6 @@
 package sysconf
 
 import (
-	"sync"
-
 	"golang.org/x/sys/unix"
 )
 
@@ -14,11 +12,6 @@ const (
 	_HOST_NAME_MAX  = _MAXHOSTNAMELEN - 1
 	_LOGIN_NAME_MAX = _MAXLOGNAME
 	_SYMLOOP_MAX    = _MAXSYMLINKS
-)
-
-var (
-	clktck     int64
-	clktckOnce sync.Once
 )
 
 // sysconf implements sysconf(3) as in the Darwin libc, version 1244.30.3
