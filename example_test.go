@@ -6,15 +6,17 @@ package sysconf_test
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/tklauser/go-sysconf"
 )
 
 func ExampleSysconfClkTck() {
 	clktck, err := sysconf.Sysconf(sysconf.SC_CLK_TCK)
-	if err == nil {
-		fmt.Printf("sysconf(SC_CLK_TCK) = %v\n", clktck)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Sysconf: %v\n", err)
 	}
+	fmt.Printf("sysconf(SC_CLK_TCK) = %v\n", clktck)
 }
 
 func ExampleSysconf_invalidParameter() {
