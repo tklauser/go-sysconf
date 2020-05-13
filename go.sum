@@ -1,4 +1,4 @@
-github.com/tklauser/numcpus v0.0.0-20200504085530-e2c165b7106a h1:eLKG1IAS76Z1fIllDm9EVSDW9SSkJyJxXqUjxCDUm9A=
-github.com/tklauser/numcpus v0.0.0-20200504085530-e2c165b7106a/go.mod h1:g2AGl/+u31d2+ZBNakog16dl+i8WpSU8JdYO6J/2lXw=
-golang.org/x/sys v0.0.0-20200501145240-bc7a7d42d5c3 h1:5B6i6EAiSYyejWfvc5Rc9BbI3rzIsrrXfAQBWnYfn+w=
-golang.org/x/sys v0.0.0-20200501145240-bc7a7d42d5c3/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+github.com/tklauser/numcpus v0.0.0-20200513113108-b180d8d09e7f h1:3tXMZR77OcDtqsBRpkODqLSo+aNI929wDmkTNGv4rDQ=
+github.com/tklauser/numcpus v0.0.0-20200513113108-b180d8d09e7f/go.mod h1:+J9GmiWKLPVI5jbBcROd0PIn8z0zs1+JdMFKAKmztRo=
+golang.org/x/sys v0.0.0-20200513112337-417ce2331b5c h1:kISX68E8gSkNYAFRFiDU8rl5RIn1sJYKYb/r2vMLDrU=
+golang.org/x/sys v0.0.0-20200513112337-417ce2331b5c/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=

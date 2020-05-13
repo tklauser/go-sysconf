@@ -3,6 +3,6 @@ module github.com/tklauser/go-sysconf
 go 1.13
 
 require (
-	github.com/tklauser/numcpus v0.0.0-20200504085530-e2c165b7106a
-	golang.org/x/sys v0.0.0-20200501145240-bc7a7d42d5c3
+	github.com/tklauser/numcpus v0.0.0-20200513113108-b180d8d09e7f
+	golang.org/x/sys v0.0.0-20200513112337-417ce2331b5c
 )
