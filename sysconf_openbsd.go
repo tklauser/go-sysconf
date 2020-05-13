@@ -261,6 +261,9 @@ func sysconf(name int) (int64, error) {
 	case SC_NPROCESSORS_CONF:
 		return sysctl32("hw.ncpu"), nil
 	case SC_NPROCESSORS_ONLN:
+		if val, err := unix.SysctlUint32("hw.ncpuonline"); err == nil {
+			return int64(val), nil
+		}
 		return sysctl32("hw.ncpu"), nil
 	}
 
