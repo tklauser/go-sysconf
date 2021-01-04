@@ -1,8 +1,8 @@
 # go-sysconf
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/tklauser/go-sysconf.svg)](https://pkg.go.dev/github.com/tklauser/go-sysconf)
 [![GitHub Actions Status][1]][2]
 [![Go Report Card][3]][4]
-[![GoDoc][5]][6]
 
 `sysconf` for Go, without using cgo or external binaries (e.g. getconf).
 
@@ -51,5 +51,3 @@ func main() {
 [2]: https://github.com/tklauser/go-sysconf/actions
 [3]: https://goreportcard.com/badge/github.com/tklauser/go-sysconf
 [4]: https://goreportcard.com/report/github.com/tklauser/go-sysconf
-[5]: https://godoc.org/github.com/tklauser/go-sysconf?status.svg
-[6]: https://godoc.org/github.com/tklauser/go-sysconf
