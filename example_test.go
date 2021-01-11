@@ -11,7 +11,7 @@ import (
 	"github.com/tklauser/go-sysconf"
 )
 
-func ExampleSysconfClkTck() {
+func ExampleSysconf_clktck() {
 	clktck, err := sysconf.Sysconf(sysconf.SC_CLK_TCK)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Sysconf: %v\n", err)
