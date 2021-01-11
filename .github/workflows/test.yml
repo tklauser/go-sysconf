@@ -1,4 +1,5 @@
 name: Run tests
+
 on:
   push:
     branches:
@@ -6,19 +7,23 @@ on:
   pull_request:
     branches:
     - master
+
 jobs:
   test:
     strategy:
       matrix:
-        go-version: [1.13.x, 1.14.x, 1.15.x]
+        go-version: [1.13, 1.14, 1.15]
         platform: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.platform }}
+
     steps:
     - name: Install Go
       uses: actions/setup-go@v1
       with:
         go-version: ${{ matrix.go-version }}
-    - name: Checkout code
+
+    - name: Check out code
       uses: actions/checkout@v2
+
     - name: Test (native)
       run: go test -v ./...
