@@ -29,7 +29,6 @@ func gensysconf() error {
 		return err
 	}
 	zsysconf := "z" + defs
-	// TODO(tk): differentiate per GOARCH?
 	if err := ioutil.WriteFile(zsysconf, b, 0644); err != nil {
 		return err
 	}

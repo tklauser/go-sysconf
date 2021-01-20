@@ -24,7 +24,7 @@ const (
 
 	_SYSTEM_CLK_TCK = 100
 
-	uintSize uint = 32 << (^uint(0) >> 63)
+	wordSize uint = 32 << (^uint(0) >> 63)
 )
 
 var (
@@ -38,10 +38,10 @@ func getclktck() int64 {
 	// Code based on cpu_linux.go in golang.org/x/sys/cpu
 	buf, err := ioutil.ReadFile("/proc/self/auxv")
 	if err == nil {
-		pb := int(uintSize / 8)
+		pb := int(wordSize / 8)
 		for i := 0; i < len(buf)-pb*2; i += pb * 2 {
 			var tag, val uint
-			switch uintSize {
+			switch wordSize {
 			case 32:
 				tag = uint(binary.LittleEndian.Uint32(buf[i:]))
 				val = uint(binary.LittleEndian.Uint32(buf[i+pb:]))
@@ -174,6 +174,33 @@ func getNprocsConf() int64 {
 	// without sysfs?
 
 	return getNprocs()
+}
+
+// getenv32BitPointers returns -1 on systems which can never provide
+// environments with 32-bit wide pointers and 1 otherwise.
+// See <bits/environments.h>
+func getEnv32BitPointers() int64 {
+	if wordSize == 64 {
+		return -1
+	}
+	return 1
+}
+
+// getEnv64BitPointers returns -1 on systems which can never provide
+// environments with 64-bit wide pointers and 1 otherwise.
+// See <bits/environments.h>
+func getEnv64BitPointers() int64 {
+	if wordSize == 32 {
+		return -1
+	}
+	return 1
+}
+
+// getEnvBiggerPointers returns -1 on systems which can never provide
+// environments with bigger pointers and 1 otherwise.
+// See <bits/environments.h>
+func getEnvBiggerPointers() int64 {
+	return -1
 }
 
 func hasClock(clockid int32) bool {
@@ -327,22 +354,22 @@ func sysconf(name int) (int64, error) {
 		return _POSIX_TYPED_MEMORY_OBJECTS, nil
 
 	case SC_V7_ILP32_OFF32:
-		return -1, nil
+		return getEnv32BitPointers(), nil
 	case SC_V7_ILP32_OFFBIG:
-		return -1, nil
+		return getEnv32BitPointers(), nil
 	case SC_V7_LP64_OFF64:
-		return _POSIX_V7_LP64_OFF64, nil
+		return getEnv64BitPointers(), nil
 	case SC_V7_LPBIG_OFFBIG:
-		return _POSIX_V7_LPBIG_OFFBIG, nil
+		return getEnvBiggerPointers(), nil
 
 	case SC_V6_ILP32_OFF32:
-		return -1, nil
+		return getEnv32BitPointers(), nil
 	case SC_V6_ILP32_OFFBIG:
-		return -1, nil
+		return getEnv32BitPointers(), nil
 	case SC_V6_LP64_OFF64:
-		return _POSIX_V6_LP64_OFF64, nil
+		return getEnv64BitPointers(), nil
 	case SC_V6_LPBIG_OFFBIG:
-		return _POSIX_V6_LPBIG_OFFBIG, nil
+		return getEnvBiggerPointers(), nil
 
 	case SC_2_C_VERSION:
 		return _POSIX2_C_VERSION, nil
