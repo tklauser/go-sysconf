@@ -25,10 +25,10 @@ func gensysconf(in, out string) error {
 	}
 
 	cmd := exec.Command("go", "tool", "cgo", "-godefs", in)
-	cmd.Stderr = os.Stderr
 	defer os.RemoveAll("_obj")
 	b, err := cmd.CombinedOutput()
 	if err != nil {
+		fmt.Fprintln(os.Stderr, string(b))
 		return err
 	}
 	b, err = format.Source(b)
