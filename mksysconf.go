@@ -15,28 +15,43 @@ import (
 	"runtime"
 )
 
-func gensysconf() error {
-	defs := "sysconf_defs_" + runtime.GOOS + ".go"
-	cmd := exec.Command("go", "tool", "cgo", "-godefs", defs)
+func gensysconf(in, out string) error {
+	if _, err := os.Stat(in); err != nil {
+		if os.IsNotExist(err) {
+			return nil
+		} else {
+			return err
+		}
+	}
+
+	cmd := exec.Command("go", "tool", "cgo", "-godefs", in)
+	cmd.Stderr = os.Stderr
 	defer os.RemoveAll("_obj")
 	b, err := cmd.CombinedOutput()
 	if err != nil {
-		fmt.Fprint(os.Stderr, string(b))
 		return err
 	}
 	b, err = format.Source(b)
 	if err != nil {
 		return err
 	}
-	zsysconf := "z" + defs
-	if err := ioutil.WriteFile(zsysconf, b, 0644); err != nil {
+	if err := ioutil.WriteFile(out, b, 0644); err != nil {
 		return err
 	}
 	return nil
 }
 
 func main() {
-	if err := gensysconf(); err != nil {
+	defs := fmt.Sprintf("sysconf_defs_%s.go", runtime.GOOS)
+	if err := gensysconf(defs, "z"+defs); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+
+	vals := fmt.Sprintf("sysconf_values_%s.go", runtime.GOOS)
+	// sysconf variable values are GOARCH-specific, thus write per GOARCH
+	zvals := fmt.Sprintf("zsysconf_values_%s_%s.go", runtime.GOOS, runtime.GOARCH)
+	if err := gensysconf(vals, zvals); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}

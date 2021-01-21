@@ -176,33 +176,6 @@ func getNprocsConf() int64 {
 	return getNprocs()
 }
 
-// getenv32BitPointers returns -1 on systems which can never provide
-// environments with 32-bit wide pointers and 1 otherwise.
-// See <bits/environments.h>
-func getEnv32BitPointers() int64 {
-	if wordSize == 64 {
-		return -1
-	}
-	return 1
-}
-
-// getEnv64BitPointers returns -1 on systems which can never provide
-// environments with 64-bit wide pointers and 1 otherwise.
-// See <bits/environments.h>
-func getEnv64BitPointers() int64 {
-	if wordSize == 32 {
-		return -1
-	}
-	return 1
-}
-
-// getEnvBiggerPointers returns -1 on systems which can never provide
-// environments with bigger pointers and 1 otherwise.
-// See <bits/environments.h>
-func getEnvBiggerPointers() int64 {
-	return -1
-}
-
 func hasClock(clockid int32) bool {
 	var res unix.Timespec
 	if err := unix.ClockGetres(clockid, &res); err != nil {
@@ -354,22 +327,22 @@ func sysconf(name int) (int64, error) {
 		return _POSIX_TYPED_MEMORY_OBJECTS, nil
 
 	case SC_V7_ILP32_OFF32:
-		return getEnv32BitPointers(), nil
+		return _POSIX_V7_ILP32_OFF32, nil
 	case SC_V7_ILP32_OFFBIG:
-		return getEnv32BitPointers(), nil
+		return _POSIX_V7_ILP32_OFFBIG, nil
 	case SC_V7_LP64_OFF64:
-		return getEnv64BitPointers(), nil
+		return _POSIX_V7_LP64_OFF64, nil
 	case SC_V7_LPBIG_OFFBIG:
-		return getEnvBiggerPointers(), nil
+		return _POSIX_V7_LPBIG_OFFBIG, nil
 
 	case SC_V6_ILP32_OFF32:
-		return getEnv32BitPointers(), nil
+		return _POSIX_V6_ILP32_OFF32, nil
 	case SC_V6_ILP32_OFFBIG:
-		return getEnv32BitPointers(), nil
+		return _POSIX_V6_ILP32_OFFBIG, nil
 	case SC_V6_LP64_OFF64:
-		return getEnv64BitPointers(), nil
+		return _POSIX_V6_LP64_OFF64, nil
 	case SC_V6_LPBIG_OFFBIG:
-		return getEnvBiggerPointers(), nil
+		return _POSIX_V6_LPBIG_OFFBIG, nil
 
 	case SC_2_C_VERSION:
 		return _POSIX2_C_VERSION, nil
