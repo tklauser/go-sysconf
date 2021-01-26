@@ -7,8 +7,7 @@
 
 `sysconf` for Go, without using cgo or external binaries (e.g. getconf).
 
-Supported operating systems: Linux, Darwin, DragonflyBSD, FreeBSD, NetBSD, OpenBSD.
-Support for Solaris is planned but not yet implemented.
+Supported operating systems: Linux, Darwin, DragonflyBSD, FreeBSD, NetBSD, OpenBSD, Solaris.
 
 All POSIX.1 and POSIX.2 variables are supported, see [References](#references) for a complete list.
 
@@ -16,10 +15,10 @@ Additionally, the following non-standard variables are supported on some operati
 
 | Variable | Supported on |
 |---|---|
-| `SC_PHYS_PAGES`       | Linux, Darwin, FreeBSD, NetBSD, OpenBSD |
-| `SC_AVPHYS_PAGES`     | Linux, OpenBSD |
-| `SC_NPROCESSORS_CONF` | Linux, Darwin, FreeBSD, NetBSD, OpenBSD |
-| `SC_NPROCESSORS_ONLN` | Linux, Darwin, FreeBSD, NetBSD, OpenBSD |
+| `SC_PHYS_PAGES`       | Linux, Darwin, FreeBSD, NetBSD, OpenBSD, Solaris |
+| `SC_AVPHYS_PAGES`     | Linux, OpenBSD, Solaris |
+| `SC_NPROCESSORS_CONF` | Linux, Darwin, FreeBSD, NetBSD, OpenBSD, Solaris |
+| `SC_NPROCESSORS_ONLN` | Linux, Darwin, FreeBSD, NetBSD, OpenBSD, Solaris |
 | `SC_UIO_MAXIOV`       | Linux |
 
 ## Usage
