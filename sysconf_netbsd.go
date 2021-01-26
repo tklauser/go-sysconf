@@ -150,5 +150,5 @@ func sysconf(name int) (int64, error) {
 		return sysctl32("kern.maxproc"), nil
 	}
 
-	return -1, errInvalid
+	return sysconfGeneric(name)
 }

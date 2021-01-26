@@ -216,5 +216,5 @@ func sysconf(name int) (int64, error) {
 		return sysctl32("hw.ncpu"), nil
 	}
 
-	return -1, errInvalid
+	return sysconfGeneric(name)
 }

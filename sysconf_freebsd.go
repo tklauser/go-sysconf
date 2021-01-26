@@ -215,5 +215,5 @@ func sysconf(name int) (int64, error) {
 		return -1, nil
 	}
 
-	return -1, errInvalid
+	return sysconfGeneric(name)
 }
