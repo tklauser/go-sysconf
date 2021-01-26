@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         go-version: [1.13, 1.14, 1.15]
-        goos: [darwin, freebsd, linux, netbsd, openbsd]
+        goos: [darwin, freebsd, linux, netbsd, openbsd, windows]
     runs-on: ubuntu-latest
 
     steps:
