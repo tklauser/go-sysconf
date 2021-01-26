@@ -42,7 +42,11 @@ func gensysconf(in, out string) error {
 }
 
 func main() {
-	defs := fmt.Sprintf("sysconf_defs_%s.go", runtime.GOOS)
+	goos := runtime.GOOS
+	if goos == "illumos" {
+		goos = "solaris"
+	}
+	defs := fmt.Sprintf("sysconf_defs_%s.go", goos)
 	if err := gensysconf(defs, "z"+defs); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
