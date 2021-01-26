@@ -390,5 +390,5 @@ func sysconf(name int) (int64, error) {
 		return _UIO_MAXIOV, nil
 	}
 
-	return -1, errInvalid
+	return sysconfGeneric(name)
 }
