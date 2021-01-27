@@ -25,5 +25,5 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
-    - name: Test (native)
+    - name: Build (cross-compile)
       run: GOOS=${{ matrix.goos }} go build ./...
