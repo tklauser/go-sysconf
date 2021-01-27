@@ -1,4 +1,4 @@
-github.com/tklauser/numcpus v0.1.0 h1:BQeAuOQKZtytv8qblsFbi9mhTfXQdFFkyX0vaV6B4tc=
-github.com/tklauser/numcpus v0.1.0/go.mod h1:i3up9VjARpkV00NkBbexuDd0RAVQz4rV5Gl8miYgd5k=
+github.com/tklauser/numcpus v0.2.0 h1:Y+tTPBtO2xyXRQKX1XUYjZu4jbNzvDugwDIz4EYSpB4=
+github.com/tklauser/numcpus v0.2.0/go.mod h1:i3up9VjARpkV00NkBbexuDd0RAVQz4rV5Gl8miYgd5k=
 golang.org/x/sys v0.0.0-20210112091331-59c308dcf3cc h1:y0Og6AYdwus7SIAnKnDxjc4gJetRiYEWOx4AKbOeyEI=
 golang.org/x/sys v0.0.0-20210112091331-59c308dcf3cc/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
