@@ -58,7 +58,7 @@ func TestGetconf(t *testing.T) {
 
 	getconf, err := exec.LookPath("getconf")
 	if err != nil {
-		t.Fatalf("exec.LookPath: %v", err)
+		t.Skipf("getconf not found in PATH: %v", err)
 	}
 
 	for _, tc := range testCases {
