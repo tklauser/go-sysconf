@@ -1,9 +1,8 @@
 # go-sysconf
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/tklauser/go-sysconf.svg)](https://pkg.go.dev/github.com/tklauser/go-sysconf)
-[![GitHub Build Action Status][1]][2]
-[![GitHub Test Action Status][3]][4]
-[![Go Report Card][5]][6]
+[![GitHub Action Status](https://github.com/tklauser/go-sysconf/workflows/Tests/badge.svg)](https://github.com/tklauser/go-sysconf/actions?query=workflow%3ATests)
+[![Go Report Card](https://goreportcard.com/badge/github.com/tklauser/go-sysconf)](https://goreportcard.com/report/github.com/tklauser/go-sysconf)
 
 `sysconf` for Go, without using cgo or external binaries (e.g. getconf).
 
@@ -46,10 +45,3 @@ func main() {
 * [POSIX documenation for `sysconf`](http://pubs.opengroup.org/onlinepubs/9699919799/functions/sysconf.html)
 * [Linux manpage for `sysconf(3)`](http://man7.org/linux/man-pages/man3/sysconf.3.html)
 * [glibc constants for `sysconf` parameters](https://www.gnu.org/software/libc/manual/html_node/Constants-for-Sysconf.html)
-
-[1]: https://github.com/tklauser/go-sysconf/workflows/Build/badge.svg
-[2]: https://github.com/tklauser/go-sysconf/actions?query=workflow%3ABuild
-[3]: https://github.com/tklauser/go-sysconf/workflows/Tests/badge.svg
-[4]: https://github.com/tklauser/go-sysconf/actions?query=workflow%3ATests
-[5]: https://goreportcard.com/badge/github.com/tklauser/go-sysconf
-[6]: https://goreportcard.com/report/github.com/tklauser/go-sysconf
