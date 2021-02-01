@@ -6,58 +6,22 @@ package sysconf
 
 import (
 	"bufio"
-	"encoding/binary"
 	"io/ioutil"
 	"os"
 	"runtime"
 	"strconv"
 	"strings"
-	"sync"
 
 	"github.com/tklauser/numcpus"
 	"golang.org/x/sys/unix"
 )
 
 const (
-	_AT_NULL   = 0  // End of auxiliary vector
-	_AT_CLKTCK = 17 // Frequency of times()
-
+	// CLK_TCK is a constant on Linux, see e.g.
+	// https://git.musl-libc.org/cgit/musl/tree/src/conf/sysconf.c#n30 and
+	// https://github.com/containerd/cgroups/pull/12
 	_SYSTEM_CLK_TCK = 100
-
-	wordSize uint = 32 << (^uint(0) >> 63)
 )
-
-var (
-	clktck     int64
-	clktckOnce sync.Once
-)
-
-func getclktck() int64 {
-	// I currently don't know a way to get the loaded-provided auxv, thus
-	// get it from /proc/self/auxv on Linux.
-	// Code based on cpu_linux.go in golang.org/x/sys/cpu
-	buf, err := ioutil.ReadFile("/proc/self/auxv")
-	if err == nil {
-		pb := int(wordSize / 8)
-		for i := 0; i < len(buf)-pb*2; i += pb * 2 {
-			var tag, val uint
-			switch wordSize {
-			case 32:
-				tag = uint(binary.LittleEndian.Uint32(buf[i:]))
-				val = uint(binary.LittleEndian.Uint32(buf[i+pb:]))
-			case 64:
-				tag = uint(binary.LittleEndian.Uint64(buf[i:]))
-				val = uint(binary.LittleEndian.Uint64(buf[i+pb:]))
-			}
-
-			switch tag {
-			case _AT_CLKTCK:
-				return int64(val)
-			}
-		}
-	}
-	return _SYSTEM_CLK_TCK
-}
 
 func readProcFsInt64(path string, fallback int64) int64 {
 	data, err := ioutil.ReadFile(path)
@@ -216,8 +180,7 @@ func sysconf(name int) (int64, error) {
 		}
 		return childMax, nil
 	case SC_CLK_TCK:
-		clktckOnce.Do(func() { clktck = getclktck() })
-		return clktck, nil
+		return _SYSTEM_CLK_TCK, nil
 	case SC_DELAYTIMER_MAX:
 		return _DELAYTIMER_MAX, nil
 	case SC_GETGR_R_SIZE_MAX:
