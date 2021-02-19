@@ -12,12 +12,12 @@ jobs:
   build:
     strategy:
       matrix:
-        go-version: [1.13, 1.14, 1.15]
+        go-version: [1.14, 1.15, 1.16]
     runs-on: ubuntu-latest
 
     steps:
     - name: Install Go
-      uses: actions/setup-go@v1
+      uses: actions/setup-go@v2
       with:
         go-version: ${{ matrix.go-version }}
 
@@ -26,7 +26,7 @@ jobs:
 
     - name: Check formatting
       run: test -z $(gofmt -l .)
-      if: matrix.go-version == '1.15'
+      if: matrix.go-version == '1.16'
 
     - name: Build (cross-compile)
       run: |
@@ -42,13 +42,13 @@ jobs:
   test:
     strategy:
       matrix:
-        go-version: [1.13, 1.14, 1.15]
+        go-version: [1.14, 1.15, 1.16]
         platform: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04, macos-10.15]
     runs-on: ${{ matrix.platform }}
 
     steps:
     - name: Install Go
-      uses: actions/setup-go@v1
+      uses: actions/setup-go@v2
       with:
         go-version: ${{ matrix.go-version }}
 
