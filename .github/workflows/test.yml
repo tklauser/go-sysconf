@@ -25,8 +25,8 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Check formatting
-      run: test -z $(gofmt -l .)
       if: matrix.go-version == '1.16'
+      run: diff -u <(echo -n) <(gofmt -d .)
 
     - name: Build (cross-compile)
       run: |
