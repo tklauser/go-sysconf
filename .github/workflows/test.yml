@@ -9,11 +9,12 @@ on:
     - master
 
 jobs:
-  build:
+  build-and-test:
     strategy:
       matrix:
         go-version: [1.14, 1.15, 1.16]
-    runs-on: ubuntu-latest
+        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04, macos-10.15]
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Install Go
@@ -25,16 +26,17 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Check formatting
-      if: matrix.go-version == '1.16'
+      if: ${{ matrix.go-version == '1.16' && matrix.os == 'ubuntu-20.04' }}
       run: diff -u <(echo -n) <(gofmt -d .)
 
     - name: Check Go modules
-      if: matrix.go-version == '1.16'
+      if: ${{ matrix.go-version == '1.16' && matrix.os == 'ubuntu-20.04' }}
       run: |
         go mod tidy
         git diff --exit-code
 
     - name: Build (cross-compile)
+      if: matrix.os == 'ubuntu-20.04'
       run: |
         GOOS=darwin go build ./...
         GOOS=dragonfly go build ./...
@@ -44,22 +46,6 @@ jobs:
         GOOS=openbsd go build ./...
         GOOS=solaris go build ./...
         GOOS=windows go build ./...
-
-  test:
-    strategy:
-      matrix:
-        go-version: [1.14, 1.15, 1.16]
-        platform: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04, macos-10.15]
-    runs-on: ${{ matrix.platform }}
-
-    steps:
-    - name: Install Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: ${{ matrix.go-version }}
-
-    - name: Check out code
-      uses: actions/checkout@v2
 
     - name: Test (native)
       run: go test -v ./...
