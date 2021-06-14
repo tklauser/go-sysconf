@@ -25,6 +25,8 @@ type testCase struct {
 }
 
 func testSysconfGoCgo(t *testing.T, tc testCase) {
+	t.Helper()
+
 	if tc.goVar != int(tc.cVar) {
 		t.Errorf("SC_* parameter value for %v is %v, want %v", tc.name, tc.goVar, tc.cVar)
 	}
@@ -46,6 +48,8 @@ func testSysconfGoCgo(t *testing.T, tc testCase) {
 }
 
 func testSysconfGoCgoInvalid(t *testing.T, tc testCase) {
+	t.Helper()
+
 	if tc.goVar != int(tc.cVar) {
 		t.Errorf("SC_* parameter value for %v is %v, want %v", tc.name, tc.goVar, tc.cVar)
 	}
