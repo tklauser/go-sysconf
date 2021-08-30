@@ -13,10 +13,11 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
+	"regexp"
 	"runtime"
 )
 
-func gensysconf(in, out string) error {
+func gensysconf(in, out, goos, goarch string) error {
 	if _, err := os.Stat(in); err != nil {
 		if os.IsNotExist(err) {
 			return nil
@@ -32,23 +33,34 @@ func gensysconf(in, out string) error {
 		fmt.Fprintln(os.Stderr, string(b))
 		return err
 	}
+
+	goBuild, build := goos, goos
+	if goarch != "" {
+		goBuild = fmt.Sprintf("%s && %s", goos, goarch)
+		build = fmt.Sprintf("%s,%s", goos, goarch)
+	}
+
+	r := fmt.Sprintf(`$1
+
+//go:build %s
+// +build %s`, goBuild, build)
+	cgoCommandRegex := regexp.MustCompile(`(cgo -godefs .*)`)
+	b = cgoCommandRegex.ReplaceAll(b, []byte(r))
+
 	b, err = format.Source(b)
 	if err != nil {
 		return err
 	}
-	if err := ioutil.WriteFile(out, b, 0644); err != nil {
-		return err
-	}
-	return nil
+	return ioutil.WriteFile(out, b, 0644)
 }
 
 func main() {
-	goos := runtime.GOOS
+	goos, goarch := runtime.GOOS, runtime.GOARCH
 	if goos == "illumos" {
 		goos = "solaris"
 	}
 	defs := fmt.Sprintf("sysconf_defs_%s.go", goos)
-	if err := gensysconf(defs, "z"+defs); err != nil {
+	if err := gensysconf(defs, "z"+defs, goos, ""); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
@@ -56,7 +68,7 @@ func main() {
 	vals := fmt.Sprintf("sysconf_values_%s.go", runtime.GOOS)
 	// sysconf variable values are GOARCH-specific, thus write per GOARCH
 	zvals := fmt.Sprintf("zsysconf_values_%s_%s.go", runtime.GOOS, runtime.GOARCH)
-	if err := gensysconf(vals, zvals); err != nil {
+	if err := gensysconf(vals, zvals, goos, goarch); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
