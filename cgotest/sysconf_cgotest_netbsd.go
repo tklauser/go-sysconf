@@ -16,11 +16,7 @@ import (
 )
 
 func testSysconfCgoMatch(t *testing.T) {
-	testCases := []struct {
-		goVar int
-		cVar  C.int
-		name  string
-	}{
+	testCases := []testCase{
 		{sysconf.SC_AIO_LISTIO_MAX, C._SC_AIO_LISTIO_MAX, "AIO_LISTIO_MAX"},
 		{sysconf.SC_AIO_MAX, C._SC_AIO_MAX, "AIO_MAX"},
 		{sysconf.SC_ARG_MAX, C._SC_ARG_MAX, "ARG_MAX"},
