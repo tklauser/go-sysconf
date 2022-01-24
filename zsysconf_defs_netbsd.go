@@ -19,6 +19,8 @@ const (
 	SC_CLK_TCK                      = 0x27
 	SC_COLL_WEIGHTS_MAX             = 0xd
 	SC_EXPR_NEST_MAX                = 0xe
+	SC_GETGR_R_SIZE_MAX             = 0x2f
+	SC_GETPW_R_SIZE_MAX             = 0x30
 	SC_HOST_NAME_MAX                = 0x45
 	SC_IOV_MAX                      = 0x20
 	SC_LINE_MAX                     = 0xf
@@ -89,6 +91,9 @@ const (
 	_COLL_WEIGHTS_MAX = 0x2
 	_EXPR_NEST_MAX    = 0x20
 	_LINE_MAX         = 0x800
+
+	_GETGR_R_SIZE_MAX = 0x400
+	_GETPW_R_SIZE_MAX = 0x400
 
 	_PATH_DEV      = "/dev/"
 	_PATH_ZONEINFO = "/usr/share/zoneinfo"

@@ -35,6 +35,8 @@ const (
 	SC_CLK_TCK                      = C._SC_CLK_TCK
 	SC_COLL_WEIGHTS_MAX             = C._SC_COLL_WEIGHTS_MAX
 	SC_EXPR_NEST_MAX                = C._SC_EXPR_NEST_MAX
+	SC_GETGR_R_SIZE_MAX             = C._SC_GETGR_R_SIZE_MAX
+	SC_GETPW_R_SIZE_MAX             = C._SC_GETPW_R_SIZE_MAX
 	SC_HOST_NAME_MAX                = C._SC_HOST_NAME_MAX
 	SC_IOV_MAX                      = C._SC_IOV_MAX
 	SC_LINE_MAX                     = C._SC_LINE_MAX
@@ -107,6 +109,9 @@ const (
 	_COLL_WEIGHTS_MAX = C.COLL_WEIGHTS_MAX
 	_EXPR_NEST_MAX    = C.EXPR_NEST_MAX
 	_LINE_MAX         = C.LINE_MAX
+
+	_GETGR_R_SIZE_MAX = C._GETGR_R_SIZE_MAX
+	_GETPW_R_SIZE_MAX = C._GETPW_R_SIZE_MAX
 
 	_PATH_DEV      = C._PATH_DEV
 	_PATH_ZONEINFO = C._PATH_ZONEINFO

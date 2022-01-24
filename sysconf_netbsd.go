@@ -129,6 +129,12 @@ func sysconf(name int) (int64, error) {
 		// sysctl("user.atexit_max")
 		return -1, nil // TODO
 
+	// 1003.1-2001, TSF
+	case SC_GETGR_R_SIZE_MAX:
+		return _GETGR_R_SIZE_MAX, nil
+	case SC_GETPW_R_SIZE_MAX:
+		return _GETPW_R_SIZE_MAX, nil
+
 	// Extensions
 	case SC_NPROCESSORS_CONF:
 		return sysctl32("hw.ncpu"), nil
