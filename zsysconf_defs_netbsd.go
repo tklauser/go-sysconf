@@ -78,7 +78,7 @@ const (
 	_POSIX_DELAYTIMER_MAX               = 0x20
 	_POSIX_SHELL                        = 0x1
 	_POSIX_THREAD_DESTRUCTOR_ITERATIONS = 0x4
-	_POSIX_THREAD_KEYS_MAX              = 0x100
+	_POSIX_THREAD_KEYS_MAX              = 0x80
 	_POSIX_TIMER_MAX                    = 0x20
 	_POSIX_VERSION                      = 0x30db0
 
