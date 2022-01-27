@@ -28,6 +28,7 @@ func testSysconfCgoMatch(t *testing.T) {
 		{sysconf.SC_CHILD_MAX, C._SC_CHILD_MAX, "CHILD_MAX"},
 		{sysconf.SC_CLK_TCK, C._SC_CLK_TCK, "CLK_TCK"},
 		{sysconf.SC_COLL_WEIGHTS_MAX, C._SC_COLL_WEIGHTS_MAX, "COLL_WEIGHTS_MAX"},
+		{sysconf.SC_DELAYTIMER_MAX, C._SC_DELAYTIMER_MAX, "DELAYTIMER_MAX"},
 		{sysconf.SC_EXPR_NEST_MAX, C._SC_EXPR_NEST_MAX, "EXPR_NEST_MAX"},
 		{sysconf.SC_GETGR_R_SIZE_MAX, C._SC_GETGR_R_SIZE_MAX, "GETGR_R_SIZE_MAX"},
 		{sysconf.SC_GETPW_R_SIZE_MAX, C._SC_GETPW_R_SIZE_MAX, "GETPW_R_SIZE_MAX"},
@@ -48,6 +49,7 @@ func testSysconfCgoMatch(t *testing.T) {
 		{sysconf.SC_RE_DUP_MAX, C._SC_RE_DUP_MAX, "RE_DUP_MAX"},
 		{sysconf.SC_STREAM_MAX, C._SC_STREAM_MAX, "STREAM_MAX"},
 		{sysconf.SC_SYMLOOP_MAX, C._SC_SYMLOOP_MAX, "SYMLOOP_MAX"},
+		{sysconf.SC_TIMER_MAX, C._SC_TIMER_MAX, "TIMER_MAX"},
 		{sysconf.SC_TTY_NAME_MAX, C._SC_TTY_NAME_MAX, "TTY_NAME_MAX"},
 		{sysconf.SC_TZNAME_MAX, C._SC_TZNAME_MAX, "TZNAME_MAX"},
 

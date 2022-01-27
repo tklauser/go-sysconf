@@ -154,6 +154,10 @@ func sysconf(name int) (int64, error) {
 		return int64(unix.Getpagesize()), nil
 	case SC_THREAD_THREADS_MAX:
 		return sysctl32("kern.maxproc"), nil
+	case SC_TIMER_MAX:
+		return _POSIX_TIMER_MAX, nil
+	case SC_DELAYTIMER_MAX:
+		return _POSIX_DELAYTIMER_MAX, nil
 	}
 
 	return sysconfGeneric(name)

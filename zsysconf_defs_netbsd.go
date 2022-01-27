@@ -18,6 +18,7 @@ const (
 	SC_CHILD_MAX                    = 0x2
 	SC_CLK_TCK                      = 0x27
 	SC_COLL_WEIGHTS_MAX             = 0xd
+	SC_DELAYTIMER_MAX               = 0x5c
 	SC_EXPR_NEST_MAX                = 0xe
 	SC_GETGR_R_SIZE_MAX             = 0x2f
 	SC_GETPW_R_SIZE_MAX             = 0x30
@@ -38,6 +39,7 @@ const (
 	SC_RE_DUP_MAX                   = 0x10
 	SC_STREAM_MAX                   = 0x1a
 	SC_SYMLOOP_MAX                  = 0x49
+	SC_TIMER_MAX                    = 0x58
 	SC_TTY_NAME_MAX                 = 0x44
 	SC_TZNAME_MAX                   = 0x1b
 
@@ -73,9 +75,11 @@ const (
 
 	_POSIX_ARG_MAX                      = 0x1000
 	_POSIX_CHILD_MAX                    = 0x19
+	_POSIX_DELAYTIMER_MAX               = 0x20
 	_POSIX_SHELL                        = 0x1
 	_POSIX_THREAD_DESTRUCTOR_ITERATIONS = 0x4
 	_POSIX_THREAD_KEYS_MAX              = 0x100
+	_POSIX_TIMER_MAX                    = 0x20
 	_POSIX_VERSION                      = 0x30db0
 
 	_POSIX2_VERSION = 0x30db0

@@ -34,6 +34,7 @@ const (
 	SC_CHILD_MAX                    = C._SC_CHILD_MAX
 	SC_CLK_TCK                      = C._SC_CLK_TCK
 	SC_COLL_WEIGHTS_MAX             = C._SC_COLL_WEIGHTS_MAX
+	SC_DELAYTIMER_MAX               = C._SC_DELAYTIMER_MAX
 	SC_EXPR_NEST_MAX                = C._SC_EXPR_NEST_MAX
 	SC_GETGR_R_SIZE_MAX             = C._SC_GETGR_R_SIZE_MAX
 	SC_GETPW_R_SIZE_MAX             = C._SC_GETPW_R_SIZE_MAX
@@ -54,6 +55,7 @@ const (
 	SC_RE_DUP_MAX                   = C._SC_RE_DUP_MAX
 	SC_STREAM_MAX                   = C._SC_STREAM_MAX
 	SC_SYMLOOP_MAX                  = C._SC_SYMLOOP_MAX
+	SC_TIMER_MAX                    = C._SC_TIMER_MAX
 	SC_TTY_NAME_MAX                 = C._SC_TTY_NAME_MAX
 	SC_TZNAME_MAX                   = C._SC_TZNAME_MAX
 
@@ -91,9 +93,11 @@ const (
 
 	_POSIX_ARG_MAX                      = C._POSIX_ARG_MAX
 	_POSIX_CHILD_MAX                    = C._POSIX_CHILD_MAX
+	_POSIX_DELAYTIMER_MAX               = C._POSIX_DELAYTIMER_MAX
 	_POSIX_SHELL                        = C._POSIX_SHELL
 	_POSIX_THREAD_DESTRUCTOR_ITERATIONS = C._POSIX_THREAD_DESTRUCTOR_ITERATIONS
 	_POSIX_THREAD_KEYS_MAX              = C._POSIX_THREAD_KEYS_MAX
+	_POSIX_TIMER_MAX                    = C._POSIX_TIMER_MAX
 	_POSIX_VERSION                      = C._POSIX_VERSION
 
 	_POSIX2_VERSION = C._POSIX2_VERSION
