@@ -22,7 +22,7 @@ func TestSysconf(t *testing.T) {
 	// C.sysconf are in the test directory.
 	val, err := sysconf.Sysconf(sysconf.SC_CLK_TCK)
 	if err != nil {
-		t.Errorf("Sysconf(SC_CLK_TCK): %v", err)
+		t.Fatalf("Sysconf(SC_CLK_TCK): %v", err)
 	}
 	t.Logf("clock ticks = %v", val)
 
