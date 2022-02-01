@@ -3,7 +3,7 @@ env:
 
 freebsd_12_task:
   freebsd_instance:
-    image_family: freebsd-12-2
+    image_family: freebsd-12-3
   install_script: |
     pkg install -y git go
     GOBIN=$PWD/bin go get golang.org/dl/go1.17
