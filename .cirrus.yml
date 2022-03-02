@@ -6,7 +6,7 @@ freebsd_12_task:
   freebsd_instance:
     image_family: freebsd-12-3
   install_script: |
-    pkg install -y git go
+    pkg install -y go
     GOBIN=$PWD/bin go install golang.org/dl/${GO_VERSION}@latest
     bin/${GO_VERSION} download
   build_script: bin/${GO_VERSION} build -v ./...
@@ -16,7 +16,7 @@ freebsd_13_task:
   freebsd_instance:
     image_family: freebsd-13-0
   install_script: |
-    pkg install -y git go
+    pkg install -y go
     GOBIN=$PWD/bin go install golang.org/dl/${GO_VERSION}@latest
     bin/${GO_VERSION} download
   build_script: bin/${GO_VERSION} build -v ./...
