@@ -12,7 +12,7 @@ jobs:
   build-and-test:
     strategy:
       matrix:
-        go-version: [ '1.15' , '1.16', '1.17', '1.18.0-rc.1' ]
+        go-version: [ '1.16', '1.17', '1.18' ]
         os: [ubuntu-18.04, ubuntu-20.04, macos-10.15, macos-11]
     runs-on: ${{ matrix.os }}
 
@@ -26,11 +26,11 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Check formatting
-      if: ${{ matrix.go-version == '1.17' && matrix.os == 'ubuntu-20.04' }}
+      if: ${{ matrix.go-version == '1.18' && matrix.os == 'ubuntu-20.04' }}
       run: diff -u <(echo -n) <(gofmt -d .)
 
     - name: Check Go modules
-      if: ${{ matrix.go-version == '1.17' && matrix.os == 'ubuntu-20.04' }}
+      if: ${{ matrix.go-version == '1.18' && matrix.os == 'ubuntu-20.04' }}
       run: |
         go mod tidy
         git diff --exit-code
