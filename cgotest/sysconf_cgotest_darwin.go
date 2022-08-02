@@ -170,10 +170,9 @@ func testMacOSVersionDeps(t *testing.T) {
 	maj, _ := strconv.Atoi(ver[0])
 
 	// _POSIX_V6_ILP32_OFFBIG was fixed in macOS 10.15 (Catalina)
-	if maj >= 19 {
-		v6Ilp32Offbig := testCase{sysconf.SC_V6_ILP32_OFFBIG, C._SC_V6_ILP32_OFFBIG, "_POSIX_V6_ILP32_OFFBIG"}
-		testSysconfGoCgo(t, v6Ilp32Offbig)
-	} else {
+	if maj < 19 {
 		t.Skip("skipping _POSIX_V6_ILP32_OFFBIG on macOS < 10.15")
 	}
+	v6Ilp32Offbig := testCase{sysconf.SC_V6_ILP32_OFFBIG, C._SC_V6_ILP32_OFFBIG, "_POSIX_V6_ILP32_OFFBIG"}
+	testSysconfGoCgo(t, v6Ilp32Offbig)
 }
