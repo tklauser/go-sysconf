@@ -163,7 +163,7 @@ func testMacOSVersionDeps(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Uname: %v", err)
 	}
-	rel := string(u.Release[:])
+	rel := unix.ByteSliceToString(u.Release[:])
 	t.Logf("macOS release: %s", rel)
 
 	ver := strings.Split(rel, ".")
