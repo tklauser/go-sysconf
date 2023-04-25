@@ -5,6 +5,10 @@
 package sysconf
 
 import (
+	"strconv"
+	"strings"
+	"sync"
+
 	"golang.org/x/sys/unix"
 )
 
@@ -13,6 +17,11 @@ const (
 	_LOGIN_NAME_MAX = _MAXLOGNAME
 	_SYMLOOP_MAX    = _MAXSYMLINKS
 )
+
+var uname struct {
+	sync.Once
+	macOSMajor int
+}
 
 // sysconf implements sysconf(3) as in the Darwin libc, version 1244.30.3
 // (derived from the FreeBSD libc).
@@ -126,7 +135,22 @@ func sysconf(name int) (int64, error) {
 		}
 		return _POSIX_SEMAPHORES, nil
 	case SC_SPAWN:
-		return _POSIX_SPAWN, nil
+		uname.Once.Do(func() {
+			var u unix.Utsname
+			err := unix.Uname(&u)
+			if err != nil {
+				return
+			}
+			rel := unix.ByteSliceToString(u.Release[:])
+			ver := strings.Split(rel, ".")
+			maj, _ := strconv.Atoi(ver[0])
+			uname.macOSMajor = maj
+		})
+		if uname.macOSMajor < 22 {
+			return -1, nil
+		}
+		// macOS 13 (Ventura) and later
+		return 200112, nil
 	case SC_SPIN_LOCKS:
 		return _POSIX_SPIN_LOCKS, nil
 	case SC_SPORADIC_SERVER:
