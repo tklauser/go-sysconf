@@ -247,7 +247,8 @@ const (
 const (
 	_CHAR_BIT = 0x8
 
-	_INT_MAX = 0x7fffffff
+	_INT_MAX  = 0x7fffffff
+	_LONG_MAX = 0x7fffffffffffffff
 
 	sizeofOffT = 0x8
 )

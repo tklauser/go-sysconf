@@ -23,8 +23,9 @@ var uname struct {
 	macOSMajor int
 }
 
-// sysconf implements sysconf(3) as in the Darwin libc, version 1244.30.3
-// (derived from the FreeBSD libc).
+// sysconf implements sysconf(4) as in the Darwin libc (derived from the FreeBSD
+// libc), version 1534.81.1.
+// See https://github.com/apple-oss-distributions/Libc/tree/Libc-1534.81.1.
 func sysconf(name int) (int64, error) {
 	switch name {
 	case SC_AIO_LISTIO_MAX:
@@ -63,12 +64,16 @@ func sysconf(name int) (int64, error) {
 		return sysctl32("kern.ngroups"), nil
 	case SC_OPEN_MAX, SC_STREAM_MAX:
 		var rlim unix.Rlimit
-		if err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlim); err == nil {
-			if rlim.Cur != unix.RLIM_INFINITY {
-				return int64(rlim.Cur), nil
-			}
+		if err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlim); err != nil {
+			return -1, nil
 		}
-		return -1, nil
+		if rlim.Cur > unix.RLIM_INFINITY {
+			return -1, nil
+		}
+		if rlim.Cur > _LONG_MAX {
+			return -1, unix.EOVERFLOW
+		}
+		return int64(rlim.Cur), nil
 	case SC_RTSIG_MAX:
 		return -1, nil
 	case SC_SEM_NSEMS_MAX:

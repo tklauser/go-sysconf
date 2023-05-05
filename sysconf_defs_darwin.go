@@ -19,7 +19,7 @@ package sysconf
 # define _PATH_ZONEINFO	"/usr/share/zoneinfo" // TZDATA from tzcode/stdtime/tzfile.h
 #endif
 
-// off_t always __int64_t on darwin, see /usr/include/_types.h
+// off_t is always __int64_t on darwin, see /usr/include/_types.h
 enum {
 	sizeofOffT = sizeof(__int64_t)
 };
@@ -268,11 +268,13 @@ const (
 	_PATH_ZONEINFO = C._PATH_ZONEINFO
 )
 
-// integer sizes
+// integer sizes (Go only supports 64 bit targets amd64 and arm64 on darwin, so
+// it's fine to generate these here).
 const (
 	_CHAR_BIT = C.CHAR_BIT
 
-	_INT_MAX = C.INT_MAX
+	_INT_MAX  = C.INT_MAX
+	_LONG_MAX = C.LONG_MAX
 
 	sizeofOffT = C.sizeofOffT
 )
