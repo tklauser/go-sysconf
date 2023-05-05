@@ -65,26 +65,26 @@ func TestGetconf(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		cmd := exec.Command(getconf, tc.name)
-		var out bytes.Buffer
-		cmd.Stdout = &out
-		if err := cmd.Run(); err != nil {
-			// Ignore getconf errors and skip the test
-			t.Skipf("failed to invoke getconf: %v", err)
-			break
-		}
-		want, err := strconv.ParseInt(strings.TrimSpace(out.String()), 10, 64)
-		if err != nil {
-			t.Errorf("strconv.ParseInt: %v", err)
-		}
+		t.Run(tc.name, func(t *testing.T) {
+			cmd := exec.Command(getconf, tc.name)
+			var out bytes.Buffer
+			cmd.Stdout = &out
+			if err := cmd.Run(); err != nil {
+				// Ignore getconf errors and skip the test
+				t.Skipf("failed to invoke getconf: %v", err)
+			}
+			want, err := strconv.ParseInt(strings.TrimSpace(out.String()), 10, 64)
+			if err != nil {
+				t.Errorf("strconv.ParseInt: %v", err)
+			}
 
-		got, err := sysconf.Sysconf(tc.goVar)
-		if err != nil {
-			t.Errorf("Sysconf(%s/%d): %v", tc.name, tc.goVar, err)
-		}
-
-		if got != want {
-			t.Errorf("Sysconf(%v/%d) returned %v, want %v", tc.name, tc.goVar, got, want)
-		}
+			got, err := sysconf.Sysconf(tc.goVar)
+			if err != nil {
+				t.Errorf("Sysconf(%s/%d): %v", tc.name, tc.goVar, err)
+			}
+			if got != want {
+				t.Errorf("Sysconf(%v/%d) returned %v, want %v", tc.name, tc.goVar, got, want)
+			}
+		})
 	}
 }
