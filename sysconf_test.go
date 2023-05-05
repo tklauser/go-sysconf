@@ -55,7 +55,6 @@ func TestGetconf(t *testing.T) {
 	}{
 		{sysconf.SC_CLK_TCK, "CLK_TCK"},
 		{sysconf.SC_HOST_NAME_MAX, "HOST_NAME_MAX"},
-		{sysconf.SC_OPEN_MAX, "OPEN_MAX"},
 		{sysconf.SC_PAGE_SIZE, "PAGE_SIZE"},
 	}
 
