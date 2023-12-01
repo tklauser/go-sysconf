@@ -98,6 +98,9 @@ func getNprocsProcStat() (int64, error) {
 			break
 		}
 	}
+	if err := s.Err(); err != nil {
+		return -1, err
+	}
 	return count, nil
 }
 
