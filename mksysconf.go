@@ -10,7 +10,6 @@ package main
 import (
 	"fmt"
 	"go/format"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"regexp"
@@ -51,7 +50,7 @@ func gensysconf(in, out, goos, goarch string) error {
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(out, b, 0644)
+	return os.WriteFile(out, b, 0644)
 }
 
 func main() {
