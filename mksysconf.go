@@ -3,7 +3,6 @@
 // license that can be found in the LICENSE file.
 
 //go:build ignore
-// +build ignore
 
 package main
 
@@ -33,16 +32,14 @@ func gensysconf(in, out, goos, goarch string) error {
 		return err
 	}
 
-	goBuild, build := goos, goos
+	goBuild := goos
 	if goarch != "" {
 		goBuild = fmt.Sprintf("%s && %s", goos, goarch)
-		build = fmt.Sprintf("%s,%s", goos, goarch)
 	}
 
 	r := fmt.Sprintf(`$1
 
-//go:build %s
-// +build %s`, goBuild, build)
+//go:build %s`, goBuild)
 	cgoCommandRegex := regexp.MustCompile(`(cgo -godefs .*)`)
 	b = cgoCommandRegex.ReplaceAll(b, []byte(r))
 
