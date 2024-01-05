@@ -2,7 +2,6 @@
 // cgo -godefs sysconf_defs_darwin.go
 
 //go:build darwin
-// +build darwin
 
 package sysconf
 
