@@ -234,7 +234,6 @@ const (
 
 	_PTHREAD_DESTRUCTOR_ITERATIONS = 0x4
 	_PTHREAD_KEYS_MAX              = 0x200
-	_PTHREAD_STACK_MIN             = 0x2000
 )
 
 const (
