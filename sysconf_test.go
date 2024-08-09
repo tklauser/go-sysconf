@@ -86,3 +86,24 @@ func TestGetconf(t *testing.T) {
 		})
 	}
 }
+
+func TestAllNames(t *testing.T) {
+	allNames := sysconf.AllNames()
+
+	testCases := []struct {
+		name  string
+		value int
+	}{
+		{"SC_CLK_TCK", sysconf.SC_CLK_TCK},
+		{"SC_HOST_NAME_MAX", sysconf.SC_HOST_NAME_MAX},
+		{"SC_PAGE_SIZE", sysconf.SC_PAGE_SIZE},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			if v := allNames[tc.name]; v != tc.value {
+				t.Errorf("Mismatching value for %s in AllNames(): got %v, want %v", tc.name, v, tc.value)
+			}
+		})
+	}
+}

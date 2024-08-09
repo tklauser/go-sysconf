@@ -19,3 +19,8 @@ var errInvalid = errors.New("invalid parameter value")
 func Sysconf(name int) (int64, error) {
 	return sysconf(name)
 }
+
+// AllNames returns a map of all available sysconf(3) runtime system parameters.
+func AllNames() map[string]int {
+	return allNames()
+}
