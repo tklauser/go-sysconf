@@ -69,9 +69,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	vals := fmt.Sprintf("sysconf_values_%s.go", runtime.GOOS)
+	vals := fmt.Sprintf("sysconf_values_%s.go", goos)
 	// sysconf variable values are GOARCH-specific, thus write per GOARCH
-	zvals := fmt.Sprintf("zsysconf_values_%s_%s.go", runtime.GOOS, runtime.GOARCH)
+	zvals := fmt.Sprintf("zsysconf_values_%s_%s.go", goos, goarch)
 	if err := gensysconf(vals, zvals, goos, goarch); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
