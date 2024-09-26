@@ -51,10 +51,18 @@ func gensysconf(in, out, goos, goarch string) error {
 }
 
 func main() {
-	goos, goarch := runtime.GOOS, runtime.GOARCH
-	if goos == "illumos" {
-		goos = "solaris"
+	goos := os.Getenv("GOOS_TARGET")
+	if goos == "" {
+		goos = runtime.GOOS
+		if goos == "illumos" {
+			goos = "solaris"
+		}
 	}
+	goarch := os.Getenv("GOARCH_TARGET")
+	if goarch == "" {
+		goarch = runtime.GOARCH
+	}
+
 	defs := fmt.Sprintf("sysconf_defs_%s.go", goos)
 	if err := gensysconf(defs, "z"+defs, goos, ""); err != nil {
 		fmt.Fprintln(os.Stderr, err)
