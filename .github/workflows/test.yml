@@ -36,6 +36,9 @@ jobs:
         go mod tidy
         git diff --exit-code
 
+    - name: Test (native)
+      run: go test -v ./...
+
     - name: Build (cross-compile)
       if: matrix.os == 'ubuntu-22.04'
       run: |
@@ -47,6 +50,3 @@ jobs:
         GOOS=openbsd go build ./...
         GOOS=solaris go build ./...
         GOOS=windows go build ./...
-
-    - name: Test (native)
-      run: go test -v ./...
