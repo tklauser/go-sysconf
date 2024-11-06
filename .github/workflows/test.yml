@@ -14,7 +14,7 @@ jobs:
       matrix:
         # Oldest supported version is 1.18, plus the latest two releases.
         go-version: ['1.18', '1.22', '1.23']
-        os: [ubuntu-20.04, ubuntu-22.04, macos-12, macos-13, macos-14, windows-2019, windows-2022]
+        os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, macos-12, macos-13, macos-14, macos-15, windows-2019, windows-2022]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -27,11 +27,11 @@ jobs:
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
     - name: Check formatting
-      if: ${{ matrix.go-version == '1.23' && matrix.os == 'ubuntu-22.04' }}
+      if: ${{ matrix.go-version == '1.23' && matrix.os == 'ubuntu-24.04' }}
       run: diff -u <(echo -n) <(gofmt -d .)
 
     - name: Check Go modules
-      if: ${{ matrix.go-version == '1.23' && matrix.os == 'ubuntu-22.04' }}
+      if: ${{ matrix.go-version == '1.23' && matrix.os == 'ubuntu-24.04' }}
       run: |
         go mod tidy
         git diff --exit-code
