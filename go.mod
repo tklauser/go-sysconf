@@ -4,5 +4,5 @@ go 1.18
 
 require (
 	github.com/tklauser/numcpus v0.9.0
-	golang.org/x/sys v0.26.0
+	golang.org/x/sys v0.28.0
 )
