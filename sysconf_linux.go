@@ -144,13 +144,6 @@ func hasClock(clockid int32) bool {
 	return true
 }
 
-func max(a, b int64) int64 {
-	if a > b {
-		return a
-	}
-	return b
-}
-
 func sysconf(name int) (int64, error) {
 	switch name {
 	case SC_AIO_LISTIO_MAX:
