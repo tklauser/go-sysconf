@@ -86,7 +86,7 @@ func sysconf(name int) (int64, error) {
 		if err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlim); err != nil {
 			return -1, nil
 		}
-		if rlim.Cur > unix.RLIM_INFINITY {
+		if rlim.Cur == unix.RLIM_INFINITY {
 			return -1, nil
 		}
 		if rlim.Cur > _LONG_MAX {
