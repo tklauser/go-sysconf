@@ -55,7 +55,7 @@ func getPhysPages() int64 {
 	var si unix.Sysinfo_t
 	err := unix.Sysinfo(&si)
 	if err != nil {
-		return int64(0)
+		return -1
 	}
 	return getMemPages(uint64(si.Totalram), si.Unit)
 }
@@ -64,7 +64,7 @@ func getAvPhysPages() int64 {
 	var si unix.Sysinfo_t
 	err := unix.Sysinfo(&si)
 	if err != nil {
-		return int64(0)
+		return -1
 	}
 	return getMemPages(uint64(si.Freeram), si.Unit)
 }
