@@ -29,7 +29,7 @@ func readProcFsInt64(path string, fallback int64) int64 {
 	if err != nil {
 		return fallback
 	}
-	i, err := strconv.ParseInt(string(data[:len(data)-1]), 0, 64)
+	i, err := strconv.ParseInt(strings.TrimRight(string(data), "\n"), 0, 64)
 	if err != nil {
 		return fallback
 	}
