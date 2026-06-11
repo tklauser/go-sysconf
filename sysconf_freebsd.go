@@ -167,7 +167,9 @@ func sysconf(name int) (int64, error) {
 	case SC_TYPED_MEMORY_OBJECTS:
 		return _POSIX_TYPED_MEMORY_OBJECTS, nil
 	case SC_VERSION:
-		// TODO(tk): FreeBSD libc uses sysctl(CTL_KERN, KERN_POSIX1)
+		if val, err := unix.SysctlUint32("kern.posix1version"); err == nil {
+			return int64(val), nil
+		}
 		return _POSIX_VERSION, nil
 
 		/* TODO(tk): these need GOARCH-dependent integer size checks
