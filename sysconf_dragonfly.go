@@ -58,17 +58,21 @@ func sysconf(name int) (int64, error) {
 	case SC_RTSIG_MAX:
 		return yesno(sysctl32("p1003_1b.rtsig_max")), nil
 	case SC_SEM_NSEMS_MAX:
-		return -1, nil
+		return yesno(sysctl32("p1003_1b.sem_nsems_max")), nil
 	case SC_SEM_VALUE_MAX:
-		return -1, nil
+		return _SEM_VALUE_MAX, nil
 	case SC_SIGQUEUE_MAX:
 		return yesno(sysctl32("p1003_1b.sigqueue_max")), nil
 	case SC_STREAM_MAX:
 		var rlim unix.Rlimit
 		if err := unix.Getrlimit(unix.RLIMIT_NOFILE, &rlim); err == nil {
-			if rlim.Cur != unix.RLIM_INFINITY {
-				return rlim.Cur, nil
+			if rlim.Cur == unix.RLIM_INFINITY || rlim.Cur > _LONG_MAX {
+				return -1, nil
+			} else if rlim.Cur > _SHRT_MAX {
+				return _SHRT_MAX, nil
 			}
+
+			return rlim.Cur, nil
 		}
 		return -1, nil
 	case SC_THREAD_DESTRUCTOR_ITERATIONS:
