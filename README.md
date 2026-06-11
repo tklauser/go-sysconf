@@ -3,11 +3,17 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/tklauser/go-sysconf.svg)](https://pkg.go.dev/github.com/tklauser/go-sysconf)
 [![GitHub Action Status](https://github.com/tklauser/go-sysconf/workflows/Tests/badge.svg)](https://github.com/tklauser/go-sysconf/actions?query=workflow%3ATests)
 
-`sysconf` for Go, without using cgo or external binaries (e.g. getconf).
+`sysconf` and `pathconf` for Go, without using cgo or external binaries (e.g. getconf).
 
 Supported operating systems: Linux, macOS, DragonflyBSD, FreeBSD, NetBSD, OpenBSD, Solaris/Illumos.
 
 All POSIX.1 and POSIX.2 variables are supported, see [References](#references) for a complete list.
+
+System-wide variables are available as `SC_*` constants and are queried using
+the `Sysconf` function.
+
+Path-dependent variables are available as `PC_*` constants and queried using
+the `Pathconf` or `Fpathconf` functions.
 
 Additionally, the following non-standard variables are supported on some operating systems:
 
@@ -36,11 +42,18 @@ func main() {
 	if err == nil {
 		fmt.Printf("SC_CLK_TCK: %v\n", clktck)
 	}
+
+	// get the maximum filename length for the root directory
+	namemax, err := sysconf.Pathconf("/", sysconf.PC_NAME_MAX)
+	if err == nil {
+		fmt.Printf("PC_NAME_MAX: %v\n", namemax)
+	}
 }
 ```
 
 ## References
 
-* [POSIX documenation for `sysconf`](http://pubs.opengroup.org/onlinepubs/9699919799/functions/sysconf.html)
+* [POSIX documentation for `sysconf`](http://pubs.opengroup.org/onlinepubs/9699919799/functions/sysconf.html)
+* [POSIX documentation for `pathconf`](http://pubs.opengroup.org/onlinepubs/9699919799/functions/pathconf.html)
 * [Linux manpage for `sysconf(3)`](http://man7.org/linux/man-pages/man3/sysconf.3.html)
 * [glibc constants for `sysconf` parameters](https://www.gnu.org/software/libc/manual/html_node/Constants-for-Sysconf.html)

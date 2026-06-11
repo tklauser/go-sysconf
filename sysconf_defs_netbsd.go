@@ -182,6 +182,19 @@ const (
 	_PASSWORD_LEN = C._PASSWORD_LEN
 )
 
-// pathconf variables
-
-const _PC_NAME_MAX = C._PC_NAME_MAX
+// pathconf
+const (
+	PC_LINK_MAX         = C._PC_LINK_MAX
+	PC_MAX_CANON        = C._PC_MAX_CANON
+	PC_MAX_INPUT        = C._PC_MAX_INPUT
+	PC_NAME_MAX         = C._PC_NAME_MAX
+	PC_PATH_MAX         = C._PC_PATH_MAX
+	PC_PIPE_BUF         = C._PC_PIPE_BUF
+	PC_CHOWN_RESTRICTED = C._PC_CHOWN_RESTRICTED
+	PC_NO_TRUNC         = C._PC_NO_TRUNC
+	PC_VDISABLE         = C._PC_VDISABLE
+	PC_2_SYMLINKS       = C._PC_2_SYMLINKS
+	PC_FILESIZEBITS     = C._PC_FILESIZEBITS
+	PC_SYMLINK_MAX      = C._PC_SYMLINK_MAX
+	PC_SYNC_IO          = C._PC_SYNC_IO
+)

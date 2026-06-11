@@ -158,4 +158,18 @@ const (
 	_PASSWORD_LEN = 0x80
 )
 
-const _PC_NAME_MAX = 0x4
+const (
+	PC_LINK_MAX         = 0x1
+	PC_MAX_CANON        = 0x2
+	PC_MAX_INPUT        = 0x3
+	PC_NAME_MAX         = 0x4
+	PC_PATH_MAX         = 0x5
+	PC_PIPE_BUF         = 0x6
+	PC_CHOWN_RESTRICTED = 0x7
+	PC_NO_TRUNC         = 0x8
+	PC_VDISABLE         = 0x9
+	PC_2_SYMLINKS       = 0xd
+	PC_FILESIZEBITS     = 0xb
+	PC_SYMLINK_MAX      = 0xc
+	PC_SYNC_IO          = 0xa
+)

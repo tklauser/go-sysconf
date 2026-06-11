@@ -228,7 +228,7 @@ func sysconf(name int) (int64, error) {
 		SC_THREAD_PROCESS_SHARED:
 		return -1, nil
 	case SC_TTY_NAME_MAX:
-		return pathconf(_PATH_DEV, _PC_NAME_MAX), nil
+		return pathconf(_PATH_DEV, PC_NAME_MAX)
 	case SC_TIMER_MAX:
 		return _POSIX_TIMER_MAX, nil
 	case SC_SEM_NSEMS_MAX:

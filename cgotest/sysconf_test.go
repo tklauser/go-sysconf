@@ -6,5 +6,6 @@ package sysconf_cgotest
 
 import "testing"
 
-// The actual test function is in sysconf_cgotest.go so that it can use cgo.
-func TestSysconfCgoMatch(t *testing.T) { testSysconfCgoMatch(t) }
+// The actual test functions are in the respective *_cgotest.go files so that they can use cgo.
+func TestSysconfCgoMatch(t *testing.T)  { testSysconfCgoMatch(t) }
+func TestPathconfCgoMatch(t *testing.T) { testPathconfCgoMatch(t) }
