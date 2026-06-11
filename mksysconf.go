@@ -14,7 +14,7 @@ import (
 	"runtime"
 )
 
-func gensysconf(in, out string) error {
+func generate(in, out string) error {
 	if _, err := os.Stat(in); err != nil {
 		if os.IsNotExist(err) {
 			return nil
@@ -27,7 +27,7 @@ func gensysconf(in, out string) error {
 	defer os.RemoveAll("_obj")
 	b, err := cmd.CombinedOutput()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, string(b))
+		fmt.Fprintf(os.Stderr, "error running %q: %s\n", cmd, string(b))
 		return err
 	}
 
@@ -52,15 +52,17 @@ func main() {
 	}
 
 	defs := fmt.Sprintf("sysconf_defs_%s.go", goos)
-	if err := gensysconf(defs, "z"+defs); err != nil {
-		fmt.Fprintln(os.Stderr, err)
+	zdefs := "z" + defs
+	if err := generate(defs, zdefs); err != nil {
+		fmt.Fprintf(os.Stderr, "failed to generate %s from %s: %v\n", zdefs, defs, err)
 		os.Exit(1)
 	}
 
 	vals := fmt.Sprintf("sysconf_values_%s.go", goos)
 	// sysconf variable values are GOARCH-specific, thus write per GOARCH
 	zvals := fmt.Sprintf("zsysconf_values_%s_%s.go", goos, goarch)
-	if err := gensysconf(vals, zvals); err != nil {
+	if err := generate(vals, zvals); err != nil {
+		fmt.Fprintf(os.Stderr, "failed to generate %s from %s: %v\n", zvals, vals, err)
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
