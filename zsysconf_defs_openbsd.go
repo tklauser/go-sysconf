@@ -147,7 +147,7 @@ const (
 	_IOV_MAX                       = 0x400
 	_LOGIN_NAME_MAX                = 0x20
 	_PTHREAD_DESTRUCTOR_ITERATIONS = 0x4
-	_PTHREAD_KEYS_MAX              = 0x100
+	_PTHREAD_KEYS_MAX              = 0x200
 	_PTHREAD_STACK_MIN             = 0x1000
 	_PTHREAD_THREADS_MAX           = 0xffffffffffffffff
 	_SEM_VALUE_MAX                 = 0xffffffff
