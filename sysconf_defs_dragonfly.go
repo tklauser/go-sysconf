@@ -10,6 +10,7 @@ package sysconf
 #include <limits.h>
 #include <paths.h>
 #include <pthread.h>
+#include <semaphore.h>
 #include <sys/param.h>
 #include <time.h>
 #include <unistd.h>
@@ -239,6 +240,8 @@ const (
 	_PTHREAD_DESTRUCTOR_ITERATIONS = C.PTHREAD_DESTRUCTOR_ITERATIONS
 	_PTHREAD_KEYS_MAX              = C.PTHREAD_KEYS_MAX
 	_PTHREAD_STACK_MIN             = C.PTHREAD_STACK_MIN
+
+	_SEM_VALUE_MAX = C.SEM_VALUE_MAX
 )
 
 // pathconf variables

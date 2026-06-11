@@ -215,6 +215,8 @@ const (
 	_PTHREAD_DESTRUCTOR_ITERATIONS = 0x4
 	_PTHREAD_KEYS_MAX              = 0x100
 	_PTHREAD_STACK_MIN             = 0x4000
+
+	_SEM_VALUE_MAX = 0x7fffffff
 )
 
 const (
