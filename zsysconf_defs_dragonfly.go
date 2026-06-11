@@ -143,7 +143,7 @@ const (
 	_CLK_TCK = 0x80
 
 	_MAXHOSTNAMELEN = 0x100
-	_MAXLOGNAME     = 0x11
+	_MAXLOGNAME     = 0x21
 	_MAXSYMLINKS    = 0x20
 	_ATEXIT_SIZE    = 0x20
 
@@ -184,7 +184,7 @@ const (
 	_POSIX_THREAD_PRIO_PROTECT        = 0x30db0
 	_POSIX_THREAD_PRIORITY_SCHEDULING = 0x30db0
 	_POSIX_THREAD_PROCESS_SHARED      = -0x1
-	_POSIX_THREAD_SAFE_FUNCTIONS      = -0x1
+	_POSIX_THREAD_SAFE_FUNCTIONS      = 0x30db0
 	_POSIX_THREAD_SPORADIC_SERVER     = -0x1
 	_POSIX_THREADS                    = 0x30db0
 	_POSIX_TIMEOUTS                   = 0x30db0
@@ -208,7 +208,7 @@ const (
 	_POSIX2_VERSION   = 0x30a2c
 
 	_XOPEN_CRYPT            = -0x1
-	_XOPEN_ENH_I18N         = -0x1
+	_XOPEN_ENH_I18N         = 0x1
 	_XOPEN_REALTIME         = -0x1
 	_XOPEN_REALTIME_THREADS = -0x1
 	_XOPEN_SHM              = 0x1

@@ -11,7 +11,6 @@ package sysconf
 #include <paths.h>
 #include <pthread.h>
 #include <sys/param.h>
-#include <sys/sysproto.h>
 #include <time.h>
 #include <unistd.h>
 
