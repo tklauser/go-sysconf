@@ -36,7 +36,7 @@ var clktck = sync.OnceValue(func() int64 {
 func sysconfPOSIX(name int) (int64, error) {
 	// NetBSD does not define all _POSIX_* values used in sysconf_posix.go
 	// The supported ones are handled in sysconf below.
-	return -1, errInvalid
+	return -1, unix.EINVAL
 }
 
 func sysconf(name int) (int64, error) {

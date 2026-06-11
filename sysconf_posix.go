@@ -6,6 +6,8 @@
 
 package sysconf
 
+import "golang.org/x/sys/unix"
+
 func sysconfPOSIX(name int) (int64, error) {
 	switch name {
 	case SC_ADVISORY_INFO:
@@ -78,5 +80,5 @@ func sysconfPOSIX(name int) (int64, error) {
 	case SC_2_VERSION:
 		return _POSIX2_VERSION, nil
 	}
-	return -1, errInvalid
+	return -1, unix.EINVAL
 }

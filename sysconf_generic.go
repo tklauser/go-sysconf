@@ -6,7 +6,11 @@
 
 package sysconf
 
-import "os"
+import (
+	"os"
+
+	"golang.org/x/sys/unix"
+)
 
 func sysconfGeneric(name int) (int64, error) {
 	// POSIX default values
@@ -41,5 +45,5 @@ func sysconfGeneric(name int) (int64, error) {
 		return _SYMLOOP_MAX, nil
 	}
 
-	return -1, errInvalid
+	return -1, unix.EINVAL
 }
