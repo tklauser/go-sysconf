@@ -8,6 +8,17 @@ on:
     branches:
     - main
 
+permissions:
+  contents: read
+
+env:
+  GO_VERSION: '1.26.4'
+  FREEBSD_RELEASE: '15.0'
+  NETBSD_RELEASE: '10.1'
+  OPENBSD_RELEASE: '7.9'
+  DRAGONFLYBSD_RELEASE: '6.4.1'
+  SOLARIS_RELEASE: '11.4-gcc' # use -gcc variant for cgo
+
 jobs:
   build-and-test:
     strategy:
@@ -41,17 +52,178 @@ jobs:
         go generate
         git diff --exit-code
 
+    - name: Build (native)
+      run: go build ./...
+
     - name: Test (native)
       run: go test -v ./...
 
-    - name: Build (cross-compile)
-      if: matrix.os == 'ubuntu-24.04'
-      run: |
-        GOOS=darwin go build ./...
-        GOOS=dragonfly go build ./...
-        GOOS=freebsd go build ./...
-        GOOS=linux go build ./...
-        GOOS=netbsd go build ./...
-        GOOS=openbsd go build ./...
-        GOOS=solaris go build ./...
-        GOOS=windows go build ./...
+  build-and-test-freebsd:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+    - name: Build and test on FreeBSD ${{ env.FREEBSD_RELEASE }}
+      uses: vmactions/freebsd-vm@a6de9343ef5747433d9c25784c90e84998b9d69a # v1.4.6
+      with:
+        release: ${{ env.FREEBSD_RELEASE }}
+        envs: 'GO_VERSION'
+        usesh: true
+        prepare: |
+          set -e
+          pkg install -y curl
+          archive=/tmp/go.tar.gz
+          curl -fsSL "https://go.dev/dl/go${GO_VERSION}.freebsd-amd64.tar.gz" -o "$archive"
+          rm -rf /usr/local/go
+          mkdir -p /usr/local
+          (cd /usr/local && gzip -dc "$archive" | tar -xf -)
+        run: |
+          set -e
+          export PATH="/usr/local/go/bin:$PATH"
+          go version
+          sysctl kern.posix1version
+          go generate
+          go build ./...
+          go test -v ./...
+
+    - name: Check diff in generated files
+      run:
+        git diff --exit-code
+
+  build-and-test-netbsd:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+    - name: Build and test on NetBSD ${{ env.NETBSD_RELEASE }}
+      uses: vmactions/netbsd-vm@99816dccf75edf233ed6cd00a159e3a5b85ea373 # v1.4.0
+      with:
+        release: ${{ env.NETBSD_RELEASE }}
+        envs: 'GO_VERSION'
+        usesh: true
+        prepare: |
+          set -e
+          /usr/sbin/pkg_add -u curl
+          archive=/tmp/go.tar.gz
+          curl -fsSL "https://go.dev/dl/go${GO_VERSION}.netbsd-amd64.tar.gz" -o "$archive"
+          rm -rf /usr/local/go
+          mkdir -p /usr/local
+          (cd /usr/local && gzip -dc "$archive" | tar -xf -)
+        run: |
+          set -e
+          export PATH="/usr/local/go/bin:$PATH"
+          go version
+          go test -v ./...
+          go build ./...
+          go test -v ./...
+          go generate
+
+    - name: Check diff in generated files
+      run:
+        git diff --exit-code
+
+  build-and-test-openbsd:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+    - name: Build and test on OpenBSD ${{ env.OPENBSD_RELEASE }}
+      uses: vmactions/openbsd-vm@fcf799d7ce9c305ad89eabef1fb2fa5c1c42d0ee # v1.4.3
+      with:
+        release: ${{ env.OPENBSD_RELEASE }}
+        envs: 'GO_VERSION'
+        usesh: true
+        prepare: |
+          set -e
+          archive=/tmp/go.tar.gz
+          ftp -o "$archive" "https://go.dev/dl/go${GO_VERSION}.openbsd-amd64.tar.gz"
+          rm -rf /usr/local/go
+          mkdir -p /usr/local
+          (cd /usr/local && gzip -dc "$archive" | tar -xf -)
+        run: |
+          set -e
+          export PATH="/usr/local/go/bin:$PATH"
+          go version
+          go build ./...
+          go test -v ./...
+          go generate
+
+    - name: Check diff in generated files
+      run:
+        git diff --exit-code
+
+  build-and-test-dragonflybsd:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+    - name: Build and test on DragonFlyBSD ${{ env.DRAGONFLYBSD_RELEASE }}
+      uses: vmactions/dragonflybsd-vm@4ba8127bd95c94b66fc4b885e37c99955ba308ea # v1.3.0
+      with:
+        release: ${{ env.DRAGONFLYBSD_RELEASE }}
+        envs: 'GO_VERSION'
+        usesh: true
+        prepare: |
+          set -e
+          pkg install -y curl
+          archive=/tmp/go.tar.gz
+          curl -fsSL "https://go.dev/dl/go${GO_VERSION}.dragonfly-amd64.tar.gz" -o "$archive"
+          rm -rf /usr/local/go
+          mkdir -p /usr/local
+          (cd /usr/local && gzip -dc "$archive" | tar -xf -)
+        run: |
+          set -e
+          export PATH="/usr/local/go/bin:$PATH"
+          go version
+          go build ./...
+          #go test -v ./...
+          go generate
+
+    - name: Check diff in generated files
+      run:
+        git diff --exit-code
+
+  build-and-test-solaris:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+    - name: Build and test on Solaris ${{ env.SOLARIS_RELEASE }}
+      uses: vmactions/solaris-vm@d30dd6c228c8661ade859e36ead7660b9a62efcc # v1.3.7
+      with:
+        release: ${{ env.SOLARIS_RELEASE }}
+        envs: 'GO_VERSION'
+        usesh: true
+        prepare: |
+          set -e
+          archive=/tmp/go.tar.gz
+          wget -q -O "$archive" "https://go.dev/dl/go${GO_VERSION}.solaris-amd64.tar.gz"
+          rm -rf /usr/local/go
+          mkdir -p /usr/local
+          (cd /usr/local && gzip -dc "$archive" | gtar -xf -)
+        run: |
+          set -e
+          export PATH="/usr/local/go/bin:$PATH"
+          go version
+          go build ./...
+          go test -v ./...
+          go generate
+
+    - name: Check diff in generated files
+      run:
+        git diff --exit-code
