@@ -84,7 +84,6 @@ jobs:
           set -e
           export PATH="/usr/local/go/bin:$PATH"
           go version
-          sysctl kern.posix1version
           go generate
           go build ./...
           go test -v ./...
