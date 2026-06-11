@@ -192,7 +192,7 @@ const (
 	_POSIX_TIMERS                     = 0x30db0
 	_POSIX_TRACE                      = -0x1
 	_POSIX_TYPED_MEMORY_OBJECTS       = -0x1
-	_POSIX_VERSION                    = 0x30db0
+	_POSIX_VERSION                    = 0x31069
 
 	_V6_ILP32_OFF32  = -0x1
 	_V6_ILP32_OFFBIG = 0x0
