@@ -8,7 +8,7 @@ import "golang.org/x/sys/unix"
 
 func sysconf(name int) (int64, error) {
 	if name < 0 {
-		return -1, errInvalid
+		return -1, unix.EINVAL
 	}
 	return unix.Sysconf(name)
 }

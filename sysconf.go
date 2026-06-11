@@ -6,11 +6,7 @@
 // associated SC_* constants to query system configuration values.
 package sysconf
 
-import "errors"
-
 //go:generate go run mksysconf.go
-
-var errInvalid = errors.New("invalid parameter value")
 
 // Sysconf returns the value of a sysconf(3) runtime system parameter.
 // The name parameter should be a SC_* constant define in this package. The

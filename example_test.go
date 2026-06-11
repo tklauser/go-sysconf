@@ -25,5 +25,5 @@ func ExampleSysconf_invalidParameter() {
 	_, err := sysconf.Sysconf(-1)
 	fmt.Print(err)
 
-	// Output: invalid parameter value
+	// Output: invalid argument
 }
