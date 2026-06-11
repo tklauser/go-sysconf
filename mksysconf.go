@@ -11,11 +11,10 @@ import (
 	"go/format"
 	"os"
 	"os/exec"
-	"regexp"
 	"runtime"
 )
 
-func gensysconf(in, out, goos, goarch string) error {
+func gensysconf(in, out string) error {
 	if _, err := os.Stat(in); err != nil {
 		if os.IsNotExist(err) {
 			return nil
@@ -31,17 +30,6 @@ func gensysconf(in, out, goos, goarch string) error {
 		fmt.Fprintln(os.Stderr, string(b))
 		return err
 	}
-
-	goBuild := goos
-	if goarch != "" {
-		goBuild = fmt.Sprintf("%s && %s", goos, goarch)
-	}
-
-	r := fmt.Sprintf(`$1
-
-//go:build %s`, goBuild)
-	cgoCommandRegex := regexp.MustCompile(`(cgo -godefs .*)`)
-	b = cgoCommandRegex.ReplaceAll(b, []byte(r))
 
 	b, err = format.Source(b)
 	if err != nil {
@@ -64,7 +52,7 @@ func main() {
 	}
 
 	defs := fmt.Sprintf("sysconf_defs_%s.go", goos)
-	if err := gensysconf(defs, "z"+defs, goos, ""); err != nil {
+	if err := gensysconf(defs, "z"+defs); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
@@ -72,7 +60,7 @@ func main() {
 	vals := fmt.Sprintf("sysconf_values_%s.go", goos)
 	// sysconf variable values are GOARCH-specific, thus write per GOARCH
 	zvals := fmt.Sprintf("zsysconf_values_%s_%s.go", goos, goarch)
-	if err := gensysconf(vals, zvals, goos, goarch); err != nil {
+	if err := gensysconf(vals, zvals); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
