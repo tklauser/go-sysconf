@@ -12,5 +12,9 @@ import (
 )
 
 func testSysconfCgoMatch(t *testing.T) {
-	t.Skipf("skipping cgotest on unsupported platform %s", runtime.GOOS)
+	t.Skipf("skipping sysconf cgotest on unsupported platform %s", runtime.GOOS)
+}
+
+func testPathconfCgoMatch(t *testing.T) {
+	t.Skipf("skipping pathconf cgotest on unsupported platform %s", runtime.GOOS)
 }

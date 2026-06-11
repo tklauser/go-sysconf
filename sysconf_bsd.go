@@ -8,13 +8,6 @@ package sysconf
 
 import "golang.org/x/sys/unix"
 
-func pathconf(path string, name int) int64 {
-	if val, err := unix.Pathconf(path, name); err == nil {
-		return int64(val)
-	}
-	return -1
-}
-
 func sysctl32(name string) int64 {
 	if val, err := unix.SysctlUint32(name); err == nil {
 		return int64(val)

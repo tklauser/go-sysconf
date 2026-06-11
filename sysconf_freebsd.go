@@ -93,9 +93,9 @@ func sysconf(name int) (int64, error) {
 	case SC_TIMER_MAX:
 		return yesno(sysctl32("p1003_1b.timer_max")), nil
 	case SC_TTY_NAME_MAX:
-		return pathconf(_PATH_DEV, _PC_NAME_MAX), nil
+		return pathconf(_PATH_DEV, PC_NAME_MAX)
 	case SC_TZNAME_MAX:
-		return pathconf(_PATH_ZONEINFO, _PC_NAME_MAX), nil
+		return pathconf(_PATH_ZONEINFO, PC_NAME_MAX)
 
 	case SC_IPV6:
 		if _POSIX_IPV6 == 0 {

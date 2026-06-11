@@ -120,9 +120,9 @@ func sysconf(name int) (int64, error) {
 		return -1, nil
 	case SC_TTY_NAME_MAX:
 		// should be _PATH_DEV instead of "/"
-		return pathconf("/", _PC_NAME_MAX), nil
+		return pathconf("/", PC_NAME_MAX)
 	case SC_TZNAME_MAX:
-		return pathconf(_PATH_ZONEINFO, _PC_NAME_MAX), nil
+		return pathconf(_PATH_ZONEINFO, PC_NAME_MAX)
 
 	case SC_IPV6:
 		if _POSIX_IPV6 == 0 {

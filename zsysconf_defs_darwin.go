@@ -235,16 +235,34 @@ const (
 )
 
 const (
-	_PC_NAME_MAX = 0x4
-
-	_PATH_ZONEINFO = "/usr/share/zoneinfo"
-)
-
-const (
 	_CHAR_BIT = 0x8
 
 	_INT_MAX  = 0x7fffffff
 	_LONG_MAX = 0x7fffffffffffffff
 
 	sizeofOffT = 0x8
+)
+
+const (
+	PC_LINK_MAX           = 0x1
+	PC_MAX_CANON          = 0x2
+	PC_NAME_MAX           = 0x4
+	PC_PATH_MAX           = 0x5
+	PC_PIPE_BUF           = 0x6
+	PC_CHOWN_RESTRICTED   = 0x7
+	PC_NO_TRUNC           = 0x8
+	PC_VDISABLE           = 0x9
+	PC_2_SYMLINKS         = 0xf
+	PC_ALLOC_SIZE_MIN     = 0x10
+	PC_ASYNC_IO           = 0x11
+	PC_FILESIZEBITS       = 0x12
+	PC_PRIO_IO            = 0x13
+	PC_REC_INCR_XFER_SIZE = 0x14
+	PC_REC_MAX_XFER_SIZE  = 0x15
+	PC_REC_MIN_XFER_SIZE  = 0x16
+	PC_REC_XFER_ALIGN     = 0x17
+	PC_SYMLINK_MAX        = 0x18
+	PC_SYNC_IO            = 0x19
+
+	_PATH_ZONEINFO = "/usr/share/zoneinfo"
 )

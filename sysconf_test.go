@@ -47,6 +47,13 @@ func TestOpenMax(t *testing.T) {
 	}
 }
 
+func TestSysconfInvalidParameter(t *testing.T) {
+	_, err := sysconf.Sysconf(-1)
+	if err == nil {
+		t.Fatal("Sysconf(-1) returned nil error")
+	}
+}
+
 func TestGetconf(t *testing.T) {
 	testCases := []struct {
 		goVar int
@@ -81,7 +88,7 @@ func TestGetconf(t *testing.T) {
 				t.Errorf("Sysconf(%s/%d): %v", tc.name, tc.goVar, err)
 			}
 			if got != want {
-				t.Errorf("Sysconf(%v/%d) returned %v, want %v", tc.name, tc.goVar, got, want)
+				t.Errorf("Sysconf(%s/%d) returned %v, want %v", tc.name, tc.goVar, got, want)
 			}
 		})
 	}

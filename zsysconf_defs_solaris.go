@@ -134,3 +134,25 @@ const (
 	SC_NPROCESSORS_CONF = 0xe
 	SC_NPROCESSORS_ONLN = 0xf
 )
+
+const (
+	PC_LINK_MAX           = 0x1
+	PC_MAX_CANON          = 0x2
+	PC_MAX_INPUT          = 0x3
+	PC_NAME_MAX           = 0x4
+	PC_PATH_MAX           = 0x5
+	PC_PIPE_BUF           = 0x6
+	PC_NO_TRUNC           = 0x7
+	PC_VDISABLE           = 0x8
+	PC_CHOWN_RESTRICTED   = 0x9
+	PC_ASYNC_IO           = 0xa
+	PC_PRIO_IO            = 0xb
+	PC_SYNC_IO            = 0xc
+	PC_ALLOC_SIZE_MIN     = 0xd
+	PC_REC_INCR_XFER_SIZE = 0xe
+	PC_REC_MAX_XFER_SIZE  = 0xf
+	PC_REC_MIN_XFER_SIZE  = 0x10
+	PC_REC_XFER_ALIGN     = 0x11
+	PC_SYMLINK_MAX        = 0x12
+	PC_2_SYMLINKS         = 0x13
+)
