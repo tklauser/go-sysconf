@@ -300,6 +300,8 @@ func sysconf(name int) (int64, error) {
 		return _POSIX2_C_VERSION, nil
 	case SC_2_CHAR_TERM:
 		return _POSIX2_CHAR_TERM, nil
+	case SC_2_FORT_RUN:
+		return -1, nil
 	case SC_2_PBS,
 		SC_2_PBS_ACCOUNTING,
 		SC_2_PBS_CHECKPOINT,

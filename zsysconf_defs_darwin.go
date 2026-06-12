@@ -215,6 +215,7 @@ const (
 	_POSIX2_C_BIND    = 0x30db0
 	_POSIX2_C_DEV     = 0x30db0
 	_POSIX2_CHAR_TERM = 0x30db0
+	_POSIX2_FORT_RUN  = 0x30db0
 	_POSIX2_LOCALEDEF = 0x30db0
 	_POSIX2_PBS       = -0x1
 	_POSIX2_SW_DEV    = 0x30db0

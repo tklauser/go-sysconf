@@ -185,6 +185,8 @@ func sysconf(name int) (int64, error) {
 
 	case SC_2_CHAR_TERM:
 		return _POSIX2_CHAR_TERM, nil
+	case SC_2_FORT_RUN:
+		return _POSIX2_FORT_RUN, nil
 	case SC_2_PBS,
 		SC_2_PBS_ACCOUNTING,
 		SC_2_PBS_CHECKPOINT,

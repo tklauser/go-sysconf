@@ -121,6 +121,8 @@ var sysconfTestCases = []testCase{
 	{sysconf.SC_2_C_BIND, C._SC_2_C_BIND, "_POSIX2_C_BIND"},
 	{sysconf.SC_2_C_DEV, C._SC_2_C_DEV, "_POSIX2_C_DEV"},
 	{sysconf.SC_2_CHAR_TERM, C._SC_2_CHAR_TERM, "_POSIX2_CHAR_TERM"},
+	{sysconf.SC_2_FORT_DEV, C._SC_2_FORT_DEV, "_POSIX2_FORT_DEV"},
+	{sysconf.SC_2_FORT_RUN, C._SC_2_FORT_RUN, "_POSIX2_FORT_RUN"},
 	{sysconf.SC_2_LOCALEDEF, C._SC_2_LOCALEDEF, "_POSIX2_LOCALEDEF"},
 	{sysconf.SC_2_PBS, C._SC_2_PBS, "_POSIX2_PBS"},
 	{sysconf.SC_2_PBS_ACCOUNTING, C._SC_2_PBS_ACCOUNTING, "_POSIX2_PBS_ACCOUNTING"},
