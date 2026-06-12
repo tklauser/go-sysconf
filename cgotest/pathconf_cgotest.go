@@ -45,8 +45,7 @@ func testPathconfGoCgo(t *testing.T, tc testCase) {
 
 	goVal, goErr := sysconf.Pathconf(path, tc.goVar)
 	if goErr != nil {
-		t.Errorf("Pathconf(%s, %s/%d): %v", path, tc.name, tc.goVar, goErr)
-		return
+		t.Fatalf("Pathconf(%s, %s/%d): %v", path, tc.name, tc.goVar, goErr)
 	}
 	t.Logf("%s = %v", tc.name, goVal)
 
@@ -55,8 +54,7 @@ func testPathconfGoCgo(t *testing.T, tc testCase) {
 
 	cVal, cErr := C.pathconf(cPath, tc.cVar)
 	if cErr != nil {
-		t.Errorf("C.pathconf(%s, %s/%d): %v", path, tc.name, tc.cVar, cErr)
-		return
+		t.Fatalf("C.pathconf(%s, %s/%d): %v", path, tc.name, tc.cVar, cErr)
 	}
 
 	if goVal != int64(cVal) {
@@ -75,14 +73,12 @@ func testFpathconfGoCgo(t *testing.T, tc testCase) {
 
 	goVal, goErr := sysconf.Fpathconf(int(f.Fd()), tc.goVar)
 	if goErr != nil {
-		t.Errorf("Fpathconf(%s/%d): %v", tc.name, tc.goVar, goErr)
-		return
+		t.Fatalf("Fpathconf(%s/%d): %v", tc.name, tc.goVar, goErr)
 	}
 
 	cVal, cErr := C.fpathconf(C.int(f.Fd()), tc.cVar)
 	if cErr != nil {
 		t.Errorf("C.fpathconf(%s/%d): %v", tc.name, tc.cVar, cErr)
-		return
 	}
 
 	if goVal != int64(cVal) {

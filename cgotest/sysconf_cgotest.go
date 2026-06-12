@@ -48,15 +48,13 @@ func testSysconfGoCgo(t *testing.T, tc testCase) {
 
 	goVal, goErr := sysconf.Sysconf(tc.goVar)
 	if goErr != nil {
-		t.Errorf("Sysconf(%s/%d): %v", tc.name, tc.goVar, goErr)
-		return
+		t.Fatalf("Sysconf(%s/%d): %v", tc.name, tc.goVar, goErr)
 	}
 	t.Logf("%s = %v", tc.name, goVal)
 
 	cVal, cErr := C.sysconf(tc.cVar)
 	if cErr != nil {
-		t.Errorf("C.sysconf(%s/%d): %v", tc.name, tc.cVar, cErr)
-		return
+		t.Fatalf("C.sysconf(%s/%d): %v", tc.name, tc.cVar, cErr)
 	}
 
 	if goVal != int64(cVal) {
@@ -74,7 +72,6 @@ func testSysconfGoCgoInvalid(t *testing.T, tc testCase) {
 	_, goErr := sysconf.Sysconf(tc.goVar)
 	if goErr == nil {
 		t.Errorf("Sysconf(%s/%d) unexpectedly returned without error", tc.name, tc.goVar)
-		return
 	}
 
 	_, cErr := C.sysconf(tc.cVar)
