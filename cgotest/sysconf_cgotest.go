@@ -23,6 +23,22 @@ type testCase struct {
 	name  string
 }
 
+func testSysconfCgoMatch(t *testing.T) {
+	for _, tc := range sysconfTestCases {
+		t.Run(tc.name, func(t *testing.T) {
+			testSysconfGoCgo(t, tc)
+		})
+	}
+}
+
+func testSysconfCgoMatchInvalid(t *testing.T) {
+	for _, tc := range sysconfTestCasesInvalid {
+		t.Run(tc.name, func(t *testing.T) {
+			testSysconfGoCgoInvalid(t, tc)
+		})
+	}
+}
+
 func testSysconfGoCgo(t *testing.T, tc testCase) {
 	t.Helper()
 
