@@ -54,22 +54,22 @@ func TestSysconfInvalidParameter(t *testing.T) {
 	}
 }
 
-func TestGetconf(t *testing.T) {
-	testCases := []struct {
-		goVar int
-		name  string
-	}{
-		{sysconf.SC_CLK_TCK, "CLK_TCK"},
-		{sysconf.SC_HOST_NAME_MAX, "HOST_NAME_MAX"},
-		{sysconf.SC_PAGE_SIZE, "PAGE_SIZE"},
-	}
-
+func TestSysconfGetconf(t *testing.T) {
 	getconf, err := exec.LookPath("getconf")
 	if err != nil {
 		t.Skipf("getconf not found in PATH: %v", err)
 	}
 
-	for _, tc := range testCases {
+	for _, tc := range []struct {
+		goVar int
+		name  string
+	}{
+		{sysconf.SC_CLK_TCK, "CLK_TCK"},
+		{sysconf.SC_HOST_NAME_MAX, "HOST_NAME_MAX"},
+		{sysconf.SC_LOGIN_NAME_MAX, "LOGIN_NAME_MAX"},
+		{sysconf.SC_NGROUPS_MAX, "NGROUPS_MAX"},
+		{sysconf.SC_PAGE_SIZE, "PAGE_SIZE"},
+	} {
 		t.Run(tc.name, func(t *testing.T) {
 			cmd := exec.Command(getconf, tc.name)
 			var out bytes.Buffer

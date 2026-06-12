@@ -17,21 +17,24 @@ import (
 	"github.com/tklauser/go-sysconf"
 )
 
+var pathconfTestCases = []struct {
+	goVar int
+	name  string
+}{
+	{sysconf.PC_NAME_MAX, "NAME_MAX"},
+	{sysconf.PC_PATH_MAX, "PATH_MAX"},
+	{sysconf.PC_PIPE_BUF, "PIPE_BUF"},
+}
+
 func TestPathconf(t *testing.T) {
-	for _, tc := range []struct {
-		name int
-		desc string
-	}{
-		{sysconf.PC_NAME_MAX, "PC_NAME_MAX"},
-		{sysconf.PC_PATH_MAX, "PC_PATH_MAX"},
-	} {
-		t.Run(tc.desc, func(t *testing.T) {
-			val, err := sysconf.Pathconf("/", tc.name)
+	for _, tc := range pathconfTestCases {
+		t.Run(tc.name, func(t *testing.T) {
+			val, err := sysconf.Pathconf("/", tc.goVar)
 			if err != nil {
-				t.Fatalf("Pathconf(/, %s): %v", tc.desc, err)
+				t.Fatalf("Pathconf(/, %s): %v", tc.name, err)
 			}
 			if val < 0 {
-				t.Fatalf("Pathconf(/, %s) = %d, want non-negative", tc.desc, val)
+				t.Fatalf("Pathconf(/, %s) = %d, want non-negative", tc.name, val)
 			}
 
 			f, err := os.Open("/")
@@ -40,34 +43,24 @@ func TestPathconf(t *testing.T) {
 			}
 			defer f.Close()
 
-			fval, err := sysconf.Fpathconf(int(f.Fd()), tc.name)
+			fval, err := sysconf.Fpathconf(int(f.Fd()), tc.goVar)
 			if err != nil {
-				t.Fatalf("Fpathconf(/, %s): %v", tc.desc, err)
+				t.Fatalf("Fpathconf(/, %s): %v", tc.name, err)
 			}
 			if fval != val {
-				t.Fatalf("Fpathconf(/, %s) = %d, want %d", tc.desc, fval, val)
+				t.Fatalf("Fpathconf(/, %s) = %d, want %d", tc.name, fval, val)
 			}
 		})
 	}
 }
 
 func TestPathconfGetconf(t *testing.T) {
-	testCases := []struct {
-		goVar int
-		name  string
-	}{
-		{sysconf.PC_NAME_MAX, "NAME_MAX"},
-		{sysconf.PC_PATH_MAX, "PATH_MAX"},
-		{sysconf.PC_MAX_CANON, "MAX_CANON"},
-		{sysconf.PC_PIPE_BUF, "PIPE_BUF"},
-	}
-
 	getconf, err := exec.LookPath("getconf")
 	if err != nil {
 		t.Skipf("getconf not found in PATH: %v", err)
 	}
 
-	for _, tc := range testCases {
+	for _, tc := range pathconfTestCases {
 		t.Run(tc.name, func(t *testing.T) {
 			path := "/"
 			cmd := exec.Command(getconf, tc.name, path)

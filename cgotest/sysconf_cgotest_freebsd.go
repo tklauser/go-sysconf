@@ -11,6 +11,8 @@ import "C"
 
 import "github.com/tklauser/go-sysconf"
 
+// sysconf
+
 var sysconfTestCases = []testCase{
 	{sysconf.SC_AIO_LISTIO_MAX, C._SC_AIO_LISTIO_MAX, "AIO_LISTIO_MAX"},
 	{sysconf.SC_AIO_MAX, C._SC_AIO_MAX, "AIO_MAX"},
@@ -142,4 +144,27 @@ var sysconfTestCasesInvalid = []testCase{
 	{sysconf.SC_TRACE_LOG, C._SC_TRACE_LOG, "_POSIX_TRACE_LOG"},
 	{sysconf.SC_XOPEN_VERSION, C._SC_XOPEN_VERSION, "_XOPEN_VERSION"},
 	{sysconf.SC_XOPEN_XCU_VERSION, C._SC_XOPEN_XCU_VERSION, "_XOPEN_XCU_VERSION"},
+}
+
+// pathconf
+
+var pathconfTestCases = []testCase{
+	{sysconf.PC_FILESIZEBITS, C._PC_FILESIZEBITS, "FILESIZEBITS"},
+	{sysconf.PC_ASYNC_IO, C._PC_ASYNC_IO, "ASYNC_IO"},
+}
+
+var pathconfTestCasesInvalid = []testCase{
+	{sysconf.PC_MAX_CANON, C._PC_MAX_CANON, "MAX_CANON"},
+	{sysconf.PC_MAX_INPUT, C._PC_MAX_INPUT, "MAX_INPUT"},
+	{sysconf.PC_CHOWN_RESTRICTED, C._PC_CHOWN_RESTRICTED, "CHOWN_RESTRICTED"},
+	{sysconf.PC_NO_TRUNC, C._PC_NO_TRUNC, "NO_TRUNC"},
+	{sysconf.PC_VDISABLE, C._PC_VDISABLE, "VDISABLE"},
+	{sysconf.PC_ALLOC_SIZE_MIN, C._PC_ALLOC_SIZE_MIN, "ALLOC_SIZE_MIN"},
+	{sysconf.PC_REC_INCR_XFER_SIZE, C._PC_REC_INCR_XFER_SIZE, "REC_INCR_XFER_SIZE"},
+	{sysconf.PC_REC_MAX_XFER_SIZE, C._PC_REC_MAX_XFER_SIZE, "REC_MAX_XFER_SIZE"},
+	{sysconf.PC_REC_MIN_XFER_SIZE, C._PC_REC_MIN_XFER_SIZE, "REC_MIN_XFER_SIZE"},
+	{sysconf.PC_REC_XFER_ALIGN, C._PC_REC_XFER_ALIGN, "REC_XFER_ALIGN"},
+	{sysconf.PC_SYMLINK_MAX, C._PC_SYMLINK_MAX, "SYMLINK_MAX"},
+	{sysconf.PC_PRIO_IO, C._PC_PRIO_IO, "PRIO_IO"},
+	{sysconf.PC_SYNC_IO, C._PC_SYNC_IO, "SYNC_IO"},
 }
