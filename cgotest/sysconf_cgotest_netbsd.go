@@ -11,6 +11,8 @@ import "C"
 
 import "github.com/tklauser/go-sysconf"
 
+// sysconf
+
 var sysconfTestCases = []testCase{
 	{sysconf.SC_ARG_MAX, C._SC_ARG_MAX, "ARG_MAX"},
 	{sysconf.SC_CHILD_MAX, C._SC_CHILD_MAX, "CHILD_MAX"},
@@ -123,3 +125,20 @@ var sysconfTestCases = []testCase{
 }
 
 var sysconfTestCasesInvalid = []testCase{}
+
+// pathconf
+
+var pathconfTestCases = []testCase{
+	{sysconf.PC_CHOWN_RESTRICTED, C._PC_CHOWN_RESTRICTED, "CHOWN_RESTRICTED"},
+	{sysconf.PC_NO_TRUNC, C._PC_NO_TRUNC, "NO_TRUNC"},
+	{sysconf.PC_2_SYMLINKS, C._PC_2_SYMLINKS, "2_SYMLINKS"},
+	{sysconf.PC_FILESIZEBITS, C._PC_FILESIZEBITS, "FILESIZEBITS"},
+	{sysconf.PC_SYMLINK_MAX, C._PC_SYMLINK_MAX, "SYMLINK_MAX"},
+	{sysconf.PC_SYNC_IO, C._PC_SYNC_IO, "SYNC_IO"},
+}
+
+var pathconfTestCasesInvalid = []testCase{
+	{sysconf.PC_MAX_CANON, C._PC_MAX_CANON, "MAX_CANON"},
+	{sysconf.PC_MAX_INPUT, C._PC_MAX_INPUT, "MAX_INPUT"},
+	{sysconf.PC_VDISABLE, C._PC_VDISABLE, "VDISABLE"},
+}

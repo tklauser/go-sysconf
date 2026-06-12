@@ -19,6 +19,8 @@ import (
 	"github.com/tklauser/go-sysconf"
 )
 
+// sysconf
+
 var sysconfTestCases = []testCase{
 	{sysconf.SC_AIO_LISTIO_MAX, C._SC_AIO_LISTIO_MAX, "AIO_LISTIO_MAX"},
 	{sysconf.SC_AIO_MAX, C._SC_AIO_MAX, "AIO_MAX"},
@@ -167,7 +169,7 @@ var sysconfTestCasesInvalid = []testCase{
 	{sysconf.SC_THREAD_ROBUST_PRIO_PROTECT, C._SC_THREAD_ROBUST_PRIO_PROTECT, "_POSIX_THREAD_ROBUST_PRIO_PROTECT"},
 }
 
-func TestGlibcVersionDeps(t *testing.T) {
+func TestSysconfGlibcVersionDeps(t *testing.T) {
 	glibcVer := C.GoString(C.gnu_get_libc_version())
 	majMin := strings.Split(glibcVer, ".")
 	if len(majMin) < 2 {
@@ -196,3 +198,27 @@ func TestGlibcVersionDeps(t *testing.T) {
 		t.Skipf("skipping _TZNAME_MAX test on glibc %d.%d (< 2.26)", maj, min)
 	}
 }
+
+// pathconf
+
+var pathconfTestCases = []testCase{
+	{sysconf.PC_MAX_CANON, C._PC_MAX_CANON, "MAX_CANON"},
+	{sysconf.PC_MAX_INPUT, C._PC_MAX_INPUT, "MAX_INPUT"},
+	{sysconf.PC_CHOWN_RESTRICTED, C._PC_CHOWN_RESTRICTED, "CHOWN_RESTRICTED"},
+	{sysconf.PC_NO_TRUNC, C._PC_NO_TRUNC, "NO_TRUNC"},
+	{sysconf.PC_VDISABLE, C._PC_VDISABLE, "VDISABLE"},
+	{sysconf.PC_SYNC_IO, C._PC_SYNC_IO, "SYNC_IO"},
+	{sysconf.PC_ASYNC_IO, C._PC_ASYNC_IO, "ASYNC_IO"},
+	{sysconf.PC_PRIO_IO, C._PC_PRIO_IO, "PRIO_IO"},
+	{sysconf.PC_FILESIZEBITS, C._PC_FILESIZEBITS, "FILESIZEBITS"},
+	{sysconf.PC_REC_INCR_XFER_SIZE, C._PC_REC_INCR_XFER_SIZE, "REC_INCR_XFER_SIZE"},
+	{sysconf.PC_REC_MAX_XFER_SIZE, C._PC_REC_MAX_XFER_SIZE, "REC_MAX_XFER_SIZE"},
+	{sysconf.PC_REC_MIN_XFER_SIZE, C._PC_REC_MIN_XFER_SIZE, "REC_MIN_XFER_SIZE"},
+	{sysconf.PC_REC_XFER_ALIGN, C._PC_REC_XFER_ALIGN, "REC_XFER_ALIGN"},
+	{sysconf.PC_ALLOC_SIZE_MIN, C._PC_ALLOC_SIZE_MIN, "ALLOC_SIZE_MIN"},
+	{sysconf.PC_SYMLINK_MAX, C._PC_SYMLINK_MAX, "SYMLINK_MAX"},
+	{sysconf.PC_2_SYMLINKS, C._PC_2_SYMLINKS, "2_SYMLINKS"},
+	{sysconf.PC_SOCK_MAXBUF, C._PC_SOCK_MAXBUF, "SOCK_MAXBUF"},
+}
+
+var pathconfTestCasesInvalid = []testCase{}

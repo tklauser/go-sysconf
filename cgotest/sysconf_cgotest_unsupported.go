@@ -22,3 +22,7 @@ func testSysconfCgoMatchInvalid(t *testing.T) {
 func testPathconfCgoMatch(t *testing.T) {
 	t.Skipf("skipping on unsupported platform %s", runtime.GOOS)
 }
+
+func testPathconfCgoMatchInvalid(t *testing.T) {
+	t.Skipf("skipping on unsupported platform %s", runtime.GOOS)
+}

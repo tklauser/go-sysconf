@@ -9,6 +9,7 @@ import "testing"
 // The actual test functions are defined in the respective {sys,path}conf_cgotest_*.go files so that
 // they can use cgo.
 
-func TestSysconfCgoMatch(t *testing.T)        { testSysconfCgoMatch(t) }
-func TestSysconfCgoMatchInvalid(t *testing.T) { testSysconfCgoMatchInvalid(t) }
-func TestPathconfCgoMatch(t *testing.T)       { testPathconfCgoMatch(t) }
+func TestSysconfCgoMatch(t *testing.T)         { testSysconfCgoMatch(t) }
+func TestSysconfCgoMatchInvalid(t *testing.T)  { testSysconfCgoMatchInvalid(t) }
+func TestPathconfCgoMatch(t *testing.T)        { testPathconfCgoMatch(t) }
+func TestPathconfCgoMatchInvalid(t *testing.T) { testPathconfCgoMatchInvalid(t) }
