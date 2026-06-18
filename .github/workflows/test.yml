@@ -30,7 +30,7 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
     - name: Install Go
       uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v5.0.2
@@ -64,7 +64,7 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
     - name: Build and test on FreeBSD ${{ env.FREEBSD_RELEASE }}
       uses: vmactions/freebsd-vm@a6de9343ef5747433d9c25784c90e84998b9d69a # v1.4.6
@@ -98,7 +98,7 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
     - name: Build and test on NetBSD ${{ env.NETBSD_RELEASE }}
       uses: vmactions/netbsd-vm@99816dccf75edf233ed6cd00a159e3a5b85ea373 # v1.4.0
@@ -133,7 +133,7 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
     - name: Build and test on OpenBSD ${{ env.OPENBSD_RELEASE }}
       uses: vmactions/openbsd-vm@fcf799d7ce9c305ad89eabef1fb2fa5c1c42d0ee # v1.4.3
@@ -166,7 +166,7 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
     - name: Build and test on DragonFlyBSD ${{ env.DRAGONFLYBSD_RELEASE }}
       uses: vmactions/dragonflybsd-vm@4ba8127bd95c94b66fc4b885e37c99955ba308ea # v1.3.0
@@ -200,7 +200,7 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
     - name: Build and test on Solaris ${{ env.SOLARIS_RELEASE }}
       uses: vmactions/solaris-vm@d30dd6c228c8661ade859e36ead7660b9a62efcc # v1.3.7
