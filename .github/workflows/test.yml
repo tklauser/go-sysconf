@@ -203,7 +203,7 @@ jobs:
       uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
     - name: Build and test on Solaris ${{ env.SOLARIS_RELEASE }}
-      uses: vmactions/solaris-vm@d30dd6c228c8661ade859e36ead7660b9a62efcc # v1.3.7
+      uses: vmactions/solaris-vm@315163f088b66e55bbcc45928bd224d4973b2312 # v1.3.8
       with:
         release: ${{ env.SOLARIS_RELEASE }}
         envs: 'GO_VERSION'
