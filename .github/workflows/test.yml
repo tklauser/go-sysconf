@@ -136,7 +136,7 @@ jobs:
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     - name: Build and test on OpenBSD ${{ env.OPENBSD_RELEASE }}
-      uses: vmactions/openbsd-vm@c941015845c0f0c429676840963dc63b226d4f69 # v1.4.5
+      uses: vmactions/openbsd-vm@86cdc08415d9d0865267e686561e276c52d62530 # v1.4.7
       with:
         release: ${{ env.OPENBSD_RELEASE }}
         envs: 'GO_VERSION'
