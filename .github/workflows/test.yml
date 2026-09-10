@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 env:
-  GO_VERSION: '1.26.4'
+  GO_VERSION: '1.27.1'
   FREEBSD_RELEASE: '15.0'
   NETBSD_RELEASE: '10.1'
   OPENBSD_RELEASE: '7.9'
@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         # Latest two supported releases.
-        go-version: ['1.25', '1.26']
+        go-version: ['1.26', '1.27']
         os: [ubuntu-22.04, ubuntu-24.04, ubuntu-24.04-arm, macos-14, macos-15, macos-26, windows-2025]
     runs-on: ${{ matrix.os }}
 
@@ -38,16 +38,16 @@ jobs:
         go-version: ${{ matrix.go-version }}
 
     - name: Check formatting
-      if: ${{ matrix.go-version == '1.26' && matrix.os == 'ubuntu-24.04' }}
+      if: ${{ matrix.go-version == '1.27' && matrix.os == 'ubuntu-24.04' }}
       run: diff -u <(echo -n) <(gofmt -d .)
 
     - name: Check Go modules
-      if: ${{ matrix.go-version == '1.26' && matrix.os == 'ubuntu-24.04' }}
+      if: ${{ matrix.go-version == '1.27' && matrix.os == 'ubuntu-24.04' }}
       run: |
         go mod tidy -diff
 
     - name: Generate
-      if: ${{ matrix.go-version == '1.26' }}
+      if: ${{ matrix.go-version == '1.27' }}
       run: |
         go generate
         git diff --exit-code
