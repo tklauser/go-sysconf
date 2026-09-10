@@ -5,6 +5,7 @@
 package sysconf
 
 import (
+	"runtime"
 	"strconv"
 	"strings"
 	"sync"
@@ -16,10 +17,6 @@ const (
 	_HOST_NAME_MAX  = _MAXHOSTNAMELEN - 1
 	_LOGIN_NAME_MAX = _MAXLOGNAME
 	_SYMLOOP_MAX    = _MAXSYMLINKS
-
-	// _PTHREAD_STACK_MIN changed in macOS 14
-	_PTHREAD_STACK_MIN_LT_MACOS14 = 0x2000
-	_PTHREAD_STACK_MIN_GE_MACOS14 = 0x4000
 )
 
 var uname struct {
@@ -110,10 +107,11 @@ func sysconf(name int) (int64, error) {
 	case SC_THREAD_PRIO_PROTECT:
 		return _POSIX_THREAD_PRIO_PROTECT, nil
 	case SC_THREAD_STACK_MIN:
-		if getMacOSMajor() < 23 {
-			return _PTHREAD_STACK_MIN_LT_MACOS14, nil
+		if runtime.GOARCH == "arm64" && getMacOSMajor() >= 23 {
+			// _PTHREAD_STACK_MIN changed in macOS 14, but on arm64 only.
+			return 0x4000, nil
 		}
-		return _PTHREAD_STACK_MIN_GE_MACOS14, nil
+		return 0x2000, nil
 	case SC_THREAD_THREADS_MAX:
 		return -1, nil
 	case SC_TIMER_MAX:
