@@ -1,7 +1,7 @@
 # go-sysconf
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/tklauser/go-sysconf.svg)](https://pkg.go.dev/github.com/tklauser/go-sysconf)
-[![GitHub Action Status](https://github.com/tklauser/go-sysconf/workflows/Tests/badge.svg)](https://github.com/tklauser/go-sysconf/actions?query=workflow%3ATests)
+[![GitHub Action Status](https://github.com/tklauser/go-sysconf/workflows/Tests/badge.svg)](https://github.com/tklauser/go-sysconf/actions?query=workflow%3ATests+%3Abranch=main)
 
 `sysconf` and `pathconf` for Go, without using cgo or external binaries (e.g. getconf).
 
