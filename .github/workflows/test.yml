@@ -59,7 +59,7 @@ jobs:
       run: go test -v ./...
 
   build-and-test-freebsd:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
 
     steps:
@@ -93,7 +93,7 @@ jobs:
         git diff --exit-code
 
   build-and-test-netbsd:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
 
     steps:
@@ -128,7 +128,7 @@ jobs:
         git diff --exit-code
 
   build-and-test-openbsd:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
 
     steps:
@@ -161,7 +161,7 @@ jobs:
         git diff --exit-code
 
   build-and-test-dragonflybsd:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
 
     steps:
@@ -195,7 +195,7 @@ jobs:
         git diff --exit-code
 
   build-and-test-solaris:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 30
 
     steps:
