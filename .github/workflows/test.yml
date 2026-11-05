@@ -12,7 +12,6 @@ permissions:
   contents: read
 
 env:
-  GO_VERSION: '1.27.1'
   FREEBSD_RELEASE: '15.0'
   NETBSD_RELEASE: '10.1'
   OPENBSD_RELEASE: '7.9'
@@ -20,6 +19,18 @@ env:
   SOLARIS_RELEASE: '11.4-gcc' # use -gcc variant for cgo
 
 jobs:
+  go-version:
+    runs-on: ubuntu-26.04
+    outputs:
+      go-version: ${{ steps.setup-go.outputs.go-version }}
+
+    steps:
+    - name: Determine latest Go version
+      id: setup-go
+      uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+      with:
+        go-version: '1.27'
+
   build-and-test:
     strategy:
       matrix:
@@ -59,8 +70,11 @@ jobs:
       run: go test -v ./...
 
   build-and-test-freebsd:
+    needs: go-version
     runs-on: ubuntu-26.04
     timeout-minutes: 30
+    env:
+      GO_VERSION: ${{ needs.go-version.outputs.go-version }}
 
     steps:
     - name: Check out code
@@ -93,8 +107,11 @@ jobs:
         git diff --exit-code
 
   build-and-test-netbsd:
+    needs: go-version
     runs-on: ubuntu-26.04
     timeout-minutes: 30
+    env:
+      GO_VERSION: ${{ needs.go-version.outputs.go-version }}
 
     steps:
     - name: Check out code
@@ -128,8 +145,11 @@ jobs:
         git diff --exit-code
 
   build-and-test-openbsd:
+    needs: go-version
     runs-on: ubuntu-26.04
     timeout-minutes: 30
+    env:
+      GO_VERSION: ${{ needs.go-version.outputs.go-version }}
 
     steps:
     - name: Check out code
@@ -161,8 +181,11 @@ jobs:
         git diff --exit-code
 
   build-and-test-dragonflybsd:
+    needs: go-version
     runs-on: ubuntu-26.04
     timeout-minutes: 30
+    env:
+      GO_VERSION: ${{ needs.go-version.outputs.go-version }}
 
     steps:
     - name: Check out code
@@ -195,8 +218,11 @@ jobs:
         git diff --exit-code
 
   build-and-test-solaris:
+    needs: go-version
     runs-on: ubuntu-26.04
     timeout-minutes: 30
+    env:
+      GO_VERSION: ${{ needs.go-version.outputs.go-version }}
 
     steps:
     - name: Check out code
