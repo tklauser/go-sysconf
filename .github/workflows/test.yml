@@ -199,9 +199,8 @@ jobs:
         usesh: true
         prepare: |
           set -e
-          pkg install -y curl
           archive=/tmp/go.tar.gz
-          curl -fsSL "https://go.dev/dl/go${GO_VERSION}.dragonfly-amd64.tar.gz" -o "$archive"
+          fetch -o "$archive" "https://go.dev/dl/go${GO_VERSION}.dragonfly-amd64.tar.gz"
           rm -rf /usr/local/go
           mkdir -p /usr/local
           (cd /usr/local && gzip -dc "$archive" | tar -xf -)
