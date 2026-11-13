@@ -167,7 +167,6 @@ const (
 	_EXPR_NEST_MAX    = C.EXPR_NEST_MAX
 	_IOV_MAX          = C.IOV_MAX
 	_LINE_MAX         = C.LINE_MAX
-	_NAME_MAX         = C.NAME_MAX
 	_RE_DUP_MAX       = C.RE_DUP_MAX
 
 	_CLK_TCK = C.CLK_TCK

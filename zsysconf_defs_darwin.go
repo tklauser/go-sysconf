@@ -142,7 +142,6 @@ const (
 	_EXPR_NEST_MAX    = 0x20
 	_IOV_MAX          = 0x400
 	_LINE_MAX         = 0x800
-	_NAME_MAX         = 0xff
 	_RE_DUP_MAX       = 0xff
 
 	_CLK_TCK = 0x64
