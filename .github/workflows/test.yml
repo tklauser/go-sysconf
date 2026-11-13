@@ -12,10 +12,10 @@ permissions:
   contents: read
 
 env:
-  FREEBSD_RELEASE: '15.0'
-  NETBSD_RELEASE: '10.1'
-  OPENBSD_RELEASE: '7.9'
-  DRAGONFLYBSD_RELEASE: '6.4.1'
+  FREEBSD_RELEASE: '15.1'
+  NETBSD_RELEASE: '11.1'
+  OPENBSD_RELEASE: '8.0'
+  DRAGONFLYBSD_RELEASE: '6.4.2'
   SOLARIS_RELEASE: '11.4-gcc' # use -gcc variant for cgo
 
 jobs:
