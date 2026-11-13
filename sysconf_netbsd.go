@@ -72,8 +72,9 @@ func sysconf(name int) (int64, error) {
 		// sysctl("user.stream_max")
 		return _FOPEN_MAX, nil
 	case SC_TZNAME_MAX:
-		// sysctl("user.tzname_max")
-		return _NAME_MAX, nil
+		// sysctl("user.tzname_max"), returns the compile-time constant
+		// _TZNAME_MAXIMUM defined in <time.h>
+		return _TZNAME_MAXIMUM, nil
 	case SC_SAVED_IDS:
 		return yesno(sysctl32("kern.saved_ids")), nil
 	case SC_VERSION:
