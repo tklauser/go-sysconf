@@ -138,7 +138,6 @@ const (
 	_POSIX2_VERSION = 0x30db0
 
 	_FOPEN_MAX  = 0x14
-	_NAME_MAX   = 0x1ff
 	_RE_DUP_MAX = 0xff
 
 	_BC_BASE_MAX      = 0x7fffffff
@@ -151,6 +150,8 @@ const (
 
 	_GETGR_R_SIZE_MAX = 0x400
 	_GETPW_R_SIZE_MAX = 0x400
+
+	_TZNAME_MAXIMUM = 0xfe
 
 	_PATH_DEV      = "/dev/"
 	_PATH_ZONEINFO = "/usr/share/zoneinfo"
