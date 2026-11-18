@@ -192,7 +192,7 @@ jobs:
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     - name: Build and test on DragonFlyBSD ${{ env.DRAGONFLYBSD_RELEASE }}
-      uses: vmactions/dragonflybsd-vm@4ab776fa9f914fbea72f13715b451e77e7ef5c41 # v1.3.4
+      uses: vmactions/dragonflybsd-vm@84881684c8771163f1dd37820a358aa3cd8bc2f2 # v1.3.5
       with:
         release: ${{ env.DRAGONFLYBSD_RELEASE }}
         envs: 'GO_VERSION'
